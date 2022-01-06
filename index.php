@@ -69,7 +69,7 @@ foreach($rows as $row) {
 
 }
 
-$req6 = $bdd->query("SELECT COUNT(*) FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
+$req6 = $bdd->query("SELECT COUNT(*) FROM formationliaison WHERE id_user = $id_userSAP"); // PAS FINI
 $donnees6 = $req4->fetch();
 echo $donnees6;
 /*while ($donnees5 = $req5->fetch()){
