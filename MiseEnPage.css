@@ -82,6 +82,15 @@ th.nv {
   background-color: #f31010;
   color: #fff;
 }
+th.okrecy{
+  background-color: #da9619;
+  color: #fff;
+}
+th.nonrecy {
+  background-color: #757575;
+  color: #fff;
+}
+
 
 .style {
     border-width: 0;background-color:#005A7B;color: #F2f2f2;
