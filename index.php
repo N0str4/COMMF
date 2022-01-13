@@ -70,18 +70,17 @@ foreach($rows as $row) {
     $tab[$i] = $row['Num_Prerequis'];
     /* DEBUG MODE */
     echo 'Tab['.$i.']='.$tab[$i];
-    echo 'Date['.$i.']='.$tabdate[$i];
     echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
     /* DEBUG MODE */
     echo 'i='.$i;
     echo '<br />';
-    /* END DEBUG MODE */
     
-
+    /* END DEBUG MODE */
 
 }
+
 ?>   
 <table>
 <thead>
@@ -99,20 +98,44 @@ foreach($rows as $row) {
 <?php
 $now = date('Y-m-d H:i:s');
     for ($k=0; $k<10; $k++){
+        $boucle = 0;
         /* DEBUG MODE */
-        /*echo 'TAB K egal : '.$tab[$k].'///';*/
+        echo '<br/>K= '.$k.'<br/>';
+        echo 'TAB K egal : '.$tab[$k].'///';
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        /*echo $numverif;*/
+        echo $numverif.'<br.>';
+        $req7 = $bdd->query("SELECT liaison_id_prerequis
+        FROM Equivalence WHERE id_prerequis LIKE '$test'");
+        $colonnes = $req7->fetchAll();
+        foreach($colonnes as $colonne) {
+
+            $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
+            echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+            $boucle=$boucle+1;
+        }
+        echo '<br/>---<br/>';
+        for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
+            if ($tabequivalence[$bouclefor]==$numverif){
+              $KALAMOUR = 'VALIDE';
+              echo '<br/> Formation équivalente ! Diplome de base :  '.$test.'<br/>';
+              echo 'Diplome equivalent : '.$tabequivalence[$bouclefor].'<br/>';
+
+            }
+        }
+
+
+
         $diff = 0;
         if ($test== $numverif){
             $KALAMOUR = 'VALIDE';
             /* DEBUG MODE */
             echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
-            echo ' | (FORMATION) =  |  '.$donnees['nomformation'];
+            echo ' | (FORMATION) =  |  '.$donnees['Nom_Prerequis'];
             echo '<br/> | (ETATVALIDE)<br/>';
             /* END DEBUG MODE */
+
             $req6 = $bdd->query("SELECT dateobtention
             FROM formationliaison WHERE Num_Prerequis LIKE '$test'");
             $donnees18 = $req6->fetch();
@@ -128,7 +151,6 @@ $now = date('Y-m-d H:i:s');
             if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
                 $RECYCLAGE = 'OUI';
                 /* DEBUG MODE */
-                echo 'CC';
                 echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
                 echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
                 /* END DEBUG MODE */
@@ -185,3 +207,19 @@ $KALAMOUR = 'NONVALIDE';
 	</body>
 
 </html>
+
+
+<?php
+/*$req7 = $bdd->query("SELECT liaison_id_prerequis
+        FROM Equivalence WHERE id_prerequis LIKE '$test'");
+        $colonnes = $req7->fetchAll();
+        foreach($colonnes as $colonne) {
+
+            $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
+            echo 'Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+            $boucle=$boucle+1;
+        }
+*/
+
+
+function valide
