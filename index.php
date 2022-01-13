@@ -11,28 +11,30 @@
 		<?php include("header.php"); ?>
 	</header>
 	<body>
+        <formulaire>
 		<form method="post">
-        Entrée le SAP : <input type="text" name="sap"/>
+        Entrée le SAP : <input type="text" name="sap" required/>
         <br>
-        Entrée la formation : <input type="text" name="form"/>
-        <select name="formation" id="pet-select">
+        <select name="formation" id="pet-select" required>
             <option value="">Selectionnez une formation</option>
-            <option value="dog">PPLD</option>
-            <option value="cat">HK</option>
-            <option value="hamster">CAT</option>
-            <option value="parrot">PLO</option>
-            <option value="spider">OKL</option>
-            <option value="goldfish">JDLOP</option>
+            <option value="PPLD">PPLD</option>
+            <option value="PPLOG">PPLOG</option>
+            <option value="HK">HK</option>
+            <option value="FS">Force Spécial</option>
+            <option value="OKL">OKL</option>
+            <option value="JDLOP">JDLOP</option>
         </select>
         <input type="submit" value="Rechercher"/>
         </form>
+        </formulaire> 
         <?php 
+
 // SCRIPT PHP BY
 // BY AYMERICK 
 // DO NOT COPY
 $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
 $sap = $_POST['sap'];
-$formation = $_POST['form'];
+$formation = $_POST['formation'];
 
 
 
@@ -54,52 +56,75 @@ $donnees4 = $req4->fetch();
 $id_userSAP = $donnees4['id'];
 $req5 = $bdd->query("SELECT Num_Prerequis
 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
-$rows= $req5->fetchAll();
+$rows= $req5->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
 $i=0;
+
 foreach($rows as $row) {
 
     echo '<br />';
     echo 'i='.$i;
     echo '<br />';
-    echo 'Valeur de la premiere case='.$$rows[$i];
+
+    $tab[$i] = $row['Num_Prerequis'];
+
+    echo 'Tab['.$i.']='.$tab[$i];
+    echo '<br/>';
     $i=$i+1;
     echo 'i='.$i;
     echo '<br />';
+    
 
 
 }
+echo '<br/>';
+echo 'Après la boucle vérif des valeurs : <br/>';
+echo 'Tab[2]='.$tab[2].'<br/>';
+echo 'Tab[1]='.$tab[1].'<br/>';
+echo 'Tab[0]='.$tab[0].'<br/>';
 
-$req6 = $bdd->query("SELECT COUNT(*) FROM formationliaison WHERE id_user = $id_userSAP"); // PAS FINI
-$donnees6 = $req4->fetch();
-echo $donnees6;
-/*while ($donnees5 = $req5->fetch()){
-    
-    for ($i; $i< $donnees6; $i++){
-    $NumFormation = array(
-        i => $donnees5['Num_Prerequis'],
-    );
-    }   
-    var_dump($NumFormation);
-*/?>   
+?>   
 <table>
 <thead>
 <tr>
+    <th>Nom</th>
     <th>NomFormation</th>
-    <th>NumPrérequis</th>
+    <th>Prérequis</th>
     <th>Prérequis Validé ?</th>
+    <th>NumPrérequis</th>
 </tr>
 </thead>
 <tbody>
+    <?php $k=0;$verif=1;?>
 <?php while ($donnees = $req2->fetch()){?>
-
-
-
-                <tr><th> <?php echo $donnees['nomformation']?></th><th> <?php echo $donnees['Nom_Prerequis']?></th></tr>
-
-<?php }?>   
+<?php
+$verif=1;
+    for ($k=0; $k<10; $k++){
+        echo '<br/>';
+        echo 'TAB K egal : '.$tab[$k].'///';
+        $numverif = $donnees['num_prerequis'];
+        $test=$tab[$k];
+        echo $numverif;
+        if ($test== $numverif){
+            $KALAMOUR = 'VALIDE';
+            echo 'VALIDE';
+         } 
+    }    
+    if(is_null($donnees4['nom'])==false){?>     
+    
+                <br/>
+                <br/>
+                <tr><th> <?php echo $donnees4['nom']?></th><th> <?php echo $donnees['nomformation']?></th><th> <?php echo $donnees['Nom_Prerequis']?></th><?php if ($KALAMOUR=='VALIDE'){?> <th class="val"><?php echo $KALAMOUR; }else {?> <th class="nv"><?php echo 'NONVALIDE';}?></th><th> <?php echo $donnees['num_prerequis']?></th></tr>
+    
+        <?php }else{?> 
+            <script type="text/javascript">
+                alert('SAP INVALIDE !');
+                window.location.replace("http://intradef.vikatchev.com");
+            </script>
+            
+        <?php }?> 
+<?php $KALAMOUR = 'NONVALIDE'; }?>   
 </table></tbody>
 	</body>
 
 </html>
-
-

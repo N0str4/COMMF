@@ -1,0 +1,254 @@
+/*Reset CSS*/
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Avenir, sans-serif;
+}
+
+table
+{
+  table-layout: fixed;
+  width: 70%;
+  border-collapse: collapse;
+  border: 3px black;
+  font-color: rgb(122, 124, 122);
+  margin-left: -700px; /* - moitié de la largeur */
+  position: absolute;
+  left: 50%;}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    padding: 20px;
+}
+
+
+thead th:nth-child(1) {
+  width: 30%;
+  background-color: #757575;
+}
+
+thead th:nth-child(2) {
+  width: 30%;
+  background-color: #757575;
+}
+
+thead th:nth-child(3) {
+  width: 30%;
+  background-color: #757575;
+}
+
+thead th:nth-child(4) {
+  width: 30%;
+  background-color: #757575;
+}
+
+thead th:nth-child(5) {
+  width: 30%;
+  background-color: #757575;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #E0E0E0;
+  font-family: arial;
+  padding: 20px;
+  color: black;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #BDBDBD;
+  font-family: arial;
+  padding: 20px;
+  color: black;
+  text-align: center;
+}
+
+form{
+    display:inline;
+}
+formulaire{
+  text-align: center;
+  color: #0082e6;
+  margin-top: auto;
+  margin-left: 500px;
+  margin-bottom: 200px;
+}
+
+th.val{
+  background-color: #397a12;
+  color: #fff;
+}
+th.nv {
+  background-color: #f31010;
+  color: #fff;
+}
+
+.style {
+    border-width: 0;background-color:#005A7B;color: #F2f2f2;
+}
+
+header {
+
+}
+
+nav {
+
+}
+
+body {
+  background-image: url("bg1.jpg");
+  
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+footer{
+background:#ccc;
+position:absolute;
+bottom:0;
+width:100%;
+padding-top:50px;
+height:50px;
+}
+
+canvas {
+        border: 3px solid #444;
+      }
+      .grid {
+        float:left;
+        width:500px;
+        margin:0 10px;
+        
+        }
+      .grid h1 {font-size:25px;text-align:center;}
+      .grid p {text-align:left;}
+
+
+
+/*Reset CSS*/
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Avenir, sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+   color:red;
+    
+}
+
+nav {
+  background: rgb(37, 83, 37);;
+  height: 80px;
+  width: 100%;
+}
+
+label.logo{
+  color: white;
+  font-size: 55px;
+  line-height: 80px;
+  padding: initial;
+  font-weight: bold;
+  margin-left : 90px;
+}
+nav ul{
+  float: right;
+  margin-right: 20px;
+}
+nav ul li{
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+nav ul li a{
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+a.active,a:hover{
+  background: #1b9bff;
+  transition: .5s;
+}
+.checkbtn{
+  font-size: 30px;
+  color: white;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+@media (max-width: 952px){
+  label.logo{
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav ul li a{
+    font-size: 16px;
+  }
+}
+@media (max-width: 858px){
+  .checkbtn{
+    display: block;
+  }
+  ul{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #2c3e50;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all .5s;
+  }
+  nav ul li{
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+  nav ul li a{
+    font-size: 20px;
+  }
+  a:hover,a.active{
+    background: none;
+    color: #0082e6;
+  }
+  #check:checked ~ ul{
+    left: 0;
+  }
+}
+
+h3 {
+    font-size: 100px;
+    text-align: center;
+    color: #1b9bff;
+    -webkit-text-stroke: 4px black;
+}
+
+h4 {
+    text-align: center;
+   font-size: 200px; 
+   color:#1b9bff;
+   -webkit-text-stroke: 4px black;
+}
+
+h1 {
+    color: red;
+}
+
+.note{
+    text-align: center;
+    font-size : 25px;
+    background-color: yellow;
+}
