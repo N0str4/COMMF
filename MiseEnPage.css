@@ -87,8 +87,15 @@ th.okrecy{
   color: #fff;
 }
 th.nonrecy {
-  background-color: #757575;
+  background-color: #949393;
   color: #fff;
+}
+.bold{
+  font-weight: bold;
+}
+.k{
+  color: rgb(221, 10, 10);
+  font-weight: bold;
 }
 
 

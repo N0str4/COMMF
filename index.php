@@ -100,18 +100,18 @@ foreach($rows as $row) {
 $now = date('Y-m-d H:i:s');
     for ($k=0; $k<10; $k++){
         /* DEBUG MODE */
-        echo '<br/>';
-        echo 'TAB K egal : '.$tab[$k].'///';
+        /*echo 'TAB K egal : '.$tab[$k].'///';*/
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        echo $numverif;
+        /*echo $numverif;*/
         $diff = 0;
         if ($test== $numverif){
             $KALAMOUR = 'VALIDE';
             /* DEBUG MODE */
-            echo '<br/> <br/>| !!!!!      DEBUG MODE      !!!!! | <br/>';
-            echo ' | (ETATVALIDE)<br/>';
+            echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
+            echo ' | (FORMATION) =  |  '.$donnees['nomformation'];
+            echo '<br/> | (ETATVALIDE)<br/>';
             /* END DEBUG MODE */
             $req6 = $bdd->query("SELECT dateobtention
             FROM formationliaison WHERE Num_Prerequis LIKE '$test'");
@@ -120,26 +120,44 @@ $now = date('Y-m-d H:i:s');
             $diff  = abs($now - $date1);  
             
             /* DEBUG MODE */
-            echo ' | (DATE NOW='.$now.')<br/>';
-            echo ' | (Numéro du Prérequis '.$test.')<br/>';
-            echo ' | (DATE DB ='.$date1.')<br/>';
-            echo ' | (Difference de date entre la BD et Mtn='.$diff.')<br/>';
+            echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+            echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+            echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+            echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
             /* END DEBUG MODE */
             if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
                 $RECYCLAGE = 'OUI';
                 /* DEBUG MODE */
                 echo 'CC';
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECCESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
                 echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
                 /* END DEBUG MODE */
 
-            } elseif ($diff>5 and $test!=12 || $test=!13 || $test=!14 || $test=!15){  
+            } elseif ($diff>5 and $test==16){  
                 /* DEBUG MODE */
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECCESSITE PAS DE RECYCLAGE)<br/>';
+                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 5 ANS)<br/>';
+                echo ' | (RECYCLAGE : NON<br/>';
+                echo ' | (VALIDITER : <k>REVOQUER</k><br/><br/>';
+                $KALAMOUR = 'NONVALIDE';
+                /* END DEBUG MODE */
+                
+            } elseif ($diff>4 and $test==17){  
+                /* DEBUG MODE */
+                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 4 ANS)<br/>';
+                echo ' | (RECYCLAGE : NON<br/>';
+                echo ' | (VALIDITER : <k> REVOQUER</k><br/><br/>';
+                $KALAMOUR = 'NONVALIDE';
+                /* END DEBUG MODE */
+                
+            }
+            elseif ($diff>5 and $test!=12 || $test=!13 || $test=!14 || $test=!15){  
+                /* DEBUG MODE */
+                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECESSITE PAS DE RECYCLAGE)<br/>';
                 echo ' | (RECYCLAGE : NON<br/><br/>';
                 /* END DEBUG MODE */
                 
-            }else {  
+            }
+            else {  
                 /* DEBUG MODE */
                 echo ' | (RECYCLAGE : NON<br/><br/>';
                 /* END DEBUG MODE */   
