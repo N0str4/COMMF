@@ -46,9 +46,6 @@ INNER JOIN Formation
 ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation'");
 
 
-/*$req3 = $bdd->query("SELECT *
-FROM formationliaison
-INNER JOIN utils ON formationliaison.id = utils.id WHERE Num_Prerequis LIKE '$coucou'")*/
 
 $req4 = $bdd->query("SELECT *
 FROM utils WHERE sap LIKE '$sap'");
@@ -62,20 +59,20 @@ $i=0;
 
 foreach($rows as $row) {
     /* DEBUG MODE */
-    echo '<br />';
-    echo 'i='.$i;
-    echo '<br />';
+    /**/ echo '<br />';
+    /**/ echo 'i='.$i;
+    /**/ echo '<br />';
     /* END DEBUG MODE */
     $tabdate[$i] = $row['dateobtention'];
     $tab[$i] = $row['Num_Prerequis'];
     /* DEBUG MODE */
-    echo 'Tab['.$i.']='.$tab[$i];
-    echo '<br/>';
+    /**/ echo 'Tab['.$i.']='.$tab[$i];
+    /**/ echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
     /* DEBUG MODE */
-    echo 'i='.$i;
-    echo '<br />';
+    /**/ echo 'i='.$i;
+    /**/ echo '<br />';
     
     /* END DEBUG MODE */
 
@@ -100,27 +97,26 @@ $now = date('Y-m-d H:i:s');
     for ($k=0; $k<10; $k++){
         $boucle = 0;
         /* DEBUG MODE */
-        echo '<br/>K= '.$k.'<br/>';
-        echo 'TAB K egal : '.$tab[$k].'///';
+        /**/ echo '<br/>K= '.$k.'<br/>';
+        /**/ echo 'TAB K egal : '.$tab[$k].'///';
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        echo $numverif.'<br.>';
+        /**/echo $numverif.'<br.>';
         $req7 = $bdd->query("SELECT liaison_id_prerequis
         FROM Equivalence WHERE id_prerequis LIKE '$test'");
         $colonnes = $req7->fetchAll();
         foreach($colonnes as $colonne) {
 
             $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-            echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+            /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
             $boucle=$boucle+1;
         }
-        echo '<br/>---<br/>';
+        /**/ echo '<br/>---<br/>';
         for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
-            $RECYCLAGE = 'NON';
             if ($tabequivalence[$bouclefor]==$numverif){
               $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
-            
+              $RECYCLAGE = 'NON';
             }
         }
 
@@ -131,9 +127,9 @@ $now = date('Y-m-d H:i:s');
 
             $KALAMOUR = 'VALIDE';
             /* DEBUG MODE */
-            echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
-            echo ' | (FORMATION) =  |  '.$donnees['Nom_Prerequis'];
-            echo '<br/> | (ETATVALIDE)<br/>';
+            /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
+            /**/ echo ' | (FORMATION) =  |  '.$donnees['Nom_Prerequis'];
+            /**/ echo '<br/> | (ETATVALIDE)<br/>';
             /* END DEBUG MODE */
 
             $req6 = $bdd->query("SELECT dateobtention
@@ -143,10 +139,10 @@ $now = date('Y-m-d H:i:s');
             $diff  = abs($now - $date1);  
             
             /* DEBUG MODE */
-            echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-            echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-            echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-            echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+            /**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+            /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+            /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+            /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
             /* END DEBUG MODE */
             $TESTOK = verifRecyclage($diff,$test,$donnees);
             if($TESTOK=='RECYCLAGE'){
