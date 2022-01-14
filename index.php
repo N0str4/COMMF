@@ -182,16 +182,7 @@ $KALAMOUR = 'NONVALIDE';
 
 
 <?php
-/*$req7 = $bdd->query("SELECT liaison_id_prerequis
-        FROM Equivalence WHERE id_prerequis LIKE '$test'");
-        $colonnes = $req7->fetchAll();
-        foreach($colonnes as $colonne) {
 
-            $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-            echo 'Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
-            $boucle=$boucle+1;
-        }
-*/
 
 function verifRecyclage($diff,$test,$donnees){
     if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
