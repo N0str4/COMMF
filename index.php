@@ -117,11 +117,10 @@ $now = date('Y-m-d H:i:s');
         }
         echo '<br/>---<br/>';
         for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
+            $RECYCLAGE = 'NON';
             if ($tabequivalence[$bouclefor]==$numverif){
-              $KALAMOUR = 'VALIDE';
-              echo '<br/> Formation équivalente ! Diplome de base :  '.$test.'<br/>';
-              echo 'Diplome equivalent : '.$tabequivalence[$bouclefor].'<br/>';
-
+              $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
+            
             }
         }
 
@@ -129,6 +128,7 @@ $now = date('Y-m-d H:i:s');
 
         $diff = 0;
         if ($test== $numverif){
+
             $KALAMOUR = 'VALIDE';
             /* DEBUG MODE */
             echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
@@ -148,42 +148,18 @@ $now = date('Y-m-d H:i:s');
             echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
             echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
             /* END DEBUG MODE */
-            if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
-                $RECYCLAGE = 'OUI';
-                /* DEBUG MODE */
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
-                echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
-                /* END DEBUG MODE */
-
-            } elseif ($diff>5 and $test==16){  
-                /* DEBUG MODE */
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 5 ANS)<br/>';
-                echo ' | (RECYCLAGE : NON<br/>';
-                echo ' | (VALIDITER : <k>REVOQUER</k><br/><br/>';
-                $KALAMOUR = 'NONVALIDE';
-                /* END DEBUG MODE */
-                
-            } elseif ($diff>4 and $test==17){  
-                /* DEBUG MODE */
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 4 ANS)<br/>';
-                echo ' | (RECYCLAGE : NON<br/>';
-                echo ' | (VALIDITER : <k> REVOQUER</k><br/><br/>';
-                $KALAMOUR = 'NONVALIDE';
-                /* END DEBUG MODE */
-                
+            $TESTOK = verifRecyclage($diff,$test,$donnees);
+            if($TESTOK=='RECYCLAGE'){
+                $RECYCLAGE='OUI';
+                $KALAMOUR="VALIDE";
             }
-            elseif ($diff>5 and $test!=12 || $test=!13 || $test=!14 || $test=!15){  
-                /* DEBUG MODE */
-                echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECESSITE PAS DE RECYCLAGE)<br/>';
-                echo ' | (RECYCLAGE : NON<br/><br/>';
-                /* END DEBUG MODE */
-                
+            elseif($TESTOK=='VALIDE'){
+                $RECYCLAGE='NON';
+                $KALAMOUR="VALIDE";
+            }elseif($TESTOK=='NONVALIDE'){
+                $RECYCLAGE='NON';
+                $KALAMOUR="NONVALIDE";
             }
-            else {  
-                /* DEBUG MODE */
-                echo ' | (RECYCLAGE : NON<br/><br/>';
-                /* END DEBUG MODE */   
-            } 
          } 
     }    
     if(is_null($donnees4['nom'])==false){?>     
@@ -221,5 +197,49 @@ $KALAMOUR = 'NONVALIDE';
         }
 */
 
+function verifRecyclage($diff,$test,$donnees){
+    if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
+        return $TEST = 'RECYCLAGE';
+        /* DEBUG MODE */
+        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+        echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+        /* END DEBUG MODE */
 
-function valide
+    } elseif ($diff>5 and $test==16){  
+        /* DEBUG MODE */
+        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 5 ANS)<br/>';
+        echo ' | (RECYCLAGE : NON<br/>';
+        echo ' | (VALIDITER : <k>REVOQUER</k><br/><br/>';
+        return $TEST = 'NONVALIDE';
+        /* END DEBUG MODE */
+        
+    } elseif ($diff>4 and $test==17){  
+        /* DEBUG MODE */
+        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 4 ANS)<br/>';
+        echo ' | (RECYCLAGE : NON<br/>';
+        echo ' | (VALIDITER : <k> REVOQUER</k><br/><br/>';
+        return $TEST = 'NONVALIDE';
+        /* END DEBUG MODE */
+        
+    }
+    elseif ($diff>5 and $test!=12 || $test=!13 || $test=!14 || $test=!15){  
+        /* DEBUG MODE */
+        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECESSITE PAS DE RECYCLAGE)<br/>';
+        echo ' | (RECYCLAGE : NON<br/><br/>';
+        return $TEST = 'VALIDE';
+        /* END DEBUG MODE */
+        
+    }
+    else {  
+        /* DEBUG MODE */
+        echo ' | (RECYCLAGE : NON<br/><br/>';
+        return $TEST = 'VALIDE';
+        /* END DEBUG MODE */   
+    } 
+}
+function verificationEquivalenceOui($test, $tabequivalence,$bouclefor){
+    $KALAMOUR = 'VALIDE';
+    echo '<br/> Formation équivalente ! Diplome de base :  '.$test.'<br/>';
+    echo 'Diplome equivalent : '.$tabequivalence[$bouclefor].'<br/>';
+    return $KALAMOUR;
+}
