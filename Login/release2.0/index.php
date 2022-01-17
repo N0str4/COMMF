@@ -9,17 +9,49 @@ if(!isset($_SESSION['unique_id'])){
 	<head>
 		<meta charset="utf-8">
         <link rel="stylesheet" href="MiseEnPage.css" />
-		<title>Gestion des pré-requis</title>
+		<title>OCMF - Gestion des pré-requis</title>
 
 	</head>
 	
 	<header>
-		<?php include("header.php"); ?>
+<nav>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <label class="logo_img"><img src="bg1.png" style="  margin-left : 2px;
+  width: 40px;
+  margin-top:10px;
+  margin-bottom: -10px;
+  height: 65px;"></label>
+      <label class="logo">OCMF</label>
+      <label class="logo_img"><img src="logoADT.png" style="  margin-left : 1050px;
+  width: 70px;
+  padding: initial;
+  margin-top:10px;
+  height: 55px;"></label>
+      <ul>
+      <li><a class="active" href="index.php">DashBoard</a></li>
+    	<li><a href="notice.php">Notice d'utilisation</a></li>
+  	</ul>
+    </nav>
+<br>
 	</header>
 	<body>
-
+        
+    <div class="wrapper">
+    <section class="form login">
+    <img class="image" src="ministere.png" style="  border: none;
+  width: 40%;
+  margin-left:160px;
+  text-align: center;
+  height: 34%;">
+        <header>DOA | Visualisation des Pré-Requis </header>
 		<form method="post">
+        <div class="field input">
         Entrée le SAP : <input type="text" name="sap" required/><br>
+        </div>
+        <div class="field input">
         Selectionner la Formation : <select name="formation" id="pet-select" required>
             <option value="PPLD">PPLD</option>
             <option value="PPLOG">PPLOG</option>
@@ -28,9 +60,13 @@ if(!isset($_SESSION['unique_id'])){
             <option value="OKL">OKL</option>
             <option value="JDLOP">JDLOP</option>
         </select><br>
+        </div>
+        <div class="field button">
         <input type="submit" value="Rechercher"/>
+        </div>
         </form>
-        
+    </section>
+        </div>
         <hr>
         <?php 
 
@@ -84,6 +120,7 @@ foreach($rows as $row) {
 }
 
 ?>   
+
 <table>
 <thead>
 <tr>
