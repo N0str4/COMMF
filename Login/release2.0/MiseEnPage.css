@@ -12,7 +12,7 @@ table
   border-collapse: collapse;
   border: 3px black;
   font-color: rgb(122, 124, 122);
-  margin-left: -700px; /* - moitié de la largeur */
+  margin-left: -500px; /* - moitié de la largeur */
   position: absolute;
   left: 50%;}
 td, th /* Mettre une bordure sur les td ET les th */
@@ -24,54 +24,63 @@ td, th /* Mettre une bordure sur les td ET les th */
 
 thead th:nth-child(1) {
   width: 30%;
-  background-color: #757575;
+  background-color: rgb(37, 83, 37);
+  color: rgb(240, 236, 236);
 }
 
 thead th:nth-child(2) {
   width: 30%;
-  background-color: #757575;
+  background-color: rgb(37, 83, 37);
+  color: rgb(240, 236, 236);
+
 }
 
 thead th:nth-child(3) {
   width: 30%;
-  background-color: #757575;
+  background-color: rgb(37, 83, 37);
+  color: rgb(240, 236, 236);
+
 }
 
 thead th:nth-child(4) {
   width: 30%;
-  background-color: #757575;
+  background-color: rgb(37, 83, 37);
+  color: rgb(240, 236, 236);
+
 }
 
 thead th:nth-child(5) {
   width: 30%;
-  background-color: #757575;
+  background-color: rgb(37, 83, 37);
+  color: rgb(240, 236, 236);
+
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #E0E0E0;
-  font-family: arial;
+  background-color: #ccc6b8;
+  font-family: serif;
   padding: 20px;
   color: black;
   text-align: center;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #BDBDBD;
-  font-family: arial;
+  background-color: #ccc6b8;
+  font-family: serif;
   padding: 20px;
   color: black;
   text-align: center;
 }
 
 form{
-    display:inline;
-}
-formulaire{
-  text-align: center;
-  color: #0082e6;
+  font-weight: bold;
+    text-align: center;
+    position : center;
+  color: #544b2c;
   margin-top: auto;
-  margin-left: 500px;
-  margin-bottom: 200px;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 20px;
 }
 
 th.val{
@@ -87,7 +96,7 @@ th.okrecy{
   color: #fff;
 }
 th.nonrecy {
-  background-color: #949393;
+  background-color: #ccc6b8;
   color: #fff;
 }
 .bold{
@@ -267,4 +276,18 @@ h1 {
     text-align: center;
     font-size : 25px;
     background-color: yellow;
+} 
+hr {
+  border: none;
+  border-top: 3px double #333;
+  color: #333;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+.image  {
+  border: none;
+  width: 70%;
+  text-align: center;
+  height: 20%;
 }
