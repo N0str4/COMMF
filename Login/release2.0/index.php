@@ -3,7 +3,12 @@ session_start();
 if(!isset($_SESSION['unique_id'])){
     header("location: ../login.php");
   }
-  ?>
+  $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+  if(mysqli_num_rows($sql) > 0){
+    $row = mysqli_fetch_assoc($sql);
+  }
+  echo $row['unique_id'] ;
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,6 +38,7 @@ if(!isset($_SESSION['unique_id'])){
       <ul>
       <li><a class="active" href="index.php">DashBoard</a></li>
     	<li><a href="notice.php">Notice d'utilisation</a></li>
+        <li style="float:right"><a href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">Deconnexion</a></li>
   	</ul>
     </nav>
 <br>
@@ -48,8 +54,9 @@ if(!isset($_SESSION['unique_id'])){
   height: 34%;">
         <header>DOA | Visualisation des Pré-Requis </header>
 		<form method="post">
+            
         <div class="field input">
-        Entrée le SAP : <input type="text" name="sap" required/><br>
+        Entrée le SAP : <input type="text" placeholder="SAP du candidat" name="sap" required/><br>
         </div>
         <div class="field input">
         Selectionner la Formation : <select name="formation" id="pet-select" required>
@@ -118,13 +125,12 @@ foreach($rows as $row) {
     /* END DEBUG MODE */
 
 }
-
-?>   
-
+  
+if(is_null($donnees4['nom'])==false){?>
 <table>
 <thead>
 <tr>
-    <th>Nom du Candidat</th>
+    <th id="rouge">Nom du Candidat</th>
     <th>Nom de la Formation</th>
     <th>Nom du Pré-Requis</th>
     <th>Validité du Pré-requis</th>
@@ -132,6 +138,7 @@ foreach($rows as $row) {
 </tr>
 </thead>
 <tbody>
+<?php }?>
     <?php $k=0;?>
 <?php while ($donnees = $req2->fetch()){?>
 <?php

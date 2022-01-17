@@ -31,7 +31,8 @@
           <input type="submit" name="submit" value="Continuez vers l'OCMF ">
         </div>
       </form>
-      <div class="link">Referez vous au CNE RYSSEN, en cas de problème.</div>
+      <div class="link">Referez vous au <a  onClick="javascript:window.open('mailto:david.ryssen@intradef.gouv.fr', 'my-window');event.preventDefault()"
+        href="mailto:david.ryssen@intradef.gouv.fr">CNE RYSSEN,</a> en cas de problème.</div>
     </section>
   </div>
   
