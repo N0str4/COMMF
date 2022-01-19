@@ -11,9 +11,9 @@ table
   width: 70%;
   border-collapse: collapse;
   border: 3px black;
-  font-color: rgb(122, 124, 122);
-  margin-left: -500px; /* - moitié de la largeur */
-  position: absolute;
+  font-color: #333;
+  margin-left: 200px; /* - moitié de la largeur */
+  position: static;
   left: 50%;}
 td, th /* Mettre une bordure sur les td ET les th */
 {
@@ -24,40 +24,40 @@ td, th /* Mettre une bordure sur les td ET les th */
 
 thead th:nth-child(1) {
   width: 30%;
-  background-color: rgb(37, 83, 37);
+  background-color: #333;
   color: rgb(240, 236, 236);
 }
 
 thead th:nth-child(2) {
   width: 30%;
-  background-color: rgb(37, 83, 37);
+  background-color: #333;
   color: rgb(240, 236, 236);
 
 }
 
 thead th:nth-child(3) {
   width: 30%;
-  background-color: rgb(37, 83, 37);
+  background-color: #333;
   color: rgb(240, 236, 236);
 
 }
 
 thead th:nth-child(4) {
   width: 30%;
-  background-color: rgb(37, 83, 37);
+  background-color: #333;
   color: rgb(240, 236, 236);
 
 }
 
 thead th:nth-child(5) {
   width: 30%;
-  background-color: rgb(37, 83, 37);
+  background-color: #333;
   color: rgb(240, 236, 236);
 
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #ccc6b8;
+  background-color: #f5f4f1;
   font-family: serif;
   padding: 20px;
   color: black;
@@ -65,7 +65,7 @@ tbody tr:nth-child(odd) {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #ccc6b8;
+  background-color: #f5f4f1;
   font-family: serif;
   padding: 20px;
   color: black;
@@ -73,14 +73,14 @@ tbody tr:nth-child(even) {
 }
 
 form{
-  font-weight: bold;
-    text-align: center;
     position : center;
-  color: #544b2c;
-  margin-top: auto;
-  margin-left: 25%;
+  margin-top: 500px;
+  margin-left: 300px;
   margin-right: 25%;
   margin-bottom: 20px;
+  padding: 25px 30px;
+  font-size: 1.2em;
+  
 }
 
 th.val{
@@ -97,7 +97,7 @@ th.okrecy{
 }
 th.nonrecy {
   background-color: #ccc6b8;
-  color: #fff;
+  color: #333;
 }
 .bold{
   font-weight: bold;
@@ -112,16 +112,9 @@ th.nonrecy {
     border-width: 0;background-color:#005A7B;color: #F2f2f2;
 }
 
-header {
-
-}
-
-nav {
-
-}
 
 body {
-  background-image: url("bg1.jpg");
+  background: #f7f7f7;
   
   /* Full height */
   height: 100%;
@@ -129,6 +122,8 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+  align-items: center;
+  justify-content: center;
 }
 
 footer{
@@ -169,38 +164,51 @@ h1 {
 }
 
 nav {
-  background: rgb(37, 83, 37);;
+  background: #f7f7f7;
   height: 80px;
   width: 100%;
 }
 
 label.logo{
-  color: white;
+  color: #333;
   font-size: 55px;
   line-height: 80px;
   padding: initial;
-  font-weight: bold;
-  margin-left : 90px;
+  font-weight: bold;;
 }
-nav ul{
-  float: right;
-  margin-right: 20px;
+label.logo_img{
+  margin-left : 10px;
+  margin-right : 10px;
+  position : inline;
 }
-nav ul li{
-  display: inline-block;
-  line-height: 80px;
-  margin: 0 5px;
+ul {
+  list-style-type: none;
+  margin: 0;
+  margin-top:0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
-nav ul li a{
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
   color: white;
-  font-size: 17px;
-  padding: 7px 13px;
-  border-radius: 3px;
-  text-transform: uppercase;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-a.active,a:hover{
-  background: #1b9bff;
-  transition: .5s;
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #dce0df;
+  color: #333;
 }
 .checkbtn{
   font-size: 30px;
@@ -285,9 +293,90 @@ hr {
   text-align: center;
   height: 5px;
 }
-.image  {
+.wrapper{
+  background: #fff;
+  max-width: 450px;
+  width: 100%;
+  margin-left: 500px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  border-radius: 16px;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+}
+.form header{
+  font-size: 25px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  margin-left : 10px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.form form{
+  margin: 20px 0;
+  margin-top : 5px;
+}
+.form form .name-details{
+  display: flex;
+}
+.form .name-details .field:first-child{
+  margin-right: 10px;
+}
+.form .name-details .field:last-child{
+  margin-left: 10px;
+}
+.form form .field{
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: column;
+  position: relative;
+}
+.form form .field label{
+  margin-bottom: 2px;
+}
+.form form .input input{
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.form form .field input{
+  outline: none;
+}
+.form form .image input{
+  font-size: 17px;
+}
+.form form .button input{
+  height: 45px;
   border: none;
-  width: 70%;
+  color: #fff;
+  font-size: 17px;
+  background: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 13px;
+}
+.form form .field i{
+  position: absolute;
+  right: 15px;
+  top: 70%;
+  color: #ccc;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.form form .field i.active::before{
+  color: #333;
+  content: "\f070";
+}
+.form .link{
   text-align: center;
-  height: 20%;
+  margin: 10px 0;
+  font-size: 17px;
+}
+.form .link a{
+  color: #333;
+}
+.form .link a:hover{
+  text-decoration: underline;
 }

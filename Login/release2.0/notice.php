@@ -1,10 +1,35 @@
-
-<?php include_once "header.php"; ?>
+<?php session_start();
+if(!isset($_SESSION['unique_id'])){
+    header("location: ../login.php");
+  }?>
+<link rel="stylesheet" href="MiseEnPage.css" />
+<nav>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <label class="logo_img"><img src="bg1.png" style="  margin-left : 2px;
+  width: 40px;
+  margin-top:10px;
+  margin-bottom: -10px;
+  height: 65px;"></label>
+      <label class="logo">OCMF</label>
+      <label class="logo_img"><img src="logoADT.png" style="  margin-left : 1050px;
+  width: 70px;
+  padding: initial;
+  margin-top:10px;
+  height: 55px;"></label>
+      <ul>
+      <li><a href="index.php">DashBoard</a></li>
+    	<li><a class="active" href="notice.php">Notice d'utilisation</a></li>
+  	</ul>
+    </nav>
+<br>
 <html>
 	<head>
 		<meta charset="utf-8">
         <link rel="stylesheet" href="notice.css" />
-		<title>Notice d'utilisation</title>
+		<title>OCMF - Notice d'utilisation</title>
 
 	</head>
     <div class="Introduction">
