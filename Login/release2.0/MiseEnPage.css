@@ -57,7 +57,7 @@ thead th:nth-child(5) {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #ccc6b8;
+  background-color: #f5f4f1;
   font-family: serif;
   padding: 20px;
   color: black;
@@ -65,7 +65,7 @@ tbody tr:nth-child(odd) {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #ccc6b8;
+  background-color: #f5f4f1;
   font-family: serif;
   padding: 20px;
   color: black;
@@ -207,7 +207,8 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #04AA6D;
+  background-color: #dce0df;
+  color: #333;
 }
 .checkbtn{
   font-size: 30px;

@@ -3,11 +3,8 @@ session_start();
 if(!isset($_SESSION['unique_id'])){
     header("location: ../login.php");
   }
-  $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
-  if(mysqli_num_rows($sql) > 0){
-    $row = mysqli_fetch_assoc($sql);
-  }
-  echo $row['unique_id'] ;
+$bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,12 +57,15 @@ if(!isset($_SESSION['unique_id'])){
         </div>
         <div class="field input">
         Selectionner la Formation : <select name="formation" id="pet-select" required>
-            <option value="PPLD">PPLD</option>
-            <option value="PPLOG">PPLOG</option>
-            <option value="HK">HK</option>
-            <option value="FS">Force Spécial</option>
-            <option value="OKL">OKL</option>
-            <option value="JDLOP">JDLOP</option>
+<?php
+        $req190 = $bdd->query("SELECT * FROM `Formationdetails`  GROUP BY `nomformation`");
+                      while ($donnees190 = $req190->fetch()){?>
+                      
+                        <option value="<?php echo $donnees190['nomformation'];?>"><?php echo $donnees190['nomformation'] ?></option>
+                        
+                      <?php
+                      }?>
+
         </select><br>
         </div>
         <div class="field button">
@@ -80,25 +80,13 @@ if(!isset($_SESSION['unique_id'])){
 // SCRIPT PHP BY
 // BY AYMERICK 
 // DO NOT COPY
-$bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
 $sap = $_POST['sap'];
 $formation = $_POST['formation'];
-
-
-
-// CHECK
-$req = $bdd->query("SELECT * FROM `Formationdetails` WHERE nomformation LIKE '$formation' ORDER BY num_prerequis");
-$req2 = $bdd->query("SELECT *
-FROM `Formationdetails`
-INNER JOIN Formation
-ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation'");
-
-
-
 $req4 = $bdd->query("SELECT *
 FROM utils WHERE sap LIKE '$sap'");
 $donnees4 = $req4->fetch();
 $id_userSAP = $donnees4['id'];
+$type_user = $donnees4['type'];
 $req5 = $bdd->query("SELECT Num_Prerequis,dateobtention
 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
 $rows= $req5->fetchAll(PDO::FETCH_ASSOC);
@@ -125,7 +113,42 @@ foreach($rows as $row) {
     /* END DEBUG MODE */
 
 }
-  
+
+$req18 = $bdd->query("SELECT num_prerequis
+FROM Formationdetails WHERE nomformation LIKE '$formation'");
+$sorties = $req18->fetchAll();
+
+
+$n=0;
+foreach($sorties as $sortie) {
+    $tabnum[$n] = $sortie['num_prerequis'];
+    echo '<br> Résult : '.$sortie['num_prerequis'].'<br>';
+    if ($tabnum[$n]==29){ // Formation Civ
+        $VerifCivOrMil = 0;
+        echo $VerifCivOrMil;
+    }elseif($tabnum[$n]==28){ // Formation Millitaire
+        $VerifCivOrMil = 1;
+        echo $VerifCivOrMil;
+    } else {
+        $VerifCivOrMil = 3; // Formation ouverte au deux
+        echo '<br> VERIF /./ '.$VerifCivOrMil.'<br>';
+    }
+    $civOuMillitaire=$civOuMillitaire+1;
+}
+
+// CHECK
+$req = $bdd->query("SELECT * FROM `Formationdetails` WHERE nomformation LIKE '$formation' ORDER BY num_prerequis");
+$req2 = $bdd->query("SELECT *
+FROM `Formationdetails`
+INNER JOIN Formation
+ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation' AND `type` LIKE '$type_user' ");
+$type_user2=3;
+$req80 = $bdd->query("SELECT *
+FROM `Formationdetails`
+INNER JOIN Formation
+ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation' AND `type` LIKE '$type_user2' ");
+
+
 if(is_null($donnees4['nom'])==false){?>
 <table>
 <thead>
@@ -207,13 +230,37 @@ $now = date('Y-m-d H:i:s');
             }
          } 
     }    
-    if(is_null($donnees4['nom'])==false){?>     
-    
+    if(is_null($donnees4['nom'])==false){   
+    if ($VerifCivOrMil==1 && $type_user==1){
+                ?> 
                 <br/>
                 <br/>
                 <tr><th> <?php echo $donnees4['nom']?></th><th> <?php echo $donnees['nomformation']?></th><th> <?php echo $donnees['Nom_Prerequis']?></th><?php if ($KALAMOUR=='VALIDE'){?> <th class="val"><?php echo $KALAMOUR; }else {?> <th class="nv"><?php echo 'NONVALIDE';}?></th><?php if ($RECYCLAGE=='OUI'){?> <th class="okrecy"><?php echo $RECYCLAGE; }else {?> <th class="nonrecy"><?php echo 'NON';}?></th></tr>
     
-        <?php }else{?> 
+        <?php }
+        if ($VerifCivOrMil==1 && $type_user==0){
+                ?> 
+                <br/>
+                <br/>        <?php }
+        if ($VerifCivOrMil==0 && $type_user==0){
+                ?> 
+                <br/>
+                <br/>
+                <tr><th> <?php echo $donnees4['nom']?></th><th> <?php echo $donnees['nomformation']?></th><th> <?php echo $donnees['Nom_Prerequis']?></th><?php if ($KALAMOUR=='VALIDE'){?> <th class="val"><?php echo $KALAMOUR; }else {?> <th class="nv"><?php echo 'NONVALIDE';}?></th><?php if ($RECYCLAGE=='OUI'){?> <th class="okrecy"><?php echo $RECYCLAGE; }else {?> <th class="nonrecy"><?php echo 'NON';}?></th></tr>
+    
+        <?php }if ($VerifCivOrMil==0 && $type_user==1){
+                ?> 
+                <br/>
+                <br/>
+                        <?php }
+        if ($VerifCivOrMil==3){
+                ?> 
+                <br/>
+                <br/>
+                <tr><th> <?php echo $donnees4['nom']?></th><th> <?php echo $donnees['nomformation']?></th><th> <?php echo $donnees['Nom_Prerequis']?></th><?php if ($KALAMOUR=='VALIDE'){?> <th class="val"><?php echo $KALAMOUR; }else {?> <th class="nv"><?php echo 'NONVALIDE';}?></th><?php if ($RECYCLAGE=='OUI'){?> <th class="okrecy"><?php echo $RECYCLAGE; }else {?> <th class="nonrecy"><?php echo 'NON';}?></th></tr>
+                
+            <?php }
+        }else{?> 
             <script type="text/javascript">
                 alert('SAP INVALIDE !');
                 window.location.replace("http://intradef.vikatchev.com");
@@ -223,7 +270,92 @@ $now = date('Y-m-d H:i:s');
 <?php 
 $RECYCLAGE = 'NON';
 $KALAMOUR = 'NONVALIDE';
-}?>   
+}?><?php while ($donnees80 = $req80->fetch()){?>
+    <?php
+    $now = date('Y-m-d H:i:s');
+        for ($k=0; $k<10; $k++){
+            $boucle = 0;
+            /* DEBUG MODE */
+            /**/ echo '<br/>K= '.$k.'<br/>';
+            /**/ echo 'TAB K egal : '.$tab[$k].'///';
+            /* END DEBUG MODE */
+            $numverif = $donnees80['num_prerequis'];
+            $test=$tab[$k];
+            /**/echo $numverif.'<br.>';
+            $req7 = $bdd->query("SELECT liaison_id_prerequis
+            FROM Equivalence WHERE id_prerequis LIKE '$test'");
+            $colonnes = $req7->fetchAll();
+            foreach($colonnes as $colonne) {
+    
+                $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
+                /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+                $boucle=$boucle+1;
+            }
+            /**/ echo '<br/>---<br/>';
+            for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
+                if ($tabequivalence[$bouclefor]==$numverif){
+                  $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
+                  $RECYCLAGE = 'NON';
+                }
+            }
+    
+    
+    
+            $diff = 0;
+            if ($test== $numverif){
+    
+                $KALAMOUR = 'VALIDE';
+                /* DEBUG MODE */
+                /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
+                /**/ echo ' | (FORMATION) =  |  '.$donnees80['Nom_Prerequis'];
+                /**/ echo '<br/> | (ETATVALIDE)<br/>';
+                /* END DEBUG MODE */
+    
+                $req6 = $bdd->query("SELECT dateobtention
+                FROM formationliaison WHERE Num_Prerequis LIKE '$test'");
+                $donnees18 = $req6->fetch();
+                $date1 = $donnees18['dateobtention'];    
+                $diff  = abs($now - $date1);  
+                
+                /* DEBUG MODE */
+                /**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+                /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+                /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+                /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+                /* END DEBUG MODE */
+                $TESTOK = verifRecyclage($diff,$test,$donnees80);
+                if($TESTOK=='RECYCLAGE'){
+                    $RECYCLAGE='OUI';
+                    $KALAMOUR="VALIDE";
+                }
+                elseif($TESTOK=='VALIDE'){
+                    $RECYCLAGE='NON';
+                    $KALAMOUR="VALIDE";
+                }elseif($TESTOK=='NONVALIDE'){
+                    $RECYCLAGE='NON';
+                    $KALAMOUR="NONVALIDE";
+                }
+             } 
+        }    
+        if(is_null($donnees4['nom'])==false){   
+            if ($VerifCivOrMil==3){
+                    ?> 
+                    <br/>
+                    <br/>
+                    <tr><th> <?php echo $donnees4['nom']?></th><th> <?php echo $donnees80['nomformation']?></th><th> <?php echo $donnees80['Nom_Prerequis']?></th><?php if ($KALAMOUR=='VALIDE'){?> <th class="val"><?php echo $KALAMOUR; }else {?> <th class="nv"><?php echo 'NONVALIDE';}?></th><?php if ($RECYCLAGE=='OUI'){?> <th class="okrecy"><?php echo $RECYCLAGE; }else {?> <th class="nonrecy"><?php echo 'NON';}?></th></tr>
+                    
+                <?php }
+            }else{?> 
+                <script type="text/javascript">
+                    alert('SAP INVALIDE !');
+                    window.location.replace("http://intradef.vikatchev.com");
+                </script>
+                
+            <?php }?> 
+    <?php 
+    $RECYCLAGE = 'NON';
+    $KALAMOUR = 'NONVALIDE';
+    }?>  
 </table></tbody>
 	</body>
 
