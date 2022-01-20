@@ -50,7 +50,7 @@
             <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $donnees['lname']?></span>
           </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <ul style="margin " class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $donnees['fname'].' '.$donnees['lname'];?></h6>
               <span><?php echo $donnees['grade']?></span>
@@ -58,7 +58,12 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="../release2.0/index.php">
+                <i class="bi bi-arrow-90deg-left"></i>
+                <span>Retour sur l'OCMF</span>
+              </a>
+            </li>
             <li>
               <a class="dropdown-item d-flex align-items-center" href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">
                 <i class="bi bi-box-arrow-right"></i>
