@@ -137,6 +137,13 @@
         </a>
       </li>
     </ul>
+    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsrecherche.php">
+          <i class="bi bi-circle"></i><span>Logs des recherches</span>
+        </a>
+      </li>
+    </ul>
   </li><!-- End Forms Nav -->
 
 </aside><!-- End Sidebar-->  

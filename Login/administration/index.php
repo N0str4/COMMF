@@ -23,6 +23,8 @@ SELECT COUNT(*) AS total FROM users");
 $req2->execute();
 $donnees2 = $req2->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE
 include 'config/menu.php'; 
+
+echo $donnees2['total'];
 ?>
 <main id="main" class="main">
 
@@ -50,7 +52,7 @@ include 'config/menu.php';
         <i class="bi bi-people"></i>
       </div>
       <div class="ps-3">
-        <h6><?php $donnees2['total']?></h6>
+        <h6><?php echo $donnees2['total']?></h6>
         <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
       </div>

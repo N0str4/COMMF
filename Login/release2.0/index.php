@@ -80,6 +80,9 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
 // SCRIPT PHP BY
 // BY AYMERICK 
 // DO NOT COPY
+
+
+
 $sap = $_POST['sap'];
 $formation = $_POST['formation'];
 $req4 = $bdd->query("SELECT *
@@ -87,6 +90,27 @@ FROM utils WHERE sap LIKE '$sap'");
 $donnees4 = $req4->fetch();
 $id_userSAP = $donnees4['id'];
 $type_user = $donnees4['type'];
+$now = date('Y-m-d H:i:s');
+
+// INTRODUCTION LOG
+$requete = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+$donneesrecup = $requete->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE
+// END INTRODUCTION LOG
+// REQ LOG
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
 $req5 = $bdd->query("SELECT Num_Prerequis,dateobtention
 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
 $rows= $req5->fetchAll(PDO::FETCH_ASSOC);
@@ -149,7 +173,15 @@ INNER JOIN Formation
 ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation' AND `type` LIKE '$type_user2' ");
 
 
-if(is_null($donnees4['nom'])==false){?>
+if(is_null($donnees4['nom'])==false){
+    
+    
+    
+    
+    
+    
+    
+    ?>
 <table>
 <thead>
 <tr>
@@ -359,10 +391,43 @@ $KALAMOUR = 'NONVALIDE';
 </table></tbody>
 	</body>
 
+
+<?php 
+try{
+    //On insère les données reçues
+    $requeteLOG = $bdd->prepare("
+        INSERT INTO logsrecherche(nom, prenom, date, sap, formation)
+        VALUES(:nom, :prenom, :date, :sap, :formation)");
+    $requeteLOG->bindParam(':nom',$donneesrecup['lname']);
+    $requeteLOG->bindParam(':prenom',$donneesrecup['fname']); 
+    $requeteLOG->bindParam(':date',$now); 
+    $requeteLOG->bindParam(':sap',$sap); 
+    $requeteLOG->bindParam(':formation',$formation); 
+
+
+    $requeteLOG->execute();
+    echo 'FINI';
+}   
+catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+}
+?>
+
 </html>
 
 
 <?php
+  
+
+
+
+
+
+
+
+
+
+
 
 
 function verifRecyclage($diff,$test,$donnees){
