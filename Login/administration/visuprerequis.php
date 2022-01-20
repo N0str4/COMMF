@@ -13,9 +13,8 @@ if(!isset($_SESSION['unique_id'])){
   <meta content="" name="keywords">
 
 
-  <?php
-include 'config/config.php';
-$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+<?php
+include 'config/config.php';$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
 ?>
@@ -23,11 +22,11 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Visualisation des formations</h1>
+      <h1>Visualisation des Pré-Requis</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Formations</li>
+          <li class="breadcrumb-item">Pré-Requis</li>
           <li class="breadcrumb-item active">Informations</li>
         </ol>
       </nav>
@@ -39,34 +38,26 @@ include 'config/menu.php';
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Formations</h5>
+              <h5 class="card-title">Pré-Requis</h5>
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nom de la Formation</th>
-                    <th scope="col">Nom du Prérequis</th>
+                    <th scope="col">ID Pré-Requis</th>
+                    <th scope="col">Nom du PréRequis</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
 $req2 = $bdd->query("SELECT *
-FROM `Formationdetails`");
-$k=0;
+FROM `Formation`");
+
 ?>
 <?php while ($donnees = $req2->fetch()){
-    $k=$k+1;
-$test=$donnees['num_prerequis'];
-$req3 = $bdd->query("SELECT *
-FROM `Formationdetails`
-INNER JOIN Formation
-ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE NumPrérequis LIKE '$test'");
-$donnees2 = $req3->fetch()
 ?>
 
-  <tr><th scope="row"><?php echo $k?></th><td> <?php echo $donnees['nomformation']?></td><td> <?php echo $donnees2['Nom_Prerequis']?></td></tr>
+  <tr><th scope="row"><?php echo $donnees['NumPrérequis']?></th><td> <?php echo $donnees['Nom_Prerequis']?></td></tr>
 
 
 
