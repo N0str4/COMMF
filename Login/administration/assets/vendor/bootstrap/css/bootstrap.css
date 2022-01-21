@@ -3512,7 +3512,7 @@ textarea.form-control-lg {
 .dropend,
 .dropdown,
 .dropstart {
-  position: relative;
+    margin-left:800px;
 }
 
 .dropdown-toggle {
@@ -7386,7 +7386,7 @@ textarea.form-control-lg {
 }
 
 .ms-auto {
-  margin-left: auto !important;
+  margin-left: 1000px !important;
 }
 
 .p-0 {

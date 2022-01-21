@@ -34,7 +34,9 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
   height: 55px;"></label>
       <ul>
       <li><a class="active" href="index.php">DashBoard</a></li>
+        <li><a href="personnel.php">Recherche</a></li>
     	<li><a href="notice.php">Notice d'utilisation</a></li>
+        <li style="float:right"><a href="../administration/index.php">Administration</a></li>
         <li style="float:right"><a href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">Deconnexion</a></li>
   	</ul>
     </nav>
@@ -75,11 +77,18 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
     </section>
         </div>
         <hr>
+
+
+
+        
         <?php 
 
 // SCRIPT PHP BY
 // BY AYMERICK 
 // DO NOT COPY
+
+
+
 $sap = $_POST['sap'];
 $formation = $_POST['formation'];
 $req4 = $bdd->query("SELECT *
@@ -87,6 +96,27 @@ FROM utils WHERE sap LIKE '$sap'");
 $donnees4 = $req4->fetch();
 $id_userSAP = $donnees4['id'];
 $type_user = $donnees4['type'];
+$now = date('Y-m-d H:i:s');
+
+// INTRODUCTION LOG
+$requete = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+$donneesrecup = $requete->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE
+// END INTRODUCTION LOG
+// REQ LOG
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
 $req5 = $bdd->query("SELECT Num_Prerequis,dateobtention
 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
 $rows= $req5->fetchAll(PDO::FETCH_ASSOC);
@@ -95,20 +125,20 @@ $i=0;
 
 foreach($rows as $row) {
     /* DEBUG MODE */
-    /**/ echo '<br />';
-    /**/ echo 'i='.$i;
-    /**/ echo '<br />';
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
     /* END DEBUG MODE */
     $tabdate[$i] = $row['dateobtention'];
     $tab[$i] = $row['Num_Prerequis'];
     /* DEBUG MODE */
-    /**/ echo 'Tab['.$i.']='.$tab[$i];
-    /**/ echo '<br/>';
+   // /**/ echo 'Tab['.$i.']='.$tab[$i];
+   // /**/ echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
     /* DEBUG MODE */
-    /**/ echo 'i='.$i;
-    /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
     
     /* END DEBUG MODE */
 
@@ -122,16 +152,16 @@ $sorties = $req18->fetchAll();
 $n=0;
 foreach($sorties as $sortie) {
     $tabnum[$n] = $sortie['num_prerequis'];
-    echo '<br> Résult : '.$sortie['num_prerequis'].'<br>';
+    //echo '<br> Résult : '.$sortie['num_prerequis'].'<br>';
     if ($tabnum[$n]==29){ // Formation Civ
         $VerifCivOrMil = 0;
-        echo $VerifCivOrMil;
+       // echo $VerifCivOrMil;
     }elseif($tabnum[$n]==28){ // Formation Millitaire
         $VerifCivOrMil = 1;
-        echo $VerifCivOrMil;
+        //echo $VerifCivOrMil;
     } else {
         $VerifCivOrMil = 3; // Formation ouverte au deux
-        echo '<br> VERIF /./ '.$VerifCivOrMil.'<br>';
+       // echo '<br> VERIF /./ '.$VerifCivOrMil.'<br>';
     }
     $civOuMillitaire=$civOuMillitaire+1;
 }
@@ -149,7 +179,15 @@ INNER JOIN Formation
 ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation' AND `type` LIKE '$type_user2' ");
 
 
-if(is_null($donnees4['nom'])==false){?>
+if(is_null($donnees4['nom'])==false){
+    
+    
+    
+    
+    
+    
+    
+    ?>
 <table>
 <thead>
 <tr>
@@ -169,22 +207,22 @@ $now = date('Y-m-d H:i:s');
     for ($k=0; $k<10; $k++){
         $boucle = 0;
         /* DEBUG MODE */
-        /**/ echo '<br/>K= '.$k.'<br/>';
-        /**/ echo 'TAB K egal : '.$tab[$k].'///';
+       // /**/ echo '<br/>K= '.$k.'<br/>';
+       // /**/ echo 'TAB K egal : '.$tab[$k].'///';
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        /**/echo $numverif.'<br.>';
+        ///**/echo $numverif.'<br.>';
         $req7 = $bdd->query("SELECT liaison_id_prerequis
         FROM Equivalence WHERE id_prerequis LIKE '$test'");
         $colonnes = $req7->fetchAll();
         foreach($colonnes as $colonne) {
 
             $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-            /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+            ///**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
             $boucle=$boucle+1;
         }
-        /**/ echo '<br/>---<br/>';
+       // /**/ echo '<br/>---<br/>';
         for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
             if ($tabequivalence[$bouclefor]==$numverif){
               $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
@@ -199,9 +237,9 @@ $now = date('Y-m-d H:i:s');
 
             $KALAMOUR = 'VALIDE';
             /* DEBUG MODE */
-            /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
-            /**/ echo ' | (FORMATION) =  |  '.$donnees['Nom_Prerequis'];
-            /**/ echo '<br/> | (ETATVALIDE)<br/>';
+           // /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
+           // /**/ echo ' | (FORMATION) =  |  '.$donnees['Nom_Prerequis'];
+           // /**/ echo '<br/> | (ETATVALIDE)<br/>';
             /* END DEBUG MODE */
 
             $req6 = $bdd->query("SELECT dateobtention
@@ -211,11 +249,11 @@ $now = date('Y-m-d H:i:s');
             $diff  = abs($now - $date1);  
             
             /* DEBUG MODE */
-            /**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-            /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-            /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-            /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
-            /* END DEBUG MODE */
+           // /**/ */ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+           // /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+            ///**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+           // /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+           // /* END DEBUG MODE */
             $TESTOK = verifRecyclage($diff,$test,$donnees);
             if($TESTOK=='RECYCLAGE'){
                 $RECYCLAGE='OUI';
@@ -276,22 +314,22 @@ $KALAMOUR = 'NONVALIDE';
         for ($k=0; $k<10; $k++){
             $boucle = 0;
             /* DEBUG MODE */
-            /**/ echo '<br/>K= '.$k.'<br/>';
-            /**/ echo 'TAB K egal : '.$tab[$k].'///';
+            ///**/ echo '<br/>K= '.$k.'<br/>';
+            ///**/ echo 'TAB K egal : '.$tab[$k].'///';
             /* END DEBUG MODE */
             $numverif = $donnees80['num_prerequis'];
             $test=$tab[$k];
-            /**/echo $numverif.'<br.>';
+            ///**/echo $numverif.'<br.>';
             $req7 = $bdd->query("SELECT liaison_id_prerequis
             FROM Equivalence WHERE id_prerequis LIKE '$test'");
             $colonnes = $req7->fetchAll();
             foreach($colonnes as $colonne) {
     
                 $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-                /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+               // /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
                 $boucle=$boucle+1;
             }
-            /**/ echo '<br/>---<br/>';
+           // /**/ echo '<br/>---<br/>';
             for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
                 if ($tabequivalence[$bouclefor]==$numverif){
                   $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
@@ -306,9 +344,9 @@ $KALAMOUR = 'NONVALIDE';
     
                 $KALAMOUR = 'VALIDE';
                 /* DEBUG MODE */
-                /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
-                /**/ echo ' | (FORMATION) =  |  '.$donnees80['Nom_Prerequis'];
-                /**/ echo '<br/> | (ETATVALIDE)<br/>';
+               // /**/ echo '<div class="bold"> <br/>| !!!!!      DEBUG MODE      !!!!! | </div><br/>';
+               //// /**/ echo ' | (FORMATION) =  |  '.$donnees80['Nom_Prerequis'];
+               // /**/ echo '<br/> | (ETATVALIDE)<br/>';
                 /* END DEBUG MODE */
     
                 $req6 = $bdd->query("SELECT dateobtention
@@ -318,10 +356,10 @@ $KALAMOUR = 'NONVALIDE';
                 $diff  = abs($now - $date1);  
                 
                 /* DEBUG MODE */
-                /**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-                /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-                /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-                /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+                ///**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+               // /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+                ///**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+               // /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
                 /* END DEBUG MODE */
                 $TESTOK = verifRecyclage($diff,$test,$donnees80);
                 if($TESTOK=='RECYCLAGE'){
@@ -359,55 +397,87 @@ $KALAMOUR = 'NONVALIDE';
 </table></tbody>
 	</body>
 
+
+<?php 
+try{
+    //On insère les données reçues
+    $requeteLOG = $bdd->prepare("
+        INSERT INTO logsrecherche(nom, prenom, date, sap, formation)
+        VALUES(:nom, :prenom, :date, :sap, :formation)");
+    $requeteLOG->bindParam(':nom',$donneesrecup['lname']);
+    $requeteLOG->bindParam(':prenom',$donneesrecup['fname']); 
+    $requeteLOG->bindParam(':date',$now); 
+    $requeteLOG->bindParam(':sap',$sap); 
+    $requeteLOG->bindParam(':formation',$formation); 
+
+
+    $requeteLOG->execute();
+}   
+catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+}
+?>
+
 </html>
 
 
 <?php
+  
+
+
+
+
+
+
+
+
+
+
 
 
 function verifRecyclage($diff,$test,$donnees){
     if (($diff>5 and $test==12) or ($diff>5 and $test==13) or ($diff>5 and $test==14) or ($diff>5 and $test==15)) {    
         return $TEST = 'RECYCLAGE';
         /* DEBUG MODE */
-        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
-        echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+        //echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+        //echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
         /* END DEBUG MODE */
 
     } elseif ($diff>5 and $test==16){  
         /* DEBUG MODE */
-        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 5 ANS)<br/>';
-        echo ' | (RECYCLAGE : NON<br/>';
-        echo ' | (VALIDITER : <k>REVOQUER</k><br/><br/>';
+        //echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 5 ANS)<br/>';
+        //echo ' | (RECYCLAGE : NON<br/>';
+        //echo ' | (VALIDITER : <k>REVOQUER</k><br/><br/>';
         return $TEST = 'NONVALIDE';
         /* END DEBUG MODE */
         
     } elseif ($diff>4 and $test==17){  
         /* DEBUG MODE */
-        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 4 ANS)<br/>';
-        echo ' | (RECYCLAGE : NON<br/>';
-        echo ' | (VALIDITER : <k> REVOQUER</k><br/><br/>';
+        //echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' A UNE VALIDITE DE 4 ANS)<br/>';
+        //echo ' | (RECYCLAGE : NON<br/>';
+       // echo ' | (VALIDITER : <k> REVOQUER</k><br/><br/>';
         return $TEST = 'NONVALIDE';
         /* END DEBUG MODE */
         
     }
     elseif ($diff>5 and $test!=12 || $test=!13 || $test=!14 || $test=!15){  
         /* DEBUG MODE */
-        echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECESSITE PAS DE RECYCLAGE)<br/>';
-        echo ' | (RECYCLAGE : NON<br/><br/>';
+       // echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NE NECESSITE PAS DE RECYCLAGE)<br/>';
+        //echo ' | (RECYCLAGE : NON<br/><br/>';
         return $TEST = 'VALIDE';
         /* END DEBUG MODE */
         
     }
     else {  
         /* DEBUG MODE */
-        echo ' | (RECYCLAGE : NON<br/><br/>';
+       // echo ' | (RECYCLAGE : NON<br/><br/>';
         return $TEST = 'VALIDE';
         /* END DEBUG MODE */   
     } 
 }
 function verificationEquivalenceOui($test, $tabequivalence,$bouclefor){
     $KALAMOUR = 'VALIDE';
-    echo '<br/> Formation équivalente ! Diplome de base :  '.$test.'<br/>';
-    echo 'Diplome equivalent : '.$tabequivalence[$bouclefor].'<br/>';
+   // echo '<br/> Formation équivalente ! Diplome de base :  '.$test.'<br/>';
+   // echo 'Diplome equivalent : '.$tabequivalence[$bouclefor].'<br/>';
     return $KALAMOUR;
 }
