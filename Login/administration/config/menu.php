@@ -46,7 +46,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="assets/img/bg1.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $donnees['lname']?></span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -125,9 +125,24 @@
           <i class="bi bi-plus-circle-dotted"></i><span>Ajout de Prérequis</span>
         </a>
       </li>
-      <li>
         <a href="visuprerequis.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Visualisation des prérequis</span>
+        </a>
+      </li>
+    </ul>
+    <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#table-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-diagram-3-fill"></i><span>Equivalence</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="table-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="equivalence.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Ajout d'équivalence</span>
+        </a>
+      </li>
+      <li>
+        <a href="visuequivalence.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Visualisation d'équivalence</span>
         </a>
       </li>
     </ul>

@@ -49,9 +49,11 @@ $totalfinal=$totalbis-100;
 
 if ($totalfinal<0){ // NEGATIF
   $augmentationOuBaisse = "Baisse";
+  $VoR=0;
 
-}elseif($totalfinal<0){
+}elseif($totalfinal>0){
   $augmentationOuBaisse = "Augmentation";
+  $VoR=1;
 
 }
 include 'config/menu.php'; 
@@ -95,7 +97,7 @@ include 'config/menu.php';
               </div>
             </div><!-- End Sales Card -->
 
-            <!-- Revenue Card -->
+            <!-- Revenue Card 
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
@@ -114,7 +116,7 @@ include 'config/menu.php';
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>--><!-- End Revenue Card -->
 
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
@@ -130,7 +132,11 @@ include 'config/menu.php';
                     </div>
                     <div class="ps-3">
                       <h6><?php echo $donnees10['total'];?></h6>
-                      <span class="text-muted small pt-2 ps-1"><?php echo $augmentationOuBaisse?> </span><span class="text-danger small pt-1 fw-bold"><?php echo $totalfinal?>%</span>
+                      <?php if($VoR==1){ ?>
+                      <span class="text-success small pt-1 fw-bold"><?php echo $totalfinal?>%</span>
+                      <?php }else{  ?>
+                        <span class="text-danger small pt-1 fw-bold"><?php echo $totalfinal?>%</span>
+                      <?php }?>
 
                     </div>
                   </div>

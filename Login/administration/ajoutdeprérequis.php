@@ -85,7 +85,7 @@ echo $donnees;
 
 
 if(isset($nomprerequis)){
-if(isset($donnees)){
+if(!empty($donnees)){
 ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading">ERROR</h4>
