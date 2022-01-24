@@ -146,6 +146,24 @@
         </a>
       </li>
     </ul>
+    <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-info-circle-fill"></i><span>Logs</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsrecherche.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Logs des recherches</span>
+        </a>
+      </li>
+    </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsajout.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Logs des ajouts</span>
+        </a>
+      </li>
+    </ul>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Divers</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -154,20 +172,6 @@
       <li>
         <a href="acces.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Accès Utilisateurs</span>
-        </a>
-      </li>
-    </ul>
-    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="logsrecherche.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Logs des recherches</span>
-        </a>
-      </li>
-    </ul>
-    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="logsajout.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Logs des ajouts</span>
         </a>
       </li>
     </ul>
