@@ -7,7 +7,7 @@ if(!isset($_SESSION['unique_id'])){
 
 <?php
 include 'config/config.php';
-$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+$req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 
 include 'config/menu.php';
@@ -97,3 +97,4 @@ $k=0;
     </section>
 
   </main><!-- End #main -->
+  <?php include 'footer.php';
