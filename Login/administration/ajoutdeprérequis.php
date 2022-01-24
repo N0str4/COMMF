@@ -71,7 +71,8 @@ include 'config/menu.php';
 $nom = $donnees['lname'];
 $prenom = $donnees['fname'];
 $nomprerequis = $_POST['nomPrere'];
-
+$now = date('Y-m-d H:i:s');
+$ajout = "AJOUT";
 include 'config.php';
 
 
@@ -116,7 +117,23 @@ try{
   catch(PDOException $e){
     echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
   }
+  try{
+    //On insère les données reçues
+    $requeteLog1 = $bdd->prepare("
+        INSERT INTO logajoutpre(Nom, Prerequis, Date, type)
+        VALUES(:nom, :prerequis, :date, :type)");
+    $requeteLog1->bindParam(':nom',$nom);
+    $requeteLog1->bindParam(':prerequis',$nomprerequis); 
+    $requeteLog1->bindParam(':date',$now); 
+    $requeteLog1->bindParam(':type',$ajout); 
 
+
+    $requeteLog1->execute();
+  }   
+  catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+  }
+  
 
 }
 }

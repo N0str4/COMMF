@@ -5,7 +5,7 @@ if(!isset($_SESSION['unique_id'])){
   }
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
-$donnees = $req->fetch();
+$donnees5 = $req->fetch();
 include 'config/menu.php';
 ?>
 </aside><!-- End Sidebar-->  
@@ -64,7 +64,7 @@ $donnees2 = $req3->fetch()
   <td> <?php echo $donnees['nomformation']?></td>
   <td> <?php echo $donnees2['Nom_Prerequis']?></td>
   <td> <?php echo $donnees['type']?></td>
-  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees['ID_PK'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees['ID_PK'];?>&nom=<?php echo $donnees5['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
 </tr>
 
 

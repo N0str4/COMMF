@@ -171,6 +171,7 @@ $selectionCivMil2 = $_POST['selectionprerequis2'];
 $selectionCivMil3 = $_POST['selectionprerequis3'];
 $k=1;
 $now = date('Y-m-d H:i:s');
+$ajout="AJOUT";
 
 include 'config.php';
 
@@ -243,12 +244,13 @@ catch(PDOException $e){
 try{
   //On insère les données reçues
   $requeteLog1 = $bdd->prepare("
-      INSERT INTO logsajout(Nom, Formation, Prerequis, Date)
-      VALUES(:nom, :formation, :prerequis, :date)");
+      INSERT INTO logsajout(Nom, Formation, Prerequis, Date, type)
+      VALUES(:nom, :formation, :prerequis, :date, :type)");
   $requeteLog1->bindParam(':date',$now); 
   $requeteLog1->bindParam(':nom',$donnees['lname']);
   $requeteLog1->bindParam(':formation',$nomformation);
   $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
+  $requeteLog1->bindParam(':type',$ajout); 
   $requeteLog1->execute();
 }   
 catch(PDOException $e){
@@ -296,11 +298,12 @@ catch(PDOException $e){
   try{
     //On insère les données reçues
     $requeteLog1 = $bdd->prepare("
-        INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
-        VALUES(:date, :nom, :formation, :prerequis)");
+        INSERT INTO logsajout(Date, Nom, Formation, Prerequis, type)
+        VALUES(:date, :nom, :formation, :prerequis, :type)");
     $requeteLog1->bindParam(':date',$now); 
     $requeteLog1->bindParam(':nom',$donnees['lname']);
     $requeteLog1->bindParam(':formation',$nomformation);
+    $requeteLog1->bindParam(':type',$ajout); 
     $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
   
   
@@ -312,11 +315,12 @@ catch(PDOException $e){
   try{
     //On insère les données reçues
     $requeteLog2 = $bdd->prepare("
-        INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
-        VALUES(:date, :nom, :formation, :prerequis)");
+        INSERT INTO logsajout(Date, Nom, Formation, Prerequis, type)
+        VALUES(:date, :nom, :formation, :prerequis, :type)");
     $requeteLog2->bindParam(':date',$now); 
     $requeteLog2->bindParam(':nom',$donnees['lname']);
     $requeteLog2->bindParam(':formation',$nomformation);
+    $requeteLog2->bindParam(':type',$ajout); 
     $requeteLog2->bindParam(':prerequis',$nomprerequis2); 
     $requeteLog2->execute();
   }   
@@ -373,11 +377,12 @@ catch(PDOException $e){
     try{
       //On insère les données reçues
       $requeteLog1 = $bdd->prepare("
-          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
-          VALUES(:date, :nom, :formation, :prerequis)");
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis, type)
+          VALUES(:date, :nom, :formation, :prerequis, :type)");
       $requeteLog1->bindParam(':date',$now); 
       $requeteLog1->bindParam(':nom',$donnees['lname']);
       $requeteLog1->bindParam(':formation',$nomformation);
+      $requeteLog1->bindParam(':type',$ajout); 
       $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
     
     
@@ -390,11 +395,12 @@ catch(PDOException $e){
     try{
       //On insère les données reçues
       $requeteLog2 = $bdd->prepare("
-          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
-          VALUES(:date, :nom, :formation, :prerequis)");
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis, type)
+          VALUES(:date, :nom, :formation, :prerequis, :type)");
       $requeteLog2->bindParam(':date',$now); 
       $requeteLog2->bindParam(':nom',$donnees['lname']);
       $requeteLog2->bindParam(':formation',$nomformation);
+      $requeteLog2->bindParam(':type',$ajout); 
       $requeteLog2->bindParam(':prerequis',$nomprerequis2); 
     
     
@@ -406,11 +412,12 @@ catch(PDOException $e){
     try{
       //On insère les données reçues
       $requeteLog3 = $bdd->prepare("
-          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
-          VALUES(:date, :nom, :formation, :prerequis)");
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis, type)
+          VALUES(:date, :nom, :formation, :prerequis, :type)");
       $requeteLog3->bindParam(':date',$now); 
       $requeteLog3->bindParam(':nom',$donnees['lname']);
       $requeteLog3->bindParam(':formation',$nomformation);
+      $requeteLog3->bindParam(':type',$ajout); 
       $requeteLog3->bindParam(':prerequis',$nomprerequis3); 
     
     

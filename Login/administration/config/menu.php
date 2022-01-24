@@ -153,14 +153,21 @@
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="logsrecherche.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Logs des recherches</span>
+          <i class="bi bi-plus-circle-dotted"></i><span>Recherches SAP/Diplomes</span>
         </a>
       </li>
     </ul>
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="logsajout.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Logs des ajouts</span>
+          <i class="bi bi-plus-circle-dotted"></i><span>Formations</span>
+        </a>
+      </li>
+    </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsajoutprerequis.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>PréRequis</span>
         </a>
       </li>
     </ul>
