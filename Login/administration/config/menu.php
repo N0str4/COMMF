@@ -171,6 +171,13 @@
         </a>
       </li>
     </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsajoutequi.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Equivalence</span>
+        </a>
+      </li>
+    </ul>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Divers</span><i class="bi bi-chevron-down ms-auto"></i>

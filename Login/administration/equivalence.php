@@ -89,7 +89,7 @@ include 'config/menu.php';
 <?php
 $numprerequis1 = $_POST['Equi-Prerequis1'];
 $numprerequis2 = $_POST['Equi-Prerequis2'];
-
+$now = date('Y-m-d H:i:s');
 
 $req2 = $bdd->query("SELECT * FROM `Equivalence` WHERE id_prerequis LIKE '$numprerequis1' AND liaison_id_prerequis LIKE '$numprerequis2'");
 $donnees2 = $req2->fetch();
@@ -99,7 +99,7 @@ $donnees6 = $req6->fetch();
 $req7 = $bdd->query("SELECT * FROM `Formation` WHERE NumPrérequis LIKE '$numprerequis2'");
 $donnees7 = $req7->fetch();
 
-
+$ajout="AJOUT";
 
 
 if (empty($donnees2)){
@@ -128,7 +128,24 @@ try{
 
 
 
-<?php
+<?php  try{
+    //On insère les données reçues
+    $requeteLog1 = $bdd->prepare("
+        INSERT INTO logsequivalence(Nom, Equivalence, Equivalence2, Date, type)
+        VALUES(:nom, :Equivalence, :Equivalence2 , :date, :type)");
+    $requeteLog1->bindParam(':nom',$donnees['lname']);
+    $requeteLog1->bindParam(':Equivalence',$numprerequis1); 
+    $requeteLog1->bindParam(':Equivalence2',$numprerequis2); 
+    $requeteLog1->bindParam(':date',$now); 
+    $requeteLog1->bindParam(':type',$ajout); 
+
+
+    $requeteLog1->execute();
+  }   
+  catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+  }
+
 
 
 
