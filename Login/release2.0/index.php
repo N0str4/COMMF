@@ -5,6 +5,7 @@ if(!isset($_SESSION['unique_id'])){
   }
 $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
 
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -93,7 +93,7 @@ if ($type == 1){
         <p><b>Prénom :</b> <?php echo $prenom?> </p>
         </div>
         <div class="field input">
-        <p><b>Attribution :</b> <?php echo $typeverif?> </p>
+        <p><b>Fonction :</b> <?php echo $typeverif?> </p>
         </div>
         <hr>
         <div class="field input">
@@ -102,9 +102,9 @@ $req2 = $bdd->query("SELECT *
 FROM `formationliaison`
 INNER JOIN Formation
 ON formationliaison.Num_Prerequis = Formation.NumPrérequis WHERE id_user LIKE '$id_userSAP'");
- while ($donnees2 = $req2->fetch()){
      $k=1;
-     echo '('.$k.') - '.$donnees2['Nom_Prerequis'];
+ while ($donnees2 = $req2->fetch()){
+     echo '(#'.$k.') - '.$donnees2['Nom_Prerequis'];
      echo '<br>';
      $k=$k+1;
 }

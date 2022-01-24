@@ -14,7 +14,7 @@
       <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="error-text"></div>
         <label style="    text-align: center;
-   color:red;  font-weight: bold;;"> !! PANEL ADMINISTRATION, accès restreint !! </label>
+   color:red;  font-weight: bold;;"> !! accès restreint !! </label>
         <div class="field input">
           <label>Adresse email</label>
           <input type="text" name="email" placeholder="Entrez votre email @intradef.gouf.fr" required>
