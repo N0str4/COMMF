@@ -31,6 +31,11 @@ include 'config/menu.php';
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                <b>Supprimer un pré-requis</b>, reviens à supprimé également la <b>Formation</b> dans lequel le pre-requis est <b>affilié.</b><br>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
 
     <section class="section">
       <div class="row">
@@ -46,6 +51,7 @@ include 'config/menu.php';
                   <tr>
                     <th scope="col">ID Pré-Requis</th>
                     <th scope="col">Nom du PréRequis</th>
+                    <th scope="col">Options</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,8 +62,12 @@ FROM `Formation`");
 ?>
 <?php while ($donnees = $req2->fetch()){
 ?>
+ <tr>
+  <th scope="row"><?php echo $donnees['NumPrérequis']?></th>
+  <td> <?php echo $donnees['Nom_Prerequis']?></td>
+  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees['NumPrérequis'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
 
-  <tr><th scope="row"><?php echo $donnees['NumPrérequis']?></th><td> <?php echo $donnees['Nom_Prerequis']?></td></tr>
+</tr>
 
 
 

@@ -16,11 +16,11 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Suivis des Recherches</h1>
+      <h1>Suivis des Ajout</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Logs</a></li>
-          <li class="breadcrumb-item">Recherches</li>
+          <li class="breadcrumb-item">Ajout</li>
           <li class="breadcrumb-item active">Suivie</li>
         </ol>
       </nav>
@@ -28,7 +28,7 @@ include 'config/menu.php';
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-    <td><a class="btn btn-danger" href="fonctions/supprimerlogsrecherche.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
+    <td><a class="btn btn-danger" href="fonctions/supprimerlogsajout.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">
@@ -45,27 +45,30 @@ include 'config/menu.php';
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Nom du Personnel</th>
-                    <th scope="col">SAP</th>
+                    <th scope="col">Nom</th>
                     <th scope="col">Formation</th>
+                    <th scope="col">Pré-requis</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
 $req2 = $bdd->query("SELECT *
-FROM `logsrecherche`");
+FROM `logsajout`");
 $k=0;
 ?>
 <?php while ($donnees = $req2->fetch()){
     $k=$k+1;
-$test=$donnees['num_prerequis'];
+    $test=$donnees['Prerequis'];
+    $req4 = $bdd->query("SELECT * FROM `Formation` WHERE NumPrérequis LIKE '$test'");
+    $donnees2 = $req4->fetch()
+    
 ?>
 
   <tr><th scope="row"><?php echo $k?></th>
-  <td> <?php echo $donnees['date']?></td>
-  <td> <?php echo $donnees['nom']?></td>
-  <td> <?php echo $donnees['sap']?></td>
-  <td> <?php echo $donnees['formation']?></td></tr>
+  <td> <?php echo $donnees['Date']?></td>
+  <td> <?php echo $donnees['Nom']?></td>
+  <td> <?php echo $donnees['Formation']?></td>
+  <td> <?php echo $donnees2['Nom_Prerequis']?></td></tr>
 
 
 

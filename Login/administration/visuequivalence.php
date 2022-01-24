@@ -38,6 +38,7 @@ include 'config/menu.php';
                 <th scope="col">#</th>
                 <th scope="col">Nom de la Formation</th>
                 <th scope="col">Nom de l'Equivalence</th>
+                <th scope="col">Option</th>
               </tr>
             </thead>
             <tbody>
@@ -70,6 +71,8 @@ $donnees4 = $req4->fetch();
 <th scope="row"><?php echo $k?></th>
 <td> <?php echo $donnees3['Nom_Prerequis']?></td>
 <td> <?php echo $donnees4['Nom_Prerequis']?></td>
+<td><a class="btn btn-danger" href="fonctions/supprimerequivalence.php?id=<?php echo $donnees['ID_FK'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+
 </tr>
 
 

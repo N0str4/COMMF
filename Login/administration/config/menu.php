@@ -164,6 +164,13 @@
         </a>
       </li>
     </ul>
+    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsajout.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Logs des ajouts</span>
+        </a>
+      </li>
+    </ul>
   </li><!-- End Forms Nav -->
 
 </aside><!-- End Sidebar-->  

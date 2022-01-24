@@ -122,8 +122,8 @@ include 'config/menu.php';
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
                   <select name="selectionprerequis1" class="form-select" id="floatingSelect" aria-label="Selection CIV or MIL" required>
-                      <option value="0">Pré-Requis Millitaire</option>
-                      <option value="1">Pré-Requis Civil</option>
+                      <option value="1">Pré-Requis Millitaire</option>
+                      <option value="0">Pré-Requis Civil</option>
                       <option value="3">Pré-Requis Civil et Millitaire</option>
                     </select>
                     <label for="floatingSelect">PréRequis Civ ou Millitaire</label>
@@ -132,8 +132,8 @@ include 'config/menu.php';
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
                     <select name="selectionprerequis2" class="form-select" id="floatingSelect" aria-label="Selection CIV or MIL" required>
-                      <option value="0">Pré-Requis Millitaire</option>
-                      <option value="1">Pré-Requis Civil</option>
+                      <option value="1">Pré-Requis Millitaire</option>
+                      <option value="0">Pré-Requis Civil</option>
                       <option value="3">Pré-Requis Civil et Millitaire</option>
                     </select>
                     <label for="floatingSelect">PréRequis Civ ou Millitaire</label>
@@ -142,8 +142,8 @@ include 'config/menu.php';
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
                   <select name="selectionprerequis3" class="form-select" id="floatingSelect" aria-label="Selection CIV or MIL" required>
-                      <option value="0">Pré-Requis Millitaire</option>
-                      <option value="1">Pré-Requis Civil</option>
+                      <option value="1">Pré-Requis Millitaire</option>
+                      <option value="0">Pré-Requis Civil</option>
                       <option value="3">Pré-Requis Civil et Millitaire</option>
                     </select>
                     <label for="floatingSelect">PréRequis Civ ou Millitaire</label>
@@ -170,6 +170,8 @@ $selectionCivMil1 = $_POST['selectionprerequis1'];
 $selectionCivMil2 = $_POST['selectionprerequis2'];
 $selectionCivMil3 = $_POST['selectionprerequis3'];
 $k=1;
+$now = date('Y-m-d H:i:s');
+
 include 'config.php';
 
 
@@ -238,6 +240,20 @@ try{
 catch(PDOException $e){
   echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
 }
+try{
+  //On insère les données reçues
+  $requeteLog1 = $bdd->prepare("
+      INSERT INTO logsajout(Nom, Formation, Prerequis, Date)
+      VALUES(:nom, :formation, :prerequis, :date)");
+  $requeteLog1->bindParam(':date',$now); 
+  $requeteLog1->bindParam(':nom',$donnees['lname']);
+  $requeteLog1->bindParam(':formation',$nomformation);
+  $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
+  $requeteLog1->execute();
+}   
+catch(PDOException $e){
+  echo "Erreur : " . $e->getMessage();
+}
 }elseif (isset($nomformation) && $nomprerequis2!=0 && $nomprerequis3==0){
   try{
  
@@ -276,6 +292,36 @@ catch(PDOException $e){
   }
   catch(PDOException $e){
     echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+  }
+  try{
+    //On insère les données reçues
+    $requeteLog1 = $bdd->prepare("
+        INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
+        VALUES(:date, :nom, :formation, :prerequis)");
+    $requeteLog1->bindParam(':date',$now); 
+    $requeteLog1->bindParam(':nom',$donnees['lname']);
+    $requeteLog1->bindParam(':formation',$nomformation);
+    $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
+  
+  
+    $requeteLog1->execute();
+  }   
+  catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+  }
+  try{
+    //On insère les données reçues
+    $requeteLog2 = $bdd->prepare("
+        INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
+        VALUES(:date, :nom, :formation, :prerequis)");
+    $requeteLog2->bindParam(':date',$now); 
+    $requeteLog2->bindParam(':nom',$donnees['lname']);
+    $requeteLog2->bindParam(':formation',$nomformation);
+    $requeteLog2->bindParam(':prerequis',$nomprerequis2); 
+    $requeteLog2->execute();
+  }   
+  catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
   }
 
 }elseif (isset($nomformation) && $nomprerequis2!=0 && $nomprerequis3!=0){
@@ -322,7 +368,63 @@ catch(PDOException $e){
     $sth3->bindParam(':nomforma',$nomformation);
     $sth3->bindParam(':numpre',$nomprerequis3);
     $sth3->bindParam(':type',$selectionCivMil3);
-    $sth3->execute();?>
+    $sth3->execute();
+    // ** // 
+    try{
+      //On insère les données reçues
+      $requeteLog1 = $bdd->prepare("
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
+          VALUES(:date, :nom, :formation, :prerequis)");
+      $requeteLog1->bindParam(':date',$now); 
+      $requeteLog1->bindParam(':nom',$donnees['lname']);
+      $requeteLog1->bindParam(':formation',$nomformation);
+      $requeteLog1->bindParam(':prerequis',$nomprerequis1); 
+    
+    
+      $requeteLog1->execute();
+    }   
+    catch(PDOException $e){
+      echo "Erreur : " . $e->getMessage();
+    }
+    //** **/
+    try{
+      //On insère les données reçues
+      $requeteLog2 = $bdd->prepare("
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
+          VALUES(:date, :nom, :formation, :prerequis)");
+      $requeteLog2->bindParam(':date',$now); 
+      $requeteLog2->bindParam(':nom',$donnees['lname']);
+      $requeteLog2->bindParam(':formation',$nomformation);
+      $requeteLog2->bindParam(':prerequis',$nomprerequis2); 
+    
+    
+      $requeteLog2->execute();
+    }   
+    catch(PDOException $e){
+      echo "Erreur : " . $e->getMessage();
+    }//** */
+    try{
+      //On insère les données reçues
+      $requeteLog3 = $bdd->prepare("
+          INSERT INTO logsajout(Date, Nom, Formation, Prerequis)
+          VALUES(:date, :nom, :formation, :prerequis)");
+      $requeteLog3->bindParam(':date',$now); 
+      $requeteLog3->bindParam(':nom',$donnees['lname']);
+      $requeteLog3->bindParam(':formation',$nomformation);
+      $requeteLog3->bindParam(':prerequis',$nomprerequis3); 
+    
+    
+      $requeteLog3->execute();
+    }   
+    catch(PDOException $e){
+      echo "Erreur : " . $e->getMessage();
+    }
+    
+    
+    
+    
+    
+    ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
     <h4 class="alert-heading"> SUCCES !</h4>
     <p>La Formation à bien été ajouté avec 3 pré-requis.</p>

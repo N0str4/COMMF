@@ -3,17 +3,6 @@ session_start();
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   }
-?>
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>OCMF - Administration</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-
-  <?php
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
 $donnees = $req->fetch();
@@ -48,10 +37,14 @@ include 'config/menu.php';
                     <th scope="col">#</th>
                     <th scope="col">Nom de la Formation</th>
                     <th scope="col">Nom du Prérequis</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Options</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
+
+
 $req2 = $bdd->query("SELECT *
 FROM `Formationdetails`");
 $k=0;
@@ -66,7 +59,13 @@ ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE NumPrérequis 
 $donnees2 = $req3->fetch()
 ?>
 
-  <tr><th scope="row"><?php echo $k?></th><td> <?php echo $donnees['nomformation']?></td><td> <?php echo $donnees2['Nom_Prerequis']?></td></tr>
+  <tr>
+  <th scope="row"><?php echo $k?></th>
+  <td> <?php echo $donnees['nomformation']?></td>
+  <td> <?php echo $donnees2['Nom_Prerequis']?></td>
+  <td> <?php echo $donnees['type']?></td>
+  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees['ID_PK'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+</tr>
 
 
 
