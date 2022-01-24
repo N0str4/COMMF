@@ -43,7 +43,7 @@ include 'config/menu.php';
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
+
                     <th scope="col">Type</th>
                     <th scope="col">Date</th>
                     <th scope="col">Nom</th>
@@ -59,14 +59,24 @@ $k=0;
 ?>
 <?php while ($donnees = $req2->fetch()){
     $k=$k+1;    
+    $equi1=$donnees['Equivalence'];
+    $equi2=$donnees['Equivalence2'];
+    $req23 = $bdd->query("SELECT * FROM `Formation` WHERE NumPrérequis LIKE '$equi1'");
+    $donnees23 = $req23->fetch();
+    $req24 = $bdd->query("SELECT * FROM `Formation` WHERE NumPrérequis LIKE '$equi2'");
+    $donnees24 = $req24->fetch();
+
+    
+
+
 ?>
 
-  <tr><th scope="row"><?php echo $k?></th>
-  <td> <?php echo $donnees['type']?></td>
+  <tr>
+  <td> <?php echo '<b>'.$donnees['type'].'</b>'?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
-  <td> <?php echo $donnees['Equivalence']?></td>
-  <td> <?php echo $donnees['Equivalence2']?></td>
+  <td> <?php echo $donnees23['Nom_Prerequis']?></td>
+  <td> <?php echo $donnees24['Nom_Prerequis']?></td>
 
 
 

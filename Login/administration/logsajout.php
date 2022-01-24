@@ -43,7 +43,7 @@ include 'config/menu.php';
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
+
                     <th scope="col">Type</th>
                     <th scope="col">Date</th>
                     <th scope="col">Nom</th>
@@ -66,8 +66,8 @@ $k=0;
     
 ?>
 
-  <tr><th scope="row"><?php echo $k?></th>
-  <td> <?php echo $donnees['type']?></td>
+  <tr>
+  <td> <?php echo '<b>'.$donnees['type'].'</b>'?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
   <td> <?php echo $donnees['Formation']?></td>
