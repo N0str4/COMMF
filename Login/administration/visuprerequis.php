@@ -14,8 +14,9 @@ if(!isset($_SESSION['unique_id'])){
 
 
 <?php
-include 'config/config.php';$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
-$donnees = $req->fetch();
+include 'config/config.php';
+$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+$donnees5 = $req->fetch();
 include 'config/menu.php';
 ?>
 </aside><!-- End Sidebar-->  
@@ -65,7 +66,7 @@ FROM `Formation`");
  <tr>
   <th scope="row"><?php echo $donnees['NumPrérequis']?></th>
   <td> <?php echo $donnees['Nom_Prerequis']?></td>
-  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees['NumPrérequis'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees['NumPrérequis'];?>&nom=<?php echo $donnees5['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
 
 </tr>
 

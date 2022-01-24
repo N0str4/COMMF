@@ -44,11 +44,12 @@ include 'config/menu.php';
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Date</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Formation</th>
                     <th scope="col">Pré-requis</th>
-                    <th scope="col">Type</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -66,11 +67,11 @@ $k=0;
 ?>
 
   <tr><th scope="row"><?php echo $k?></th>
+  <td> <?php echo $donnees['type']?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
   <td> <?php echo $donnees['Formation']?></td>
   <td> <?php echo $donnees2['Nom_Prerequis']?></td>
-  <td> <?php echo $donnees['type']?></td>
 
 
 </tr>
