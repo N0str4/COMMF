@@ -8,18 +8,19 @@
         if(mysqli_num_rows($sql) > 0){
             $row = mysqli_fetch_assoc($sql);
             $user_pass = $password;
-            $status = $row['admin'];
+            $status2 = $row['admin'];
             $enc_pass = $row['password'];
-            if($user_pass === $enc_pass && $status==1 ){
+            if($user_pass === $enc_pass && $status2==1 ){
                 $status = "En Ligne";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
                 if($sql2){
                     $_SESSION['unique_id'] = $row['unique_id'];
+                   $_SESSION['id'] = $row['user_id'];
                     echo "success";
                 }else{
                     echo "Something went wrong. Please try again!";
                 }
-            }elseif($user_pass === $enc_pass && $status!=1 ) {
+            }elseif($user_pass === $enc_pass && $status2!=1 ) {
                 echo "Vous n'avez pas les accès requis.";
             }else {
                 echo "Email or Password is Incorrect!";

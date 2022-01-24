@@ -4,8 +4,8 @@ if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   }
 include 'config/config.php';
-$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
-$donnees5 = $req->fetch();
+$req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
+$donnees = $req->fetch();
 include 'config/menu.php';
 ?>
 </aside><!-- End Sidebar-->  
@@ -49,9 +49,9 @@ $req2 = $bdd->query("SELECT *
 FROM `Formationdetails`");
 $k=0;
 ?>
-<?php while ($donnees = $req2->fetch()){
+<?php while ($donnees34 = $req2->fetch()){
     $k=$k+1;
-$test=$donnees['num_prerequis'];
+$test=$donnees34['num_prerequis'];
 $req3 = $bdd->query("SELECT *
 FROM `Formationdetails`
 INNER JOIN Formation
@@ -61,10 +61,10 @@ $donnees2 = $req3->fetch()
 
   <tr>
   <th scope="row"><?php echo $k?></th>
-  <td> <?php echo $donnees['nomformation']?></td>
+  <td> <?php echo $donnees34['nomformation']?></td>
   <td> <?php echo $donnees2['Nom_Prerequis']?></td>
-  <td> <?php if($donnees['type']==0){ echo 'Civil'; } elseif($donnees['type']==1){ echo 'Millitaire';} elseif($donnees['type']==3){ echo 'Commun';} elseif($donnees['type']>3){ echo 'Autres';}?></td>
-  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees['ID_PK'];?>&nom=<?php echo $donnees5['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+  <td> <?php if($donnees34['type']==0){ echo 'Civil'; } elseif($donnees34['type']==1){ echo 'Millitaire';} elseif($donnees34['type']==3){ echo 'Commun';} elseif($donnees34['type']>3){ echo 'Autres';}?></td>
+  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees34['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
 </tr>
 
 

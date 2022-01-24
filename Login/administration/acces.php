@@ -59,14 +59,14 @@ $req2 = $bdd->query("SELECT *
 FROM `users`");
 
 ?>
-<?php while ($donnees = $req2->fetch()){
+<?php while ($donnees2 = $req2->fetch()){
 ?>
-  <td> <?php echo $donnees['email']?></td>
-  <td> <?php echo $donnees['password']?></td>
-  <td> <?php if($donnees['admin']==1){ echo 'Oui'; }else{ echo 'Non';}?></td>
-  <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
-  <?php if($donnees['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
-  <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimé</a></td>
+  <td> <?php echo $donnees2['email']?></td>
+  <td> <?php echo $donnees2['password']?></td>
+  <td> <?php if($donnees2['admin']==1){ echo 'Oui'; }else{ echo 'Non';}?></td>
+  <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
+  <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
+  <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimé</a></td>
 
 </tr>
 

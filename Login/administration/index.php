@@ -15,8 +15,13 @@ if(!isset($_SESSION['unique_id'])){
 
   <?php
 include 'config/config.php';
-$req = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
+$req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE
+
+if($donnees['admin']!=1){
+  header("location: login.php");
+}
+
 
 $req2 = $bdd->prepare("
 SELECT COUNT(*) AS total FROM users");
@@ -82,7 +87,7 @@ include 'config/menu.php';
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h5 class="card-title">Personnel <span>| Aujourd'hui</span></h5>
+                  <h5 class="card-title"> Personnel <span>| Aujourd'hui</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -150,3 +155,4 @@ include 'config/menu.php';
 
             </div><!-- End Left side columns -->
 
+            <?php include 'footer.php';
