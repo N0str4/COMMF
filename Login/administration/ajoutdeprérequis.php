@@ -58,6 +58,25 @@ include 'config/menu.php';
                     <label for="floatingPassword"><?php echo 'Nom: '.$donnees['lname']?></label>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                  <select name="Recyclage" class="form-select" id="floatingSelect" aria-label="Recyclage" required>
+                      <option selected value="0">NON</option>
+                      <option value="1">OUI</option>
+                    </select>
+                    <label for="floatingSelect">Formation comprenant un recyclage</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                  <select name="Validite" class="form-select" id="floatingSelect" aria-label="Validité" required>
+                      <option selected value="1">A vie</option>
+                      <option value="4">4 ans</option>
+                      <option value="5">5 ans</option>
+                    </select>
+                    <label for="floatingSelect">Temps de Validité</label>
+                  </div>
+                </div>
 
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
@@ -70,6 +89,8 @@ include 'config/menu.php';
 <?php
 $nom = $donnees['lname'];
 $prenom = $donnees['fname'];
+$recyclage = $_POST['Recyclage'];
+$validite = $_POST['Validite'];
 $nomprerequis = $_POST['nomPrere'];
 $now = date('Y-m-d H:i:s');
 $ajout = "AJOUT";
@@ -104,19 +125,37 @@ if(!empty($donnees)){
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 <?php 
+echo $recyclage;
+echo $validite;
+if ($validite!=1){
 try{
+
     //On insère les données reçues
     $sth = $bdd->prepare("
-        INSERT INTO Formation(Nom_Prerequis)
-        VALUES(:nom)");
+        INSERT INTO Formation(Nom_Prerequis, recyclage, validité)
+        VALUES(:nom, :recyclage, :validite)");
     $sth->bindParam(':nom',$nomprerequis);
+    $sth->bindParam(':recyclage',$recyclage);
+    $sth->bindParam(':validite',$validite);
     $sth->execute();
-  
-    
-  }
+
+}
   catch(PDOException $e){
     echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
-  }
+}
+}else {
+  try{
+  $sth = $bdd->prepare("
+      INSERT INTO Formation(Nom_Prerequis, recyclage)
+      VALUES(:nom, :recyclage)");
+  $sth->bindParam(':nom',$nomprerequis);
+  $sth->bindParam(':recyclage',$recyclage);
+  $sth->execute();
+}
+catch(PDOException $e){
+  echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+}
+}
   try{
     //On insère les données reçues
     $requeteLog1 = $bdd->prepare("

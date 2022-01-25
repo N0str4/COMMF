@@ -178,16 +178,19 @@ include 'config.php';
 
 
 if(isset($nomformation)){
+  $type=5;
+
 if ($selection==0){
   // CIVIL
   try{
   $idFormaCivil=29;
   $envoieCivil = $bdd->prepare("
-        INSERT INTO Formationdetails(id, nomformation, num_prerequis)
-        VALUES(:id, :nomforma, :numpre)");
+        INSERT INTO Formationdetails(id, nomformation, num_prerequis, type)
+        VALUES(:id, :nomforma, :numpre, :type)");
     $envoieCivil->bindParam(':id',$k);
     $envoieCivil->bindParam(':nomforma',$nomformation);
     $envoieCivil->bindParam(':numpre',$idFormaCivil);
+    $envoieCivil->bindParam(':type',$type);
     $envoieCivil->execute();
   }catch(PDOException $e){
     echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
@@ -197,11 +200,12 @@ if ($selection==0){
   try{
   $idFormaMil=28;
   $envoieMil = $bdd->prepare("
-        INSERT INTO Formationdetails(id, nomformation, num_prerequis)
-        VALUES(:id, :nomforma, :numpre)");
+        INSERT INTO Formationdetails(id, nomformation, num_prerequis, type)
+        VALUES(:id, :nomforma, :numpre, :type)");
     $envoieMil->bindParam(':id',$k);
     $envoieMil->bindParam(':nomforma',$nomformation);
     $envoieMil->bindParam(':numpre',$idFormaMil);
+    $envoieMil->bindParam(':type',$type);
     $envoieMil->execute();
 
   }catch(PDOException $e){
