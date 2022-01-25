@@ -105,15 +105,93 @@ $donneesrecup = $requete->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE M
 // END INTRODUCTION LOG
 // REQ LOG
 
-  
 
+//////////    RECYCLAGE  VERIFICATION SI LES STAGES ONT BESOIN D'UN RECYCLAGE ////// 
+$valeurrecyclage=1;
+$req67 = $bdd->query("SELECT *
+FROM Formation WHERE recyclage LIKE '$valeurrecyclage'");
+$entites= $req67->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($entites as $entite) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testRecyclage[$i] = $entite['NumPrérequis'];
+    /* DEBUG MODE */
+    echo 'testRecyclage['.$i.']='.$testRecyclage[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
 
+}
 
+///////////
 
+//////////    VALIDITE  VERIFICATION SI LES STAGES ONT BESOIN D'UN VALIDITE >5 ////// 
+$valeurValidite5=5;
+$req68 = $bdd->query("SELECT *
+FROM Formation WHERE validité LIKE '$valeurValidite5'");
+$valeurs= $req68->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($valeurs as $valeur) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testValidite5[$i] = $valeur['NumPrérequis'];
+    /* DEBUG MODE */
+    echo '<br> testValidite5['.$i.']='.$testValidite5[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
 
+}
 
+///////////
 
+//////////    VALIDITE  VERIFICATION SI LES STAGES ONT BESOIN D'UN VALIDITE >4 ////// 
+$valeurValidite4=4;
+$req69 = $bdd->query("SELECT *
+FROM Formation WHERE validité LIKE '$valeurValidite4'");
+$infos= $req69->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($infos as $info) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testValidite4[$i] = $info['NumPrérequis'];
+    /* DEBUG MODE */
+    echo '<br> testValidite4['.$i.']='.$testValidite4[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
 
+}
+
+///////////
 
 
 
@@ -244,30 +322,37 @@ $now = date('Y-m-d H:i:s');
             /* END DEBUG MODE */
 
             $req6 = $bdd->query("SELECT dateobtention
-            FROM formationliaison WHERE Num_Prerequis LIKE '$test'");
+            FROM formationliaison WHERE Num_Prerequis LIKE '$test' AND id_user LIKE '$id_userSAP'");
             $donnees18 = $req6->fetch();
             $date1 = $donnees18['dateobtention'];    
             $diff  = abs($now - $date1);  
             
             /* DEBUG MODE */
-           // /**/ */ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-           // /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-            ///**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-           // /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+            /**/  echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+            /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+            /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+           /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+            /**/ echo ' | (FORMATION =  |  '.$test.'  |)<br/>';
+
            // /* END DEBUG MODE */
-            $TESTOK = verifRecyclage($diff,$test,$donnees);
-            if($TESTOK=='RECYCLAGE'){
-                $RECYCLAGE='OUI';
-                $KALAMOUR="VALIDE";
+           $TESTOK = verifRecyclageV2($diff,$testRecyclage,$test);
+           if($TESTOK=='RECYCLAGE'){
+               $RECYCLAGE='OUI';
+           }elseif ($TESTOK=='N/R'){
+               $RECYCLAGE='NON';
+           }
+           $VALIDITECHECK = verifValidite5($diff, $testValidite5,$test);
+           $VALIDITECHECK4=verifValidite4($diff, $testValidite4,$test);
+           echo '<br>RECY'.$TESTOK;
+           echo '<br>VALI 4 '.$VALIDITECHECK4;
+           echo '<br>VALI 5 '.$VALIDITECHECK;
+           if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4=='NONVALIDE'){
+            $KALAMOUR="NONVALIDE";
+            }else{
+            $KALAMOUR="VALIDE";
             }
-            elseif($TESTOK=='VALIDE'){
-                $RECYCLAGE='NON';
-                $KALAMOUR="VALIDE";
-            }elseif($TESTOK=='NONVALIDE'){
-                $RECYCLAGE='NON';
-                $KALAMOUR="NONVALIDE";
-            }
-         } 
+           echo '<br>'.$KALAMOUR;
+        } 
     }    
     if(is_null($donnees4['nom'])==false){   
     if ($VerifCivOrMil==1 && $type_user==1){
@@ -351,30 +436,33 @@ $KALAMOUR = 'NONVALIDE';
                 /* END DEBUG MODE */
     
                 $req6 = $bdd->query("SELECT dateobtention
-                FROM formationliaison WHERE Num_Prerequis LIKE '$test'");
+                FROM formationliaison WHERE Num_Prerequis LIKE '$test' AND id_user LIKE '$id_userSAP'");
                 $donnees18 = $req6->fetch();
                 $date1 = $donnees18['dateobtention'];    
                 $diff  = abs($now - $date1);  
                 
                 /* DEBUG MODE */
-                ///**/ echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-               // /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-                ///**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-               // /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+                 echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+                /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+                /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+               /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
                 /* END DEBUG MODE */
-                $TESTOK = verifRecyclage($diff,$test,$donnees80);
+                $TESTOK = verifRecyclageV2($diff,$testRecyclage,$test);
                 if($TESTOK=='RECYCLAGE'){
                     $RECYCLAGE='OUI';
-                    $KALAMOUR="VALIDE";
-                }
-                elseif($TESTOK=='VALIDE'){
+                }elseif ($TESTOK=='N/R'){
                     $RECYCLAGE='NON';
-                    $KALAMOUR="VALIDE";
-                }elseif($TESTOK=='NONVALIDE'){
-                    $RECYCLAGE='NON';
-                    $KALAMOUR="NONVALIDE";
                 }
-             } 
+                $VALIDITECHECK = verifValidite5($diff, $testValidite5,$test);
+                $VALIDITECHECK4=verifValidite4($diff, $testValidite4,$test);
+                if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4='NONVALIDE'){
+                 $KALAMOUR="NONVALIDE";
+                 }else{
+                 $KALAMOUR="VALIDE";
+             }
+     
+                echo $VALIDITECHECK.' <br>'.$TESTOK.' <br>'.$VALIDITECHECK4;
+            } 
         }    
         if(is_null($donnees4['nom'])==false){   
             if ($VerifCivOrMil==3){
@@ -427,12 +515,68 @@ catch(PDOException $e){
 
 
 
+/// VERIF RECYCLAGE
+function verifRecyclageV2($diff, $testRecyclage,$test){
+    for ($bouclefor2=0;$bouclefor2<10;$bouclefor2++){
+        echo '<br>DIFF'.$diff;
+        echo '<br>TEST RECY '.$testRecyclage[$bouclefor2];
+        echo '<br>TEST  '.$test.'<br';
+
+        if ($diff>5 and ($testRecyclage[$bouclefor2]==$test)) {    
+            return $TEST = 'RECYCLAGE';
+            $bouclefor2=11;
+
+            /* DEBUG MODE */
+            echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+            echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+            /* END DEBUG MODE */
+    
+        }else {
+            
+        } 
+    } 
+    return $TEST= 'N/R';
+} 
 
 
+/// VERIF VALIDITER >5
+function verifValidite5($diff, $testValidite5,$test){
+    for ($bouclefor2=0;$bouclefor2<10;$bouclefor2++){
 
+        if ($diff>5 and ($testValidite5[$bouclefor2]==$test)) {    
+            return $TEST = 'NONVALIDE';
+            $bouclefor2=11;
 
+            /* DEBUG MODE */
+            echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+            echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+            /* END DEBUG MODE */
+    
+        }else {
+            
+        } 
+        return $TEST= 'VALIDE';
+    } 
+} 
+///   VERIF VALIDITER >4
+function verifValidite4($diff, $testValidite4,$test){
+    for ($bouclefor2=0;$bouclefor2<10;$bouclefor2++){
+        echo $testValidite4[$bouclefor2].'='.$test;
+        if ($diff>4 and ($testValidite4[$bouclefor2]==$test)) { 
+            return $TEST = 'NONVALIDE';
+            $bouclefor2=11;
 
-
+            /* DEBUG MODE */
+            echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+            echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+            /* END DEBUG MODE */
+    
+        }else {
+            
+        } 
+        return $TEST= 'VALIDE';
+    } 
+} 
 
 
 
