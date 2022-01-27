@@ -57,10 +57,12 @@ $k=0;
 ?>
 <?php while ($donnees = $req2->fetch()){
     $k=$k+1;    
+    $type = $donnees['type'];
+
 ?>
 
   <tr>
-  <td> <?php echo '<b>'.$donnees['type'].'</b>'?></td>
+  <td> <?php if($type=='AJOUT'){ echo '<k style=color:green> <b>AJOUT</b> </k>';}elseif($type=='SUPPRESSIONS'){echo '<k style=color:red><b> SUPPRESSION </b></k>';}?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
   <td> <?php echo $donnees['Prerequis']?></td>
@@ -87,4 +89,18 @@ $k=0;
     </section>
 
   </main><!-- End #main -->
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
   <?php include 'footer.php';
+  
