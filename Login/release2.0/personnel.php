@@ -54,6 +54,7 @@ if ($type == 1){
       <li><a href="index.php">DashBoard</a></li>
       <li><a class="active" href="personnel.php">Recherche</a></li>
     	<li><a href="notice.php">Notice d'utilisation</a></li>
+        <li><a href="contact.php">Contact</a></li>
         <li style="float:right!important"><a href="../administration/index.php">Administration</a></li>
         <li style="float:right!important"><a href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">Deconnexion</a></li>
   	</ul>
