@@ -62,12 +62,13 @@ $k=0;
     $k=$k+1;
     $test=$donnees['Prerequis'];
     $req4 = $bdd->query("SELECT * FROM `Formation` WHERE NumPrérequis LIKE '$test'");
-    $donnees2 = $req4->fetch()
+    $donnees2 = $req4->fetch();
+    $type = $donnees['type'];
     
 ?>
 
   <tr>
-  <td> <?php echo '<b>'.$donnees['type'].'</b>'?></td>
+  <td> <?php if($type=='AJOUT'){ echo '<k style=color:green> <b>AJOUT</b> </k>';}elseif($type=='SUPPRESSIONS'){echo '<k style=color:red><b> SUPPRESSION </b></k>';}?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
   <td> <?php echo $donnees['Formation']?></td>
@@ -99,7 +100,7 @@ $k=0;
   </main>
   
   
-  <!-- Vendor JS Files -->
+<!-- Vendor JS Files -->
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.min.js"></script>
@@ -111,4 +112,5 @@ $k=0;
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
   
