@@ -268,7 +268,7 @@ if(is_null($donnees4['nom'])==false){
     
     
     ?>
-<table>
+<table class="table datatable">
 <thead>
 <tr>
     <th id="rouge">Nom du Candidat</th>

@@ -1,6 +1,8 @@
 
 
 <?php include_once "header.php"; ?>
+<link rel="stylesheet" href="stylebis.css">
+
 <body>
 
   <div class="wrapper">
@@ -13,8 +15,10 @@
       <header>DOA | Accès Administration</header>
       <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="error-text"></div>
-        <label style="    text-align: center;
-   color:red;  font-weight: bold;;"> !! accès restreint !! </label>
+        <div class="alert">
+  <span class="closebtn" ></span> 
+  <strong> Accès Restreint !</strong>  
+</div>
         <div class="field input">
           <label>Adresse email</label>
           <input type="text" name="email" placeholder="Entrez votre email @intradef.gouf.fr" required>
@@ -25,11 +29,12 @@
           <i class="fas fa-eye"></i>
         </div>
         <div class="field button">
-          <input type="submit" name="submit" value="Continuez vers l'OCMF ">
-        </div>
+          <input type="submit" name="submit" value="Continuez vers l'Administration ">
+                </div>
       </form>
       <div class="link">Referez vous au <a  onClick="javascript:window.open('mailto:david.ryssen@intradef.gouv.fr', 'my-window');event.preventDefault()"
         href="mailto:david.ryssen@intradef.gouv.fr">CNE RYSSEN,</a> en cas de problème.</div>
+
     </section>
   </div>
   
