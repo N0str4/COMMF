@@ -22,8 +22,9 @@ $recordlt = $record->location->latitude;
             $row = mysqli_fetch_assoc($sql);
             $user_pass = $password;
             $enc_pass = $row['password'];
+            $blocage = $row['blocage'];
             
-            if($user_pass === $enc_pass){
+            if($user_pass === $enc_pass && $blocage <6){
                 $status = "En Ligne";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
                 if($sql2){
@@ -76,6 +77,20 @@ $recordlt = $record->location->latitude;
                             }
 
                     }
+                    $req65 = $bdd->query("SELECT *
+                    FROM users WHERE email LIKE '$email'");
+                    $donnees65 = $req65->fetch();
+                    $blocagecompte=0;    
+                    try{
+                        $req = $bdd->prepare("UPDATE users SET `blocage` = :adm WHERE `email` = :coucou");
+                        $req->bindParam(':adm', $blocagecompte);
+                        $req->bindParam(':coucou', $email);
+                        $req->execute();
+                    }
+                          
+                    catch(PDOException $e){
+                        echo "Erreur : " . $e->getMessage();
+                    }
                     echo "success";
                 }else{
                     $etat='Erreur : Problème applicatif';
@@ -126,7 +141,58 @@ $recordlt = $record->location->latitude;
                     }
                     echo "Something went wrong. Please try again!";
                 }
-            }else{
+            }elseif($user_pass === $enc_pass && $blocage >5){
+                $status = "En Ligne";
+                $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+                if($sql2){
+                    $etat='Erreur : Compte Bloqué';
+                    if (empty($recordville)){
+                        $recordville = 'N/A';
+                        $recordlg = 'N/A';
+                        $recordlt = 'N/A';
+                        try{
+        
+                            $req = $bdd->prepare("
+                            INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                            VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                            $req->bindParam(':email', $email);
+                            $req->bindParam(':date', $now);
+                            $req->bindParam(':etat', $etat);
+                            $req->bindParam(':ip', $ip);
+                            $req->bindParam(':pays', $recordpays);
+                            $req->bindParam(':local', $recordville);
+                            $req->bindParam(':lat', $recordlt);
+                            $req->bindParam(':long', $recordlg);
+                            $req->execute();
+                            }
+                              
+                            catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                            }
+                    } elseif(!empty($recordville)){
+                        try{
+        
+                            $req = $bdd->prepare("
+                            INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                            VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                            $req->bindParam(':email', $email);
+                            $req->bindParam(':date', $now);
+                            $req->bindParam(':etat', $etat);
+                            $req->bindParam(':ip', $ip);
+                            $req->bindParam(':pays', $recordpays);
+                            $req->bindParam(':local', $recordville);
+                            $req->bindParam(':lat', $recordlt);
+                            $req->bindParam(':long', $recordlg);
+                            $req->execute();
+                            }
+                              
+                            catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                            }
+
+                    }
+                    echo "Votre compte est bloqué.";
+            } }elseif($user_pass != $enc_pass && $blocage >2){ 
                 $etat='Erreur : Email ou mot de passe incorrect';
                 if (empty($recordville)){
                     $recordville = 'N/A';
@@ -146,11 +212,12 @@ $recordlt = $record->location->latitude;
                         $req->bindParam(':lat', $recordlt);
                         $req->bindParam(':long', $recordlg);
                         $req->execute();
-                        }
+                    }
                           
-                        catch(PDOException $e){
+                    catch(PDOException $e){
                         echo "Erreur : " . $e->getMessage();
-                        }
+                    }
+                        
                 }elseif(!empty($recordville)){
                     try{
     
@@ -172,6 +239,87 @@ $recordlt = $record->location->latitude;
                         echo "Erreur : " . $e->getMessage();
                         }
 
+                }
+                $req60 = $bdd->query("SELECT *
+                FROM users WHERE email LIKE '$email'");
+                $donnees18 = $req60->fetch();
+                $blocagecompte= $donnees18['blocage'] + 1 ;    
+                try{
+                    $req = $bdd->prepare("UPDATE users SET `blocage` = :adm WHERE `email` = :coucou");
+                    $req->bindParam(':adm', $blocagecompte);
+                    $req->bindParam(':coucou', $email);
+                    $req->execute();
+                }
+                      
+                catch(PDOException $e){
+                    echo "Erreur : " . $e->getMessage();
+                }
+                echo "Email ou Mot de Passe incorrect! Attention, il vous reste 2 tentatives.";
+        
+        
+        
+        
+            }else{
+                $etat='Erreur : Email ou mot de passe incorrect';
+                if (empty($recordville)){
+                    $recordville = 'N/A';
+                    $recordlg = 'N/A';
+                    $recordlt = 'N/A';
+                    try{
+    
+                        $req = $bdd->prepare("
+                        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                        $req->bindParam(':email', $email);
+                        $req->bindParam(':date', $now);
+                        $req->bindParam(':etat', $etat);
+                        $req->bindParam(':ip', $ip);
+                        $req->bindParam(':pays', $recordpays);
+                        $req->bindParam(':local', $recordville);
+                        $req->bindParam(':lat', $recordlt);
+                        $req->bindParam(':long', $recordlg);
+                        $req->execute();
+                    }
+                          
+                    catch(PDOException $e){
+                        echo "Erreur : " . $e->getMessage();
+                    }
+                        
+                }elseif(!empty($recordville)){
+                    try{
+    
+                        $req = $bdd->prepare("
+                        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                        $req->bindParam(':email', $email);
+                        $req->bindParam(':date', $now);
+                        $req->bindParam(':etat', $etat);
+                        $req->bindParam(':ip', $ip);
+                        $req->bindParam(':pays', $recordpays);
+                        $req->bindParam(':local', $recordville);
+                        $req->bindParam(':lat', $recordlt);
+                        $req->bindParam(':long', $recordlg);
+                        $req->execute();
+                        }
+                          
+                        catch(PDOException $e){
+                        echo "Erreur : " . $e->getMessage();
+                        }
+
+                }
+                $req60 = $bdd->query("SELECT *
+                FROM users WHERE email LIKE '$email'");
+                $donnees18 = $req60->fetch();
+                $blocagecompte= $donnees18['blocage'] + 1 ;    
+                try{
+                    $req = $bdd->prepare("UPDATE users SET `blocage` = :adm WHERE `email` = :coucou");
+                    $req->bindParam(':adm', $blocagecompte);
+                    $req->bindParam(':coucou', $email);
+                    $req->execute();
+                }
+                      
+                catch(PDOException $e){
+                    echo "Erreur : " . $e->getMessage();
                 }
                 echo "Email ou Mot de Passe incorrect!";
             }
