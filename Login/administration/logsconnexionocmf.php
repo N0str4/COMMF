@@ -49,6 +49,9 @@ include 'config/menu.php';
                     <th scope="col">Etat</th>
                     <th scope="col">IP</th>
                     <th scope="col">Ville</th>
+                    <th scope="col">Options</th>
+
+                    
 
                   </tr>
                 </thead>
@@ -69,6 +72,7 @@ $k=0;
   <td> <?php if($type=='Erreur : Email inconnu'){ echo '<k style=color:red> <b>Erreur : Email inconnu</b> </k>';}elseif($type=='Erreur : Email ou mot de passe incorrect'){echo '<k style=color:orange><b> Erreur : Mot de passe incorrect </b></k>';}elseif($type=="Erreur : Vous n'avez pas les accès requis"){echo "<k style=color:orange><b>Erreur : Vous n'avez pas les accès requis</b></k>";}elseif($type=="Succès : Connexion reussite"){echo "<k style=color:green><b>Succès : Connexion reussite</b></k>";}?></td>
   <td> <?php echo $donnees['IP']?></td>
   <td> <?php echo $donnees['Localisation']?></td>
+  <td><a class="btn btn-info"" href="infosip.php?id=<?php echo $donnees2['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-info-circle"></i></a></td>
 
 
 
