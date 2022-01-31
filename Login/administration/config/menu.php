@@ -178,6 +178,20 @@
         </a>
       </li>
     </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsconnexionpanel.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Connexion Panel</span>
+        </a>
+      </li>
+    </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsconnexionocmf.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Connexion OCMF</span>
+        </a>
+      </li>
+    </ul>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Divers</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -205,3 +219,5 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  

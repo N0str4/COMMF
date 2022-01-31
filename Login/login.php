@@ -20,7 +20,7 @@
         <div class="error-text"></div>
         <div class="field input">
           <label>Adresse email</label>
-          <input type="text" name="email" placeholder="Entrez votre email @intradef.gouf.fr" required>
+          <input type="text" name="email" placeholder="Entrez votre email @intradef.gouv.fr" required>
         </div>
         <div class="field input">
           <label>Mot De Passe</label>
