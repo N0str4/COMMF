@@ -8,7 +8,7 @@
 
 
 <!-- Favicons -->
-<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/favicon-16x16.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -37,7 +37,7 @@
         <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">Administration OCMF</span>
+            <span class="d-none d-lg-block">Administration</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     <nav class="header-nav ms-auto">
@@ -64,6 +64,7 @@
                 <span>Retour sur l'OCMF</span>
               </a>
             </li>
+                          <hr class="dropdown-divider">
             <li>
               <a class="dropdown-item d-flex align-items-center" href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">
                 <i class="bi bi-box-arrow-right"></i>

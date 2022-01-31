@@ -64,7 +64,8 @@ include 'config/menu.php';
                       <option value="LTN">SLT</option>
                       <option value="MAJ">MAJ</option>
                       <option value="ADC">ADC</option>
-                      <option value="ADC">ADJ</option>
+                      <option selected value="ADJ">ADJ</option>
+                      <option value="Civil">Civil</option>
                     </select>
                     <label for="floatingSelect">Grade du Personnel</label>
                   </div>
@@ -73,7 +74,7 @@ include 'config/menu.php';
                   <div class="form-floating mb-3">
                   <select name="admin" class="form-select" id="floatingSelect" aria-label="Admin" required>
                       <option value="1">Oui</option>
-                      <option value="0">Non</option>
+                      <option selected value="0">Non</option>
                     </select>
                     <label for="floatingSelect">Administrateur</label>
                   </div>
