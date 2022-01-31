@@ -1,11 +1,12 @@
 <?php 
 session_start();
+use GeoIp2\Database\Reader;
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
-  }else{
-include "php/login.php";
-
   }
+
+
+
 ?>
 <head>
   <meta charset="utf-8">
@@ -24,6 +25,7 @@ $donnees = $req->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU T
 if($donnees['admin']!=1){
   header("location: login.php");
 }
+
 
 
 $req2 = $bdd->prepare("
@@ -158,4 +160,5 @@ include 'config/menu.php';
 
             </div><!-- End Left side columns -->
 
-            <?php include 'footer.php';
+            <?php include 'footer.php';  
+          
