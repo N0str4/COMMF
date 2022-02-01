@@ -71,6 +71,14 @@ for ($k=0;$k<13;$k++){
   
 }
 
+// CHECK CB DE FORMATION EXISTE 
+$reqNbFormation = $bdd->prepare("SELECT COUNT(*) AS total FROM Formationdetails");
+$reqNbFormation->execute();
+$donneesNbFormation = $reqNbFormation->fetch();
+//
+
+
+
 // MOIS DIAGRAMM 
 $reqVerifJanviers = $bdd->prepare("SELECT COUNT(*) AS total FROM logsrecherche WHERE MONTH(date) = :Janviers");
 $reqVerifJanviers->bindParam(':Janviers', $tab[1]);
@@ -201,7 +209,7 @@ include 'config/menu.php';
 
               <div class="card info-card customers-card">
                 <div class="card-body">
-                  <h5 class="card-title">Recherche <span>| Ce mois</span></h5>
+                  <h5 class="card-title">Recherches <span>| Ce mois</span></h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-search"></i>
@@ -217,6 +225,29 @@ include 'config/menu.php';
               <?php 
               
               ?>
+            </div><!-- End Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+              
+
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Formations <span> | Total</span></h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-book-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6><?php echo $donneesNbFormation['total'];?></h6>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <?php 
+              
+              ?>
+            </div><!-- End Customers Card -->
             </div><!-- End Customers Card -->
             <div class="col-12">
           <div class="card">
@@ -281,6 +312,7 @@ include 'config/menu.php';
 
             </div>
           </div>
+          
         </div>
 
 
