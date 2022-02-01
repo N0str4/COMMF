@@ -65,7 +65,7 @@ FROM `users`");
   <td> <?php echo $donnees2['email']?></td>
   <td> <?php echo $donnees2['password']?></td>
   <td> <?php if($donnees2['blocage']<6){ echo 'Non'; }else{ echo '<b style=color:red;>Oui</b>';}?></td>
-  <td> <?php if($donnees2['admin']==1){ echo 'Oui'; }else{ echo 'Non';}?></td>
+  <td> <?php if($donnees2['admin']==1){ echo '<b><k style="color:orange">Oui</k></b>'; }else{ echo 'Non';}?></td>
   <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
   <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
   <?php if($donnees2['blocage']>5){?> <td><a class="btn btn-warning" href="fonctionuser/deblocageutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Débloqué</a></td><?php }?>
