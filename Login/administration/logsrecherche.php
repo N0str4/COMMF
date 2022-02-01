@@ -99,4 +99,4 @@ $test=$donnees['num_prerequis'];
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  </main><!-- End #main --><?php include 'footer.php';
+  </main><!-- End #main -->
