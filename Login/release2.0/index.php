@@ -122,7 +122,7 @@ foreach($entites as $entite) {
     /* END DEBUG MODE */
     $testRecyclage[$i] = $entite['NumPrérequis'];
     /* DEBUG MODE */
-    echo 'testRecyclage['.$i.']='.$testRecyclage[$i];
+    //echo 'testRecyclage['.$i.']='.$testRecyclage[$i];
    // /**/ echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
@@ -151,7 +151,7 @@ foreach($valeurs as $valeur) {
     /* END DEBUG MODE */
     $testValidite5[$i] = $valeur['NumPrérequis'];
     /* DEBUG MODE */
-    echo '<br> testValidite5['.$i.']='.$testValidite5[$i];
+   //echo '<br> testValidite5['.$i.']='.$testValidite5[$i];
    // /**/ echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
@@ -180,7 +180,7 @@ foreach($infos as $info) {
     /* END DEBUG MODE */
     $testValidite4[$i] = $info['NumPrérequis'];
     /* DEBUG MODE */
-    echo '<br> testValidite4['.$i.']='.$testValidite4[$i];
+    //echo '<br> testValidite4['.$i.']='.$testValidite4[$i];
    // /**/ echo '<br/>';
     /* END DEBUG MODE */
     $i=$i+1;
@@ -443,10 +443,10 @@ $KALAMOUR = 'NONVALIDE';
                 $diff  = abs($now - $date1);  
                 
                 /* DEBUG MODE */
-                 echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
-                /**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
-                /**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
-               /**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
+                 //echo ' | (Numéro du Prérequis =  |  '.$test.'  |)<br/>';
+                ///**/ echo ' | (DATE Aujourd hui =  |  '.$now.'  |)<br/>';
+                ///**/ echo ' | (DATE Obtention =  |  '.$date1.'  |)<br/>';
+               ///**/ echo ' | (Difference de date entre obtention et aujourdhui =  |  '.$diff.'  |)<br/>';
                 /* END DEBUG MODE */
                 $TESTOK = verifRecyclageV2($diff,$testRecyclage,$test);
                 if($TESTOK=='RECYCLAGE'){
@@ -462,7 +462,7 @@ $KALAMOUR = 'NONVALIDE';
                  $KALAMOUR="VALIDE";
              }
      
-                echo $VALIDITECHECK.' <br>'.$TESTOK.' <br>'.$VALIDITECHECK4;
+                //echo $VALIDITECHECK.' <br>'.$TESTOK.' <br>'.$VALIDITECHECK4;
             } 
         }    
         if(is_null($donnees4['nom'])==false){   
