@@ -192,7 +192,7 @@ $recordlt = $record->location->latitude;
 
                     }
                     echo "Votre compte est bloqué.";
-            } }elseif($user_pass != $enc_pass && $blocage >2){ 
+            } }elseif($user_pass != $enc_pass && $blocage >2 && $blocage<7){ 
                 $etat='Erreur : Email ou mot de passe incorrect';
                 if (empty($recordville)){
                     $recordville = 'N/A';
@@ -255,6 +255,73 @@ $recordlt = $record->location->latitude;
                     echo "Erreur : " . $e->getMessage();
                 }
                 echo "Email ou Mot de Passe incorrect! Attention, il vous reste 2 tentatives.";
+        
+        
+        
+        
+            }elseif($user_pass != $enc_pass && $blocage>7){ 
+                $etat='Erreur : Compte Bloqué';
+                if (empty($recordville)){
+                    $recordville = 'N/A';
+                    $recordlg = 'N/A';
+                    $recordlt = 'N/A';
+                    try{
+    
+                        $req = $bdd->prepare("
+                        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                        $req->bindParam(':email', $email);
+                        $req->bindParam(':date', $now);
+                        $req->bindParam(':etat', $etat);
+                        $req->bindParam(':ip', $ip);
+                        $req->bindParam(':pays', $recordpays);
+                        $req->bindParam(':local', $recordville);
+                        $req->bindParam(':lat', $recordlt);
+                        $req->bindParam(':long', $recordlg);
+                        $req->execute();
+                    }
+                          
+                    catch(PDOException $e){
+                        echo "Erreur : " . $e->getMessage();
+                    }
+                        
+                }elseif(!empty($recordville)){
+                    try{
+    
+                        $req = $bdd->prepare("
+                        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
+                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
+                        $req->bindParam(':email', $email);
+                        $req->bindParam(':date', $now);
+                        $req->bindParam(':etat', $etat);
+                        $req->bindParam(':ip', $ip);
+                        $req->bindParam(':pays', $recordpays);
+                        $req->bindParam(':local', $recordville);
+                        $req->bindParam(':lat', $recordlt);
+                        $req->bindParam(':long', $recordlg);
+                        $req->execute();
+                        }
+                          
+                        catch(PDOException $e){
+                        echo "Erreur : " . $e->getMessage();
+                        }
+
+                }
+                $req60 = $bdd->query("SELECT *
+                FROM users WHERE email LIKE '$email'");
+                $donnees18 = $req60->fetch();
+                $blocagecompte= $donnees18['blocage'] + 1 ;    
+                try{
+                    $req = $bdd->prepare("UPDATE users SET `blocage` = :adm WHERE `email` = :coucou");
+                    $req->bindParam(':adm', $blocagecompte);
+                    $req->bindParam(':coucou', $email);
+                    $req->execute();
+                }
+                      
+                catch(PDOException $e){
+                    echo "Erreur : " . $e->getMessage();
+                }
+                echo "Compte Bloqué.";
         
         
         

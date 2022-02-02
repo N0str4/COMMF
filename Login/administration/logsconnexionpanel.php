@@ -67,7 +67,7 @@ $k=0;
   <tr>
   <td> <?php echo $donnees2['Date']?></td>
   <td> <?php echo $donnees2['Email']?></td>
-  <td> <?php if($type=='Erreur : Email inconnu'){ echo '<k style=color:red> <b>Erreur : Email inconnu</b> </k>';}elseif($type=='Erreur : Email ou mot de passe incorrect'){echo '<k style=color:red><b> Erreur : mot de passe incorrect </b></k>';}elseif($type=="Erreur : Vous n'avez pas les accès requis"){echo "<k style=color:orange><b>Erreur : Vous n'avez pas les accès requis</b></k>";}elseif($type=="Succès : Connexion reussite"){echo "<k style=color:green><b>Succès : Connexion reussite</b></k>";}?></td>
+  <td> <?php if($type=='Erreur : Email inconnu'){ echo '<k style=color:red> <b>Erreur : Email inconnu</b> </k>';}elseif($type=='Erreur : Email ou mot de passe incorrect'){echo '<k style=color:red><b> Erreur : mot de passe incorrect </b></k>';}elseif($type=="Erreur : Vous n'avez pas les accès requis"){echo "<k style=color:orange><b>Erreur : Vous n'avez pas les accès requis</b></k>";}elseif($type=="Succès : Connexion reussite"){echo "<k style=color:green><b>Succès : Connexion reussite</b></k>";}elseif($type=="Erreur : Compte Bloqué"){echo "<k style=color:blue><b>Erreur : Compte Bloqué</b></k>";}?></td>
   <td> <?php echo $donnees2['IP']?></td>
   <td> <?php echo $donnees2['Localisation']?></td>
   <td><a class="btn btn-info"" href="infosip.php?id=<?php echo $donnees2['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-info-circle"></i></a></td>
