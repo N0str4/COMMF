@@ -7,6 +7,7 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
+
 ?>
 </aside><!-- End Sidebar-->  
   <main id="main" class="main">
@@ -64,7 +65,8 @@ $donnees2 = $req3->fetch()
   <td> <?php echo $donnees34['nomformation']?></td>
   <td> <?php echo $donnees2['Nom_Prerequis']?></td>
   <td> <?php if($donnees34['type']==0){ echo 'Civil'; } elseif($donnees34['type']==1){ echo 'Millitaire';} elseif($donnees34['type']==3){ echo 'Commun';} elseif($donnees34['type']>3){ echo '<k style="color:red"><b>Autres</b></k>';}?></td>
-  <td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees34['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+  <?php if($donnees['admin']==1){?>
+<td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees34['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
 </tr>
 
 

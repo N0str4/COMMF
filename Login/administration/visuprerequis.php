@@ -18,6 +18,7 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
+
 ?>
 </aside><!-- End Sidebar-->  
   <main id="main" class="main">
@@ -70,7 +71,9 @@ FROM `Formation`");
   <td> <?php echo $donnees34['Nom_Prerequis']?></td>
   <td> <?php if($donnees34['recyclage']==1){ echo '<k style="color:red"> <b>Oui</b></k>'; }else{ echo 'Non'; }?></td>
   <td> <?php if($donnees34['validité']==4){ echo '<k style="color:red"> <b>4 ans</b></k>'; }elseif($donnees34['validité']==5){echo '<k style="color:red"> <b>5 ans</b></k>'; }else{echo 'A vie'; }?></td>
-  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees34['NumPrérequis'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td>
+  <?php if($donnees['admin']==1){?>
+
+  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees34['NumPrérequis'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
 
 </tr>
 

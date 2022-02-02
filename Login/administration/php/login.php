@@ -31,10 +31,9 @@ $recordpays = $record['pays'];*/
         if(mysqli_num_rows($sql) > 0){
             $row = mysqli_fetch_assoc($sql);
             $user_pass = $password;
-            $status2 = $row['admin'];
             $enc_pass = $row['password'];
             $blocage = $row['blocage'];
-            if($user_pass === $enc_pass && $status2==1 && $blocage<6 ){
+            if($user_pass === $enc_pass && $blocage<6 ){
                 $status = "En Ligne";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
                 if($sql2){
@@ -148,56 +147,7 @@ $recordpays = $record['pays'];*/
 
                     echo "Something went wrong. Please try again!";
                 }
-            }elseif($user_pass === $enc_pass && $status2!=1 ) {
-                $etat="Erreur : Vous n'avez pas les accès requis";
-                if (empty($recordville)){
-                    $recordville = 'N/A';
-                    $recordlg = 'N/A';
-                    $recordlt = 'N/A';
-                    try{
-    
-                        $req = $bdd->prepare("
-                        INSERT INTO logsconnexion(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
-                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
-                        $req->bindParam(':email', $email);
-                        $req->bindParam(':date', $now);
-                        $req->bindParam(':etat', $etat);
-                        $req->bindParam(':ip', $ip);
-                        $req->bindParam(':pays', $recordpays);
-                        $req->bindParam(':local', $recordville);
-                        $req->bindParam(':lat', $recordlt);
-                        $req->bindParam(':long', $recordlg);
-                        $req->execute();
-                        }
-                          
-                        catch(PDOException $e){
-                        echo "Erreur : " . $e->getMessage();
-                        }
-                }elseif(!empty($recordville)){
-                    try{
-    
-                        $req = $bdd->prepare("
-                        INSERT INTO logsconnexion(Email, Date, Etat, IP, Pays, Localisation, Latitude, Longitude)
-                        VALUES(:email, :date, :etat, :ip, :pays, :local, :lat, :long)");
-                        $req->bindParam(':email', $email);
-                        $req->bindParam(':date', $now);
-                        $req->bindParam(':etat', $etat);
-                        $req->bindParam(':ip', $ip);
-                        $req->bindParam(':pays', $recordpays);
-                        $req->bindParam(':local', $recordville);
-                        $req->bindParam(':lat', $recordlt);
-                        $req->bindParam(':long', $recordlg);
-                        $req->execute();
-                        }
-                          
-                        catch(PDOException $e){
-                        echo "Erreur : " . $e->getMessage();
-                        }
-
-                }
-
-                echo "Vous n'avez pas les accès requis.";
-            }elseif($user_pass === $enc_pass && $blocage >5 && $status2==1  ){
+            }elseif($user_pass === $enc_pass && $blocage >5){
                 $status = "En Ligne";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
                 if($sql2){
