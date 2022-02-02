@@ -37,7 +37,12 @@
         <div class="d-flex align-items-center justify-content-between">
         <a href="index.php" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">OCMF</span>
+            <?php if($donnees['admin']==0){?>
+<span class="d-none d-lg-block">OCMF</span>
+<?php }else{?>
+  <span class="d-none d-lg-block">OCMF - Admin</span>
+
+  <?php }?>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     <nav class="header-nav ms-auto">
@@ -58,15 +63,9 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../release2.0/index.php">
-                <i class="bi bi-arrow-90deg-left"></i>
-                <span>Retour sur l'OCMF</span>
-              </a>
-            </li>
                           <hr class="dropdown-divider">
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">
+              <a class="dropdown-item d-flex align-items-center" href="php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Deconnexion</span>
               </a>
