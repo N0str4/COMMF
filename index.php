@@ -1,4 +1,4 @@
 <?php
-  header('Location: http://intradef.vikatchev.com/Login/release2.0/index.php');
+  header('Location: http://intradef.vikatchev.com/Login/administration/index.php');
   exit();
 ?>
