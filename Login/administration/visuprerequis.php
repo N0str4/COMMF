@@ -57,7 +57,7 @@ if($donnees['admin']!=1){
                     <th scope="col">Nom du PréRequis</th>
                     <th scope="col">Recyclage</th>
                     <th scope="col">Validité</th>
-                    <th scope="col">Options</th>
+                    <?php if($donnees['admin']==1){?><th scope="col">Options</th><?php }?>
                   </tr>
                 </thead>
                 <tbody>

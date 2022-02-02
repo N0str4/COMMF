@@ -38,7 +38,8 @@ include 'config/menu.php';
                 <th scope="col">#</th>
                 <th scope="col">Nom de la Formation</th>
                 <th scope="col">Nom de l'Equivalence</th>
-                <th scope="col">Option</th>
+                <?php if($donnees['admin']==1){?><th scope="col">Option</th>
+                  <?php }?>
               </tr>
             </thead>
             <tbody>
