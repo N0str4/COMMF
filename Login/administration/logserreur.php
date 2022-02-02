@@ -8,8 +8,27 @@ if(!isset($_SESSION['unique_id'])){
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
+$admintype=1;
+$email = $donnees['email'];
+$etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
+$now = date('Y-m-d H:i:s');
 if($donnees['admin']!=$admintype){
-  header("location: paslesacces.html");
+  try{
+        
+    $req = $bdd->prepare("
+    INSERT INTO logsconnexionocmf(Email, Date, Etat)
+    VALUES(:email, :date, :etat)");
+    $req->bindParam(':email', $email);
+    $req->bindParam(':date', $now);
+    $req->bindParam(':etat', $etat);
+    $req->execute();
+    header("location: paslesacces.html");
+    }
+      
+    catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+    }
+
 }
 include 'config/menu.php';
 ?>
@@ -48,9 +67,6 @@ include 'config/menu.php';
                     <th scope="col">Date</th>
                     <th scope="col">Email</th>
                     <th scope="col">Etat</th>
-                    <th scope="col">IP</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Options</th>
 
                     
 
@@ -70,11 +86,7 @@ $k=0;
   <tr>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Email']?></td>
-  <td> <?php if($type=='Erreur : Email inconnu'){ echo '<k style=color:red> <b>Erreur : Email inconnu</b> </k>';}elseif($type=='Erreur : Email ou mot de passe incorrect'){echo '<k style=color:orange><b> Erreur : Mot de passe incorrect </b></k>';}elseif($type=="Erreur : Vous n'avez pas les accès requis"){echo "<k style=color:orange><b>Erreur : Vous n'avez pas les accès requis</b></k>";}elseif($type=="Succès : Connexion reussite"){echo "<k style=color:green><b>Succès : Connexion reussite</b></k>";}elseif($type=="Erreur : Compte Bloqué"){echo "<k style=color:blue><b>Erreur : Compte Bloqué</b></k>";}?></td>
-  <td> <?php echo $donnees['IP']?></td>
-  <td> <?php echo $donnees['Localisation']?></td>
-  <td><a class="btn btn-info"" href="infosip.php?id=<?php echo $donnees2['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-info-circle"></i></a></td>
-
+  <td> <?php if($type=="Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits"){ echo '<k style=color:red> <b>'.$type.'</b> </k>';}?></td>
 
 
 </tr>

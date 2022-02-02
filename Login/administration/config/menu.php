@@ -204,23 +204,30 @@
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="logsconnexionpanel.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Connexion Panel</span>
+          <i class="bi bi-plus-circle-dotted"></i><span>Connexion OCMF</span>
         </a>
       </li>
     </ul>
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="logsconnexionocmf.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Connexion OCMF</span>
+        <a href="logserreur.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Erreur</span>
         </a>
       </li>
     </ul>
-
+<?php } ?>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Divers</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <li>
+        <a href="contact.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Contact Support</span>
+        </a>
+      </li>
+
+    <?php if($donnees['admin']==1){?>
       <li>
         <a href="acces.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Accès Utilisateurs</span>

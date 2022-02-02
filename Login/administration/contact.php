@@ -1,76 +1,63 @@
 <?php 
 session_start();
 if(!isset($_SESSION['unique_id'])){
-    header("location: ../login.php");
+    header("location: login.php");
   }
-$bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
-?><!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-        <link rel="stylesheet" href="MiseEnPage.css" />
-		<title>OCMF - Gestion des pré-requis</title>
+?>
+<?php
 
-	</head>
-	
-	<header>
-<nav>
-      <input type="checkbox" id="check">
-      <label for="check" class="checkbtn">
-        <i class="fas fa-bars"></i>
-      </label>
-      <label class="logo_img"><img src="bg1.png" style="  margin-left : 2px;
-  width: 40px;
-  margin-top:10px;
-  margin-bottom: -10px;
-  height: 65px;"></label>
-      <label class="logo">OCMF</label>
-      <label class="logo_img"><img src="logoADT.png" style="  margin-left : 1050px;
-  width: 70px;
-  padding: initial;
-  margin-top:10px;
-  height: 55px;"></label>
-      <ul>
-      <li><a href="index.php">DashBoard</a></li>
-        <li><a href="personnel.php">Recherche</a></li>
-    	<li><a href="notice.php">Notice d'utilisation</a></li>
-        <li><a class="active" href="contact.php">Contact</a></li>
-        <li style="float:right"><a href="../administration/index.php">Administration</a></li>
-        <li style="float:right"><a href="../php/logout.php?logout_id= <?php echo $_SESSION['unique_id'];?>">Deconnexion</a></li>
-  	</ul>
-    </nav>
-<br>
-	</header>
-    <body>
-        
-        <div class="wrapper">
-        <section class="form login">
-        <img class="image" src="ministere.png" style="  border: none;
-      width: 40%;
-      margin-left:160px;
-      text-align: center;
-      height: 34%;">
-            <header>DOA | Contact Support </header>
-            <!-- modify this form HTML and place wherever you want your form -->
-            <form method="post" action="https://formspree.io/f/xoqrjgjl">
-            
-            <div class="field input">
-            <label>
-            Entrée votre email : <input type="email" placeholder="@email intradef.gouv.fr" name="_replyto" required/><br>
-            </label>
-            </div>
-            <div class="field input">
-            <label>
-            Objet : <input type="text" placeholder="Objet du mail" name="objet" required/><br>
-            </label>
-            </div>
-            <div class="field input">
-            <label>
-            Votre message :<input placeholder="Votre message" name="message" required/><br>
-            </div>
-            </label>
-            <div class="field button">
-            <input type="submit" value="Envoyer"/>
-            </div>
-            </form>
+include 'config/config.php';
+include 'config/menu.php';
 
+?>
+            <main id="main" class="main">
+
+<div class="pagetitle">
+  <h1>Contact Support</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item">Support</li>
+      <li class="breadcrumb-item active">Contact</li>
+    </ol>
+  </nav>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                Dans le cas, où vous rencontrez un problème, vous pouvez à tout moment me contacter.<br>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+</div><!-- End Page Title -->
+<section class="section">
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">     </h5>
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3" method="post" action="https://formspree.io/f/xoqrjgjl">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" name="_replyto" id="floatingName" placeholder="Email" required>
+                    <label for="floatingName"> Email </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="objet" id="floatingEmail" placeholder="Objet" >
+                    <label for="floatingEmail">Objet</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="message" id="floatingPassword" placeholder="Message" >
+                    <label for="floatingPassword">Message</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+            </div>
+          </div>
