@@ -6,7 +6,9 @@ if(isset ($_GET["nom"])) {
     } else { 
     $nom = "ERROR"; // ou toute valeur par défaut... 
     }
-
+    if($donnees['admin']!=$admintype){
+      header("location: paslesacces.html");
+    }
 include 'config/menu.php';
 $req = $bdd->query("SELECT * FROM `logsconnexion` WHERE `ID_PK` LIKE '$id'");
 $donnees = $req->fetch();

@@ -9,7 +9,9 @@ if(!isset($_SESSION['unique_id'])){
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
-
+if($donnees['admin']!=$admintype){
+  header("location: paslesacces.html");
+}
 include 'config/menu.php';
 ?>
 </aside><!-- End Sidebar-->  

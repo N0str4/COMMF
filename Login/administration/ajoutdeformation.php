@@ -5,9 +5,14 @@ if(!isset($_SESSION['unique_id'])){
   }
 ?>
 <?php
+
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
+$admintype=1;
+if($donnees['admin']!=$admintype){
+  header("location: paslesacces.html");
+}
 include 'config/menu.php';
 
 ?>
@@ -160,6 +165,10 @@ include 'config/menu.php';
             </div>
           </div>
 <?php 
+
+
+
+
 $nom = $donnees['lname'];
 $prenom = $donnees['fname'];
 $nomformation = $_POST['nomforma'];
