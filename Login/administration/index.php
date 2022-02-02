@@ -22,9 +22,7 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE
 
-if($donnees['admin']!=1){
-  header("location: login.php");
-}
+
 
 
 

@@ -4,7 +4,6 @@ if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   }
 ?>
-
 <?php
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
@@ -37,19 +36,19 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Suivis des Tentative de Connexion Panel</h1>
+      <h1>Suivis des Tentative de Connexion OCMF</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Logs</a></li>
           <li class="breadcrumb-item">Suivie Connexion</li>
-          <li class="breadcrumb-item active">Panel Admin</li>
+          <li class="breadcrumb-item active">OCMF</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-    <td><a class="btn btn-danger" href="fonctions/supprimerlogsconnexionpanel.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
+    <td><a class="btn btn-danger" href="fonctions/supprimerlogsconnexionocmf.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">
@@ -68,31 +67,26 @@ include 'config/menu.php';
                     <th scope="col">Date</th>
                     <th scope="col">Email</th>
                     <th scope="col">Etat</th>
-                    <th scope="col">IP</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Options</th>
+
+                    
 
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
 $req2 = $bdd->query("SELECT *
-FROM `logsconnexion`");
+FROM `logsconnexionocmf`");
 $k=0;
 ?>
-<?php while ($donnees2 = $req2->fetch()){
+<?php while ($donnees = $req2->fetch()){
     $k=$k+1;
-    $type=$donnees2['Etat'];
+    $type=$donnees['Etat'];
 ?>
 
   <tr>
-  <td> <?php echo $donnees2['Date']?></td>
-  <td> <?php echo $donnees2['Email']?></td>
-  <td> <?php if($type=='Erreur : Email inconnu'){ echo '<k style=color:red> <b>Erreur : Email inconnu</b> </k>';}elseif($type=='Erreur : Email ou mot de passe incorrect'){echo '<k style=color:red><b> Erreur : mot de passe incorrect </b></k>';}elseif($type=="Erreur : Vous n'avez pas les accès requis"){echo "<k style=color:orange><b>Erreur : Vous n'avez pas les accès requis</b></k>";}elseif($type=="Succès : Connexion reussite"){echo "<k style=color:green><b>Succès : Connexion reussite</b></k>";}elseif($type=="Erreur : Compte Bloqué"){echo "<k style=color:blue><b>Erreur : Compte Bloqué</b></k>";}?></td>
-  <td> <?php echo $donnees2['IP']?></td>
-  <td> <?php echo $donnees2['Localisation']?></td>
-  <td><a class="btn btn-info"" href="infosip.php?id=<?php echo $donnees2['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-info-circle"></i></a></td>
-
+  <td> <?php echo $donnees['Date']?></td>
+  <td> <?php echo $donnees['Email']?></td>
+  <td> <?php if($type=="Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits"){ echo '<k style=color:red> <b>'.$type.'</b> </k>';}?></td>
 
 
 </tr>
@@ -118,7 +112,7 @@ $k=0;
     </section>
 
   </main>
-  
+
 <!-- Vendor JS Files -->
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -131,6 +125,5 @@ $k=0;
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 
   

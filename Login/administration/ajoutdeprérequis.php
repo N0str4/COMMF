@@ -9,7 +9,28 @@ if(!isset($_SESSION['unique_id'])){
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
+$admintype=1;
+$email = $donnees['email'];
+$etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
+$now = date('Y-m-d H:i:s');
+if($donnees['admin']!=$admintype){
+  try{
+        
+    $req = $bdd->prepare("
+    INSERT INTO logsconnexionocmf(Email, Date, Etat)
+    VALUES(:email, :date, :etat)");
+    $req->bindParam(':email', $email);
+    $req->bindParam(':date', $now);
+    $req->bindParam(':etat', $etat);
+    $req->execute();
+    header("location: paslesacces.html");
+    }
+      
+    catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+    }
 
+}
 include 'config/menu.php';
 
 // CONTENUE PAGE : 
@@ -79,7 +100,7 @@ include 'config/menu.php';
                 </div>
 
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Envoyer</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- End floating Labels Form -->
