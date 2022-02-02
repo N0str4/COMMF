@@ -3,14 +3,12 @@ session_start();
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   }
-
 ?>
 <?php
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
-
 ?>
   <main id="main" class="main">
 

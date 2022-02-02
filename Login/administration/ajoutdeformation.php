@@ -175,7 +175,9 @@ $now = date('Y-m-d H:i:s');
 $ajout="AJOUT";
 
 include 'config.php';
-
+if($donnees['admin']!=1){
+  header("location: login.php");
+}
 
 
 if(isset($nomformation)){
