@@ -18,7 +18,9 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
-
+if($donnees['admin']!=1){
+  header("location: login.php");
+}
 ?>
 </aside><!-- End Sidebar-->  
   <main id="main" class="main">
