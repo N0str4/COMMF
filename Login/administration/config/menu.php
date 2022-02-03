@@ -176,7 +176,14 @@
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="logsrecherche.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Recherches SAP/Diplomes</span>
+          <i class="bi bi-plus-circle-dotted"></i><span>Recherches Pré-Requis</span>
+        </a>
+      </li>
+    </ul>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="logsdiplome.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Recherches Diplome</span>
         </a>
       </li>
     </ul>

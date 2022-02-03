@@ -37,11 +37,11 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Suivis des Recherches Pré-Requis</h1>
+      <h1>Suivis des Recherches Diplomes</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Logs</a></li>
-          <li class="breadcrumb-item">Recherches Pré-Requis</li>
+          <li class="breadcrumb-item">Recherches Diplomes</li>
           <li class="breadcrumb-item active">Suivie</li>
         </ol>
       </nav>
@@ -49,7 +49,7 @@ include 'config/menu.php';
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-    <td><a class="btn btn-danger" href="fonctions/supprimerlogsrecherche.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
+    <td><a class="btn btn-danger" href="fonctions/supprimerlogsdiplome.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">
@@ -68,13 +68,12 @@ include 'config/menu.php';
                     <th scope="col">Date</th>
                     <th scope="col">Nom du Personnel</th>
                     <th scope="col">SAP</th>
-                    <th scope="col">Formation</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
 $req2 = $bdd->query("SELECT *
-FROM `logsrecherche`");
+FROM `logsdiplome`");
 $k=0;
 ?>
 <?php while ($donnees = $req2->fetch()){
@@ -82,11 +81,12 @@ $k=0;
 $test=$donnees['num_prerequis'];
 ?>
 
-  <tr><th scope="row"><?php echo $k?></th>
+<tr>
+  <th scope="row"><?php echo $k?></th>
   <td> <?php echo $donnees['date']?></td>
   <td> <?php echo $donnees['nom']?></td>
   <td> <?php echo $donnees['sap']?></td>
-  <td> <?php echo $donnees['formation']?></td></tr>
+</tr>
 
 
 

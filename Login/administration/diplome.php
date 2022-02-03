@@ -9,6 +9,7 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
+$now = date('Y-m-d H:i:s');
 
 include 'config/menu.php';
 $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
@@ -28,6 +29,21 @@ if ($type == 1){
     $typeverif="Civil";
 }else{
     $typeverif="Error";
+}
+try{
+  //On insère les données reçues
+  $requeteLOG = $bdd->prepare("
+      INSERT INTO logsdiplome(nom, date, sap)
+      VALUES(:nom, :date, :sap)");
+  $requeteLOG->bindParam(':nom',$donnees['lname']);
+  $requeteLOG->bindParam(':date',$now); 
+  $requeteLOG->bindParam(':sap',$sap); 
+
+
+  $requeteLOG->execute();
+}   
+catch(PDOException $e){
+  echo "Erreur : " . $e->getMessage();
 }
 ?>
 <main id="main" class="main">
