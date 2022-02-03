@@ -233,6 +233,11 @@
           <i class="bi bi-plus-circle-dotted"></i><span>Contact Support</span>
         </a>
       </li>
+      <li>
+        <a href="contact.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Notice d'Utilisation</span>
+        </a>
+      </li>
 
     <?php if($donnees['admin']==1){?>
       <li>
