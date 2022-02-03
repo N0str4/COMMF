@@ -30,17 +30,17 @@ include 'config/menu.php';
 
           <div class="card basic">
             <div class="card-body">
-              <h5 class="card-title"> 1. Introduction</h5>
+              <h5 class="card-title">Informations supplémentaires</h5>
 
               <div>
-                <h6>1. Introduction</h6>
+                <h6><b>1. Introduction</b></h6>
                 <p><b>Outils Cellulle Metier Formation</b> est un outil permettant à la Celulle Metier et Formation de rechercher les pré-requis d'un candidat, en fonction d'une formation spécifique. 
     <br><br>
     L'utilisation de <b>l'OCMF </b> à était simplifié à sont maximum, afin de permettre à la Cellule, de pouvoir utiliser les possibilités de cette outils, à sont maximum.</p>
               </div>
 
               <div class="pt-2">
-                <h6>2. Candidat et Formation</h6>
+                <h6><b>2. Candidat et Formation</b></h6>
                <p> Chaque personnel de l'Armée de Terre est identifié par un SAP.
     Dans le but de selectionné un candidat, vous devez impérativement entré un <b>SAP valide.</b><br>
     Dans le cas, où un SAP invalide est entré, un message vous préviendra de réitéré votre action.<br>
@@ -49,7 +49,7 @@ include 'config/menu.php';
               </div>
 
               <div class="pt-2">
-                <h6>3. Affichage des résultats</h6>
+                <h6><b>3. Affichage des résultats</b></h6>
 <p> Une fois le <b>SAP</b> et la <b>Formation</b> correctement entré, un tableau s'affichera, contenant l'ensemble des informations connu sur le candidat.<br></p>
 <p>    <b>Vous retrouverez :</b><br>
       - <b>NOM</b><br>
@@ -68,7 +68,7 @@ include 'config/menu.php';
 
               </div>
               <div class="pt-2">
-                <h6>4. Spécificité pris en charge</h6>
+                <h6><b>4. Spécificité pris en charge</b></h6>
                 <p>LE <b>OCMF</b> prend en charge concernant les formations de :<br>     </p>
 <p>
   - la validité <br>
@@ -76,7 +76,7 @@ include 'config/menu.php';
   - l'équivalence <br><br>        </p>     
                  </div>
                  <div class="pt-2">
-              <h6>5. Recyclage des formations</h6>
+              <h6><b>5. Recyclage des formations</b></h6>
               <p class="introduction_text">
     <b>L'OCMF</b> calcule <b>automatiquement</b> si les formations des candidats sont arrivé à expiration, et necessite simplement un <b>recyclage</b><br>
     Dans le cas où une formation est arrivé à expiration et necessite un recyclage, l'OCMF affichera alors que la formation est <b>VALIDE</b>, mais affichera dans la colonne <b>'Recyclage'</b> en orange, qu'elle necessitera une formation recyclage afin de l'acquerir à nouveau.<br><br>

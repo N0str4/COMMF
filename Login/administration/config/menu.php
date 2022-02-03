@@ -234,7 +234,7 @@
         </a>
       </li>
       <li>
-        <a href="contact.php">
+        <a href="notice.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Notice d'Utilisation</span>
         </a>
       </li>
