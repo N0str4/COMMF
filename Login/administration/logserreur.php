@@ -36,12 +36,12 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Suivis des Tentative de Connexion OCMF</h1>
+      <h1>Suivis des erreurs</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Logs</a></li>
-          <li class="breadcrumb-item">Suivie Connexion</li>
-          <li class="breadcrumb-item active">OCMF</li>
+          <li class="breadcrumb-item">Suivie</li>
+          <li class="breadcrumb-item active">Erreurs</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
