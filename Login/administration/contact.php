@@ -5,8 +5,12 @@ if(!isset($_SESSION['unique_id'])){
   }
 ?>
 <?php
-
+$bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 'vikatch505', 'Billitlebg59');
 include 'config/config.php';
+
+
+$req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
+$donnees = $req->fetch();
 include 'config/menu.php';
 
 ?>
