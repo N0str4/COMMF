@@ -112,6 +112,7 @@ $prenom = $donnees['fname'];
 $message = $_POST['message'];
 $now = date('Y-m-d H:i:s');
 $Succes=0;
+$Erreur=1;
 
 if(!empty($message)){
     try{
@@ -124,7 +125,17 @@ if(!empty($message)){
     
       }
       catch(PDOException $e){
+        $etat2 = "Erreur : ".$e->getMessage();
         echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+        $req = $bdd->prepare("
+        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+        VALUES(:email, :date, :etat, :ip)");
+        $req->bindParam(':email', $email);
+        $req->bindParam(':date', $now);
+        $req->bindParam(':etat', $etat2);
+        $req->bindParam(':ip', $Erreur);
+
+        $req->execute();
       }
 
       try{
