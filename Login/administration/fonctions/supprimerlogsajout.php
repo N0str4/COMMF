@@ -2,6 +2,7 @@
 
 include '../config/config.php';
 
+$id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
 
 try{
     //On insère les données reçues
@@ -17,5 +18,5 @@ try{
   }
 
 ?><script type="text/javascript">
-window.location.replace("http://intradef.vikatchev.com/Login/administration/logsajout.php");
+window.location.replace("http://intradef.vikatchev.com/Login/administration/fonctions/regroupementlogcomplete.php?etat=Attention:Log_RechercheSAP_Supprimé&id=<? echo $id; ?>&type=3");
 </script>

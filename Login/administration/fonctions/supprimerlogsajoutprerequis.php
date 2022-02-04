@@ -1,6 +1,7 @@
 <?php
 
 include '../config/config.php';
+$id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
 
 
 try{
@@ -17,5 +18,5 @@ try{
   }
 
 ?><script type="text/javascript">
-window.location.replace("http://intradef.vikatchev.com/Login/administration/logsajout.php");
+window.location.replace("http://intradef.vikatchev.com/Login/administration/fonctions/regroupementlogcomplete.php?etat=Attention:Log_AjoutPrerequis_Supprimé&id=<? echo $id; ?>&type=3");
 </script>
