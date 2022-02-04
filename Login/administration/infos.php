@@ -13,15 +13,17 @@ $admintype=1;
 $email = $donnees['email'];
 $etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
 $now = date('Y-m-d H:i:s');
+$Erreur=1;
 if($donnees['admin']!=$admintype){
   try{
         
     $req = $bdd->prepare("
-    INSERT INTO logsconnexionocmf(Email, Date, Etat)
-    VALUES(:email, :date, :etat)");
+    INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+    VALUES(:email, :date, :etat, :ip)");
     $req->bindParam(':email', $email);
     $req->bindParam(':date', $now);
     $req->bindParam(':etat', $etat);
+    $req->bindParam(':ip', $Erreur);
     $req->execute();
     header("location: paslesacces.html");
     }
@@ -109,7 +111,7 @@ $nom = $donnees['lname'];
 $prenom = $donnees['fname'];
 $message = $_POST['message'];
 $now = date('Y-m-d H:i:s');
-
+$Succes=0;
 
 if(!empty($message)){
     try{
@@ -126,18 +128,25 @@ if(!empty($message)){
       }
 
       try{
+          $etat2 = "Succès : Message d'accueil mis à jour";
         //On insère les données reçues
         $reqAjoutMess = $bdd->prepare("
             INSERT INTO infoIndex(Information)
             VALUES(:info)");
         $reqAjoutMess->bindParam(':info',$message);
         $reqAjoutMess->execute();
+
+        $req = $bdd->prepare("
+        INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+        VALUES(:email, :date, :etat, :ip)");
+        $req->bindParam(':email', $email);
+        $req->bindParam(':date', $now);
+        $req->bindParam(':etat', $etat2);
+        $req->bindParam(':ip', $Succes);
+
+        $req->execute();
     }   
     catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
     }
-    
-
-
-
 }
