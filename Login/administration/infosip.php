@@ -7,6 +7,8 @@ if(isset ($_GET["nom"])) {
     $nom = "ERROR"; // ou toute valeur par défaut... 
     }
     $admintype=1;
+$req = $bdd->query("SELECT * FROM `users` WHERE `lname` LIKE '$nom'");
+$donnees = $req->fetch(); // PERMET D'AVOIR NOM/PRENOM SITUER DANS LE MENU, AU TOP DU SITE    
     $email = $donnees['email'];
 $etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
 $now = date('Y-m-d H:i:s');
@@ -32,7 +34,7 @@ if($donnees['admin']!=$admintype){
 }
 include 'config/menu.php';
 $req = $bdd->query("SELECT * FROM `logsconnexion` WHERE `ID_PK` LIKE '$id'");
-$donnees = $req->fetch();
+$donnees2 = $req->fetch();
 
 // CONTENUE PAGE : 
 ?>
@@ -63,8 +65,8 @@ $donnees = $req->fetch();
             <div class="card-body">
               <h5 class="card-title">     </h5>
 <?php 
-$Latitude = $donnees['Latitude'];
-$Longitude = $donnees['Longitude'];
+$Latitude = $donnees2['Latitude'];
+$Longitude = $donnees2['Longitude'];
 
 ?>
               <!-- Floating Labels Form -->
@@ -72,31 +74,31 @@ $Longitude = $donnees['Longitude'];
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" name="IP" id="floatingName" placeholder="IP de Connexion" disabled="disabled">
-                    <label for="floatingEmail"><b><?php  echo '<k style="text-align: center;">IP: '.$donnees['IP'].'</k>'?></b></label>
+                    <label for="floatingEmail"><b><?php  echo '<k style="text-align: center;">IP: '.$donnees2['IP'].'</k>'?></b></label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
                     <input type="email" class="form-control" name="prenom" id="floatingEmail" placeholder="Ville" disabled="disabled">
-                    <label for="floatingEmail"><?php  echo 'Ville: '.$donnees['Localisation']?></label>
+                    <label for="floatingEmail"><?php  echo 'Ville: '.$donnees2['Localisation']?></label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
                     <input type="password" class="form-control" name="nom" id="floatingPassword" placeholder="Pays" disabled="disabled">
-                    <label for="floatingPassword"><?php echo 'Pays: '.$donnees['Pays']?></label>
+                    <label for="floatingPassword"><?php echo 'Pays: '.$donnees2['Pays']?></label>
                   </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-floating">
                     <input type="password" class="form-control" name="nom" id="floatingPassword" placeholder="Latitude" disabled="disabled">
-                    <label for="floatingPassword"><?php echo 'Latitude: '.$donnees['Latitude']?></label>
+                    <label for="floatingPassword"><?php echo 'Latitude: '.$donnees2['Latitude']?></label>
                   </div>
                 </div>
                 <div class="col-md-6">
                 <div class="form-floating">
                     <input type="password" class="form-control" name="nom" id="floatingPassword" placeholder="Longitude" disabled="disabled">
-                    <label for="floatingPassword"><?php echo 'Longitude: '.$donnees['Longitude']?></label>
+                    <label for="floatingPassword"><?php echo 'Longitude: '.$donnees2['Longitude']?></label>
                   </div>
                 </div>
               </form><!-- End floating Labels Form -->
