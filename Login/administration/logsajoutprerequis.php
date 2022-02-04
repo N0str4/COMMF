@@ -13,6 +13,8 @@ $admintype=1;
 $email = $donnees['email'];
 $etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
 $now = date('Y-m-d H:i:s');
+$userId = $donnees['user_id'];
+
 $Erreur=1;
 if($donnees['admin']!=$admintype){
   try{
@@ -51,7 +53,6 @@ include 'config/menu.php';
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-    <td><a class="btn btn-danger" href="fonctions/supprimerlogsajoutprerequis.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">

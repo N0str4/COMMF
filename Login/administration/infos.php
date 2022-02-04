@@ -10,6 +10,7 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 $admintype=1;
+$userId = $donnees['user_id'];
 $email = $donnees['email'];
 $etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
 $now = date('Y-m-d H:i:s');
@@ -68,7 +69,7 @@ include 'config/menu.php';
                 <? echo $messageError ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-              <td><a class="btn btn-danger" href="fonctions/supprimermessage.php?"><i class="bi bi-check-circle"></i> Supprimer le message</a></td>
+              <td><a class="btn btn-danger" href="fonctions/supprimermessage.php?id=<? echo $userId ?>"><i class="bi bi-check-circle"></i> Supprimer le message</a></td>
 
               <?     }?>
 </div><!-- End Page Title -->
@@ -78,7 +79,7 @@ include 'config/menu.php';
               <h5 class="card-title">     </h5>
 
               <!-- Floating Labels Form -->
-              <form class="row g-3" method="post">
+              <form class="row g-3" method="post" action="https://intradef.vikatchev.com/Login/administration/infos.php">
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" name="message" id="floatingName" placeholder="Contenue du Message" required>

@@ -50,7 +50,6 @@ include 'config/menu.php';
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-    <td><a class="btn btn-danger" href="fonctions/supprimerlogsconnexionocmf.php"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">
@@ -89,7 +88,7 @@ $k=0;
   <tr>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Email']?></td>
-  <td> <?php if($type==1){ echo '<k style=color:red> <b>'.$message.'</b> </k>';}elseif($type==0){ echo '<k style=color:green> <b>'.$message.'</b> </k>';}?></td>
+  <td> <?php if($type==1){ echo '<k style=color:red> <b>'.$message.'</b> </k>';}elseif($type==0){ echo '<k style=color:green> <b>'.$message.'</b> </k>';}elseif($type==3){ echo '<k style=color:orange> <b>'.$message.'</b> </k>';}?></td>
 
 
 </tr>
