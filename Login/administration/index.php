@@ -138,6 +138,19 @@ $reqVerifDecembre->bindParam(':Decembre', $tab[12]);
 $reqVerifDecembre->execute();
 $donneesDecembre= $reqVerifDecembre->fetch();
 // END OF DIAGRAMM MONTH / 
+// VERIFICATION SI AFFICHAGE DE L'INFO INDEX OU PAS
+$reqMessageInfoIndex = $bdd->prepare("SELECT COUNT(*) AS total FROM infoIndex");
+$reqMessageInfoIndex->execute();
+$donneesMessageInfoIndex= $reqMessageInfoIndex->fetch();
+$messageexiste = $donneesMessageInfoIndex['total'];
+// END
+// SI OUI, CONTENUE DE L'INFO
+$reqMessageContenue = $bdd->prepare("SELECT * FROM infoIndex");
+$reqMessageContenue->execute();
+$donneesMessageContenue= $reqMessageContenue->fetch();
+$messageError = $donneesMessageContenue['Information'];
+//END
+
 
 include 'config/menu.php'; 
 
@@ -155,8 +168,14 @@ include 'config/menu.php';
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
+      <? if($messageexiste >0){?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                <?php echo '<b>'.$messageError.'</b>'?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
       <div class="row">
-
+<?php } ?>
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">

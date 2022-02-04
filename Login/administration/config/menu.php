@@ -245,6 +245,11 @@
           <i class="bi bi-plus-circle-dotted"></i><span>Accès Utilisateurs</span>
         </a>
       </li>
+      <li>
+        <a href="infos.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Message d'accueil</span>
+        </a>
+      </li>
     </ul>
     <?php } ?>
   </li><!-- End Forms Nav -->
