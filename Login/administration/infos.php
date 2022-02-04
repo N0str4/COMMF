@@ -50,7 +50,7 @@ include 'config/menu.php';
 <main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>Changement du message d'Accueil</h1>
+  <h1>Changement du message d'accueil</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -60,13 +60,13 @@ include 'config/menu.php';
   </nav>
   <?php if($messageexiste >0){?>
     
-  <h1>Message d'accueil actuelle : </h1>
+  <h1>Message d'accueil actuel : </h1>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <i class="bi bi-exclamation-triangle me-1"></i>
                 <? echo $messageError ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-              <td><a class="btn btn-danger" href="fonctions/supprimermessage.php?"><i class="bi bi-check-circle"></i>Supprimer le message</a></td>
+              <td><a class="btn btn-danger" href="fonctions/supprimermessage.php?"><i class="bi bi-check-circle"></i> Supprimer le message</a></td>
 
               <?     }?>
 </div><!-- End Page Title -->
