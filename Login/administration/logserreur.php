@@ -12,15 +12,17 @@ $admintype=1;
 $email = $donnees['email'];
 $etat = "Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits";
 $now = date('Y-m-d H:i:s');
+$Erreur=1;
 if($donnees['admin']!=$admintype){
   try{
         
     $req = $bdd->prepare("
-    INSERT INTO logsconnexionocmf(Email, Date, Etat)
-    VALUES(:email, :date, :etat)");
+    INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+    VALUES(:email, :date, :etat, :ip)");
     $req->bindParam(':email', $email);
     $req->bindParam(':date', $now);
     $req->bindParam(':etat', $etat);
+    $req->bindParam(':ip', $Erreur);
     $req->execute();
     header("location: paslesacces.html");
     }
@@ -36,12 +38,12 @@ include 'config/menu.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Suivis des erreurs</h1>
+      <h1>Suivis des complète des logs</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Logs</a></li>
           <li class="breadcrumb-item">Suivie</li>
-          <li class="breadcrumb-item active">Erreurs</li>
+          <li class="breadcrumb-item active">Logs Complète</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -80,13 +82,14 @@ $k=0;
 ?>
 <?php while ($donnees = $req2->fetch()){
     $k=$k+1;
-    $type=$donnees['Etat'];
+    $type= $donnees['IP'];
+    $message = $donnees['Etat'];
 ?>
 
   <tr>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Email']?></td>
-  <td> <?php if($type=="Erreur : L'utilisateur a tenté d'accédé à une page dont il n'avais pas les droits"){ echo '<k style=color:red> <b>'.$type.'</b> </k>';}?></td>
+  <td> <?php if($type==1){ echo '<k style=color:red> <b>'.$message.'</b> </k>';}elseif($type==0){ echo '<k style=color:green> <b>'.$message.'</b> </k>';}?></td>
 
 
 </tr>

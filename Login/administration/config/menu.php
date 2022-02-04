@@ -218,7 +218,7 @@
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="logserreur.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Erreur</span>
+          <i class="bi bi-plus-circle-dotted"></i><span>Logs Complète</span>
         </a>
       </li>
     </ul>
