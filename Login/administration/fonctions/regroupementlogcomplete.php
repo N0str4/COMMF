@@ -36,4 +36,6 @@ try{
   }   
   catch(PDOException $e){
       echo "Erreur : " . $e->getMessage();
-  }
+  }?><script type="text/javascript">
+  window.location.replace("http://intradef.vikatchev.com/Login/administration/index.php");
+  </script>

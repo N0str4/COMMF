@@ -198,7 +198,7 @@ $recordpays = $record['pays'];*/
 
                     }
                     echo "Votre compte est bloqué.";
-            } }elseif($user_pass != $enc_pass && $blocage >2 && $blocage<7 ){ 
+            } }elseif($user_pass != $enc_pass && $blocage >2 && $blocage<6 ){ 
                 $etat='Erreur : Email ou mot de passe incorrect';
                 if (empty($recordville)){
                     $recordville = 'N/A';
