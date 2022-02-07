@@ -29,7 +29,7 @@
           <i class="fas fa-eye"></i>
         </div>
         <div class="field button">
-          <input type="submit" name="submit" value="Continuez vers l'Administration ">
+          <input type="submit" name="submit" value="Continuez vers l'OCMF ">
                 </div>
       </form>
       <div class="link">Referez vous au <a  onClick="javascript:window.open('mailto:david.ryssen@intradef.gouv.fr', 'my-window');event.preventDefault()"
