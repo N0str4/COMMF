@@ -17,12 +17,12 @@ include 'config/menu.php';
 <!-- Vendor JS Files -->
 <!-- Vendor JS Files -->
 <div class="pagetitle">
-  <h1>OCMF - Conditions Pré-Requis</h1>
+  <h1>OCMF - Prospections de candidats</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item">Recherche</li>
-      <li class="breadcrumb-item active">Conditions Pré-Requis</li>
+      <li class="breadcrumb-item">Prospection</li>
+      <li class="breadcrumb-item active">candidats</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -33,23 +33,7 @@ include 'config/menu.php';
 
               <!-- Floating Labels Form -->
               <form class="row g-3" method="post">
-              <div class="col-md-12">
-                  <div class="form-floating mb-3">
-                    <select name="regiment" class="form-select" id="floatingSelect" aria-label="Selection de la Formation">
-                      <?php
-                      
-                      $req191 = $bdd->query("SELECT * FROM `regiments`  GROUP BY `NomRegiment`");                      $varListDeroulante=1;
-                      while ($donnees191 = $req191->fetch()){?>
-                      
-                        <option value="<?php echo $donnees191['NomRegiment'];?>"><?php echo $donnees191['NomRegiment'] ?></option>
-                        
-                      <?php
-                      }?>
-
-                    </select>
-                    <label for="floatingSelect">Selection du Régiment</label>
-                  </div>
-                </div>   
+              <div class="col-md-12">  
                 <div class="col-md-12">
                   <div class="form-floating mb-3">
                     <select name="formation" class="form-select" id="floatingSelect" aria-label="Selection de la Formation" required>
@@ -118,7 +102,7 @@ $n=0;
 foreach($sorties as $sortie) {
     $tabnum[$n] = $sortie['num_prerequis'];
     //echo '<br> Résult : '.$sortie['num_prerequis'].'<br>';
-    echo $tabnum[$n]; 
+    //echo $tabnum[$n]; 
     $n++;
     //echo $n;
 }
@@ -132,7 +116,7 @@ $utilisateurnum = 0;
 if (!empty($formation)){
 while ($donnees19 = $req19->fetch()){
     $id_userSAP = $donnees19['id'];
-    echo '<br>'.$id_userSAP.'<br>';
+    //echo '<br>'.$id_userSAP.'<br>';
                 $req5 = $bdd->query("SELECT *
                 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
                 $rows= $req5->fetchAll(PDO::FETCH_ASSOC);
@@ -159,19 +143,19 @@ while ($donnees19 = $req19->fetch()){
                         /* END DEBUG MODE */
 
                 }
-                echo '<br>UTILISATION : '.$utilisateurnum;
-                echo '<br>'.$count180['total'];
+              //  echo '<br>UTILISATION : '.$utilisateurnum;
+              //  echo '<br>'.$count180['total'];
                 $checked=0;
                 for ($k=0;$k<20;$k++){// FORMA
                     for($p=0;$p<20;$p++){// UTIL
                         
-                        echo '<br>PREREQUIS FORMA'.$tabnum[$k];
-                        echo '<br> PREREQUIS UTIL'.$tab[$p];
+                    ///    echo '<br>PREREQUIS FORMA'.$tabnum[$k];
+                    ///    echo '<br> PREREQUIS UTIL'.$tab[$p];
                         if($tabnum[$k]!=NULL){// SI PLUS DE PREREQUIS DE FORMA A CHECK
                             if($tabnum[$k]==$tab[$p]){
                                 $tableaucheck[$checked]=1;
                                 $checked++;
-                                echo '<br>YES<br>';
+                               // echo '<br>YES<br>';
 
                             }
                             // RECUPERATION DES LIAISONS LIEE AU PREREQUIS UTIL
@@ -190,7 +174,7 @@ while ($donnees19 = $req19->fetch()){
                                 if ($tabequivalence[$bouclefor]==$tabnum[$k]){
                                     $tableaucheck[$checked]=1;
                                     $checked++;
-                                    echo '<br>YES<br>';
+                                   // echo '<br>YES<br>';
                                 }
                             }
 
@@ -200,7 +184,7 @@ while ($donnees19 = $req19->fetch()){
 
                 }
                 for ($test=0;$test<$count180RESULT;$test++){
-                    echo '['.$test.']'.$tableaucheck[$test].'<br>';
+                    //echo '['.$test.']'.$tableaucheck[$test].'<br>';
  
                 }
                for( $i = 1; $i < $count180RESULT; $i++ )
@@ -270,7 +254,7 @@ while ($donnees19 = $req19->fetch()){
                     unset($tab[$i]);
                     unset($tabnum[$i]);
                 }
-                echo $isEqual;
+                //echo $isEqual;
                 $utilisateurnum ++;     
                 $tableaucheck[ 0 ]=NULL;   
  }

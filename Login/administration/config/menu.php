@@ -114,9 +114,25 @@
         </a>
       </li>
     </ul>
+    <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#prospection" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-broadcast"></i><span>Prospection</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="prospection" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="prospection.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Prospection des candidats</span>
+        </a>
+      </li>
+      <li>
+        <a href="regroupement.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Recensement des candidats</span>
+        </a>
+      </li>
+    </ul>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi-file-earmark-spreadsheet"></i><span>Formation</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-calendar-check-fill"></i><span>Formation</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <?php if($donnees['admin']==1){?>
