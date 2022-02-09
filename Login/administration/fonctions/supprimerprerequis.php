@@ -50,9 +50,8 @@ try{
     $requeteLog1->bindParam(':prerequis',$donnees45["Nom_Prerequis"]); 
     $requeteLog1->bindParam(':date',$now); 
     $requeteLog1->bindParam(':type',$supprimage); 
-
-
     $requeteLog1->execute();
+    
   }   
   catch(PDOException $e){
     echo "Erreur : " . $e->getMessage();
