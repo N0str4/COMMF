@@ -52,6 +52,7 @@ include 'config/menu.php';
     <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
+    <td><a class="btn btn-danger" href="fonctions/supprimerlogsconnexionpanel.php?id=<?echo $userId?>"><i class="bi bi-exclamation-octagon"></i>Supprimer les logs</a></td>
 </div>
 </div>
     <section class="section">

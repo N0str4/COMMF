@@ -86,7 +86,7 @@ $k=0;
 ?>
 
   <tr>
-  <td> <?php if($type=='AJOUT'){ echo '<k style=color:green> <b>AJOUT</b> </k>';}elseif($type=='SUPPRESSIONS'){echo '<k style=color:red><b> SUPPRESSION </b></k>';}?></td>
+  <td> <?php if($type=='AJOUT'){ echo '<span class="badge bg-success">Ajout</span>';}elseif($type=='SUPPRESSIONS'){echo '<span class="badge bg-danger">Suppression</span>';}?></td>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Nom']?></td>
   <td> <?php echo $donnees['Prerequis']?></td>
