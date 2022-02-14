@@ -60,8 +60,14 @@
               <h6><?php echo $donnees['fname'].' '.$donnees['lname'];?></h6>
               <span><?php echo $donnees['grade']?></span>
             </li>
-            <li>
+           <li>
               <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="changemdp.php">
+                <i class="bi bi-bookmark-check-fill"></i>
+                <span>Changer de mot de passe</span>
+              </a>
             </li>
                           <hr class="dropdown-divider">
             <li>
