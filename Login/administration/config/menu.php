@@ -66,7 +66,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="changemdp.php">
                 <i class="bi bi-bookmark-check-fill"></i>
-                <span>Changer de mot de passe</span>
+                <span>Profil de l'utilisateur</span>
               </a>
             </li>
                           <hr class="dropdown-divider">

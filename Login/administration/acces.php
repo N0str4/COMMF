@@ -93,6 +93,7 @@ FROM `users`");
   <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
   <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
   <?php if($donnees2['blocage']>5){?> <td><a class="btn btn-warning" href="fonctionuser/deblocageutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Débloqué</a></td><?php }?>
+  <td><a class="btn btn-info" href="changeprofiluser.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Modifier</a></td>
   <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimé</a></td>
 </tr>
 
