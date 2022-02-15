@@ -59,6 +59,7 @@ if($donnees['admin']!=$admintype){
 
       <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+        <img src="ArmeeDeTerre.png" alt="Profile" >
 
           <h2><? echo $donnees2['fname'].' '.$donnees2['lname']?></h2>
           <h3><? echo $donnees2['grade']?></h3>
@@ -77,15 +78,16 @@ if($donnees['admin']!=$admintype){
             <li class="nav-item">
             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Informations</button>
             </li>
-
+<?php if($donnees['admin']==1){ ?>
+  
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier Profil</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier les informations</button>
             </li>
 
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Changer Mot de Passe</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le mot de passe</button>
             </li>
-
+      <?  }?>
           </ul>
           <div class="tab-content pt-2">
 
@@ -188,6 +190,7 @@ $mdp = $_POST['newpassword'];
 $mdprenew = $_POST['renewpassword'];
 $cellule = $_POST['Cellule'];
 $fonction = $_POST['Fonction'];
+if($donnees['admin']==1){
 if(!empty($fonction)){
 
     try{
@@ -273,6 +276,7 @@ if(!empty($cellule)){
   <?php
     }
   }
+}
   ?>
   
     </div>

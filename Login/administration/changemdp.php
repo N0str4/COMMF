@@ -32,6 +32,7 @@ $now = date('Y-m-d H:i:s');
 
       <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+        <img src="ArmeeDeTerre.png" alt="Profile" >
 
           <h2><? echo $donnees['fname'].' '.$donnees['lname']?></h2>
           <h3><? echo $donnees['grade']?></h3>
@@ -52,11 +53,11 @@ $now = date('Y-m-d H:i:s');
             </li>
 
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier Profil</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier ces informations</button>
             </li>
 
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Changer Mot de Passe</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier son mot de passe</button>
             </li>
 
           </ul>

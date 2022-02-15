@@ -78,9 +78,24 @@ include 'config/menu.php';
                     <label for="floatingName">E-mail</label>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="Fonction" id="floatingName" placeholder="Fonction" required>
+                    <label for="floatingName">Fonction</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="Cellule" id="floatingName" placeholder="Cellule" required>
+                    <label for="floatingName">Cellule</label>
+                  </div>
+                </div>
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
                   <select name="grade" class="form-select" id="floatingSelect" aria-label="Grade" required>
+                      <option value="COL">COL</option>
+                      <option value="LCL">LCL</option>
+                      <option value="CDT">CDT</option>
                       <option value="CNE">CNE</option>
                       <option value="LTN">LTN</option>
                       <option value="LTN">SLT</option>
@@ -119,6 +134,8 @@ $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $email = $_POST['email'];
 $mdp = $_POST['mdp'];
+$cellule = $_POST['Cellule'];
+$fonction = $_POST['Fonction'];
 $grade = $_POST['grade'];
 $admin = $_POST['admin'];
 
@@ -131,13 +148,13 @@ $donnees = $emailverif->fetchAll();
 
 
 
-echo $nom.' '.$prenom.' '.$email.' '.$mdp.' ' .$grade.' '.$admin;
+
 if(isset($nom)&&isset($prenom)&&isset($email)){
 if(empty($donnees)){ // SI VIDE
 ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <h4 class="alert-heading">SUCCESS</h4>
-  <p>Le Personnel <b><?php echo $prenom.'CC'.$nom ?> </b> à bien était intégré à la base de donné. </p>
+  <p>Le Personnel <b><?php echo $prenom.' '.$nom ?> </b> à bien était intégré à la base de donné. </p>
   <hr>                
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -159,8 +176,8 @@ if(empty($donnees)){ // SI VIDE
 try{
   //On insère les données reçues
   $sth = $bdd->prepare("
-      INSERT INTO users(fname, lname, email, password, admin, grade)
-      VALUES(:fname, :lname, :email, :password, :adminnumber, :gradeform)");
+      INSERT INTO users(fname, lname, email, password, admin, grade, Cellule, Fonction)
+      VALUES(:fname, :lname, :email, :password, :adminnumber, :gradeform, :cel, :fonc)");
 
       
   $sth->bindParam(':fname',$prenom);
@@ -169,6 +186,8 @@ try{
   $sth->bindParam(':password',$mdp);
   $sth->bindParam(':adminnumber',$admin);
   $sth->bindParam(':gradeform',$grade);
+  $sth->bindParam(':cel',$cellule);
+  $sth->bindParam(':fonc',$fonction);
 
 
 
@@ -179,7 +198,6 @@ try{
 catch(PDOException $e){
   echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
 }
-
 
 
 

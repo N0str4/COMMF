@@ -65,7 +65,7 @@
             </li>
             <li>
               <a class="dropdown-item d-flex align-items-center" href="changemdp.php">
-                <i class="bi bi-bookmark-check-fill"></i>
+                <i class="bi bi-person-circle"></i>
                 <span>Profil de l'utilisateur</span>
               </a>
             </li>
@@ -104,9 +104,10 @@
       <span>Tableau de bord</span>
     </a>
   </li><!-- End Dashboard Nav -->
+  <hr class="dropdown-divider">
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#recherche-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi-file-earmark-spreadsheet"></i><span>Recherches</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-search"></i><span>Recherches</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="recherche-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
@@ -189,6 +190,24 @@
         </a>
       </li>
     </ul>
+    <hr class="dropdown-divider">
+    <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#charts-ful" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-person-lines-fill"></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="charts-ful" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <?php if($donnees['admin']==1){?>
+      <li>
+        <a href="acces.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Accès Utilisateurs</span>
+        </a>
+      </li>
+      <?php } ?>
+        <a href="utilisateurs.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Recherche Utilisateurs</span>
+        </a>
+      </li>
+    </ul>
     <?php if($donnees['admin']==1){?>
 
     <li class="nav-item">
@@ -246,10 +265,10 @@
     </ul>
 <?php } ?>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#forms-util" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Divers</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <ul id="forms-util" class="nav-content collapse " data-bs-parent="#sidebar-nav">
     <li>
         <a href="contact.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Contact Support</span>
@@ -262,11 +281,6 @@
       </li>
 
     <?php if($donnees['admin']==1){?>
-      <li>
-        <a href="acces.php">
-          <i class="bi bi-plus-circle-dotted"></i><span>Accès Utilisateurs</span>
-        </a>
-      </li>
       <li>
         <a href="infos.php">
           <i class="bi bi-plus-circle-dotted"></i><span>Message d'accueil</span>
