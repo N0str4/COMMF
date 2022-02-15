@@ -86,14 +86,13 @@ FROM `users`");
 ?>
 <?php while ($donnees2 = $req2->fetch()){
 ?>
-  <td> <?php echo $donnees2['email']?></td>
+  <td> <?php echo '<b>'.$donnees2['email'].'</b>'?></td>
   <td> <?php echo $donnees2['password']?></td>
-  <td> <?php if($donnees2['blocage']<6){ echo 'Non'; }else{ echo '<b style=color:red;>Oui</b>';}?></td>
-  <td> <?php if($donnees2['admin']==1){ echo '<b><k style="color:orange">Oui</k></b>'; }else{ echo 'Non';}?></td>
+  <td> <?php if($donnees2['blocage']<6){ echo '<span class="badge bg-dark">Non</span>'; }else{ echo '<span class="badge bg-danger">Oui</span>';}?></td>
+  <td> <?php if($donnees2['admin']==1){ echo '<span class="badge bg-success">Oui</span>'; }else{ echo '<span class="badge bg-dark">Non</span>';}?></td>
   <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
   <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
   <?php if($donnees2['blocage']>5){?> <td><a class="btn btn-warning" href="fonctionuser/deblocageutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Débloqué</a></td><?php }?>
-  <td><a class="btn btn-info" href="changeprofiluser.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Modifier</a></td>
   <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimé</a></td>
 </tr>
 
@@ -109,3 +108,29 @@ function myFunction(){
 
 };
 </script>
+</tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    </main><!-- End #main -->
+
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>            <?php include 'footer.php'; 
