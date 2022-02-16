@@ -10,6 +10,8 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 
+$sap = $_POST['sap'];
+$formation = $_POST['formation'];
 include 'config/menu.php';
 ?>
 <main id="main" class="main">
@@ -25,6 +27,7 @@ include 'config/menu.php';
     </ol>
   </nav>
 </div><!-- End Page Title -->
+
 <section class="section">
 <div class="card">
             <div class="card-body">
@@ -76,6 +79,23 @@ include 'config/menu.php';
             </div>
           </div>
                     </section>
+    
+<?php
+// SCRIPT PHP BY
+// BY AYMERICK 
+// DO NOT COPY
+
+
+
+
+if (!empty($sap)) {
+$req4 = $bdd->query("SELECT *
+FROM utils WHERE sap LIKE '$sap'");
+$donnees4 = $req4->fetch();
+$id_userSAP = $donnees4['id'];
+$type_user = $donnees4['type'];
+$now = date('Y-m-d H:i:s');?>
+<?php if(!empty($sap) && !empty($donnees4['nom'])){?>
 <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -97,29 +117,8 @@ include 'config/menu.php';
                 </thead>
                 <tbody>
 
-<?php 
+<?php }
 
-
-
-
-    
-
-// SCRIPT PHP BY
-// BY AYMERICK 
-// DO NOT COPY
-
-
-
-$sap = $_POST['sap'];
-$formation = $_POST['formation'];
-
-if (!empty($sap)) {
-$req4 = $bdd->query("SELECT *
-FROM utils WHERE sap LIKE '$sap'");
-$donnees4 = $req4->fetch();
-$id_userSAP = $donnees4['id'];
-$type_user = $donnees4['type'];
-$now = date('Y-m-d H:i:s');
 
 // INTRODUCTION LOG
 $requete = $bdd->query("SELECT * FROM `users` WHERE unique_id LIKE '{$_SESSION['unique_id']}'");
@@ -280,15 +279,22 @@ INNER JOIN Formation
 ON Formationdetails.num_prerequis = Formation.NumPrérequis WHERE nomformation LIKE '$formation' AND `type` LIKE '$type_user2' ");
 
 }
-if(is_null($donnees4['nom'])==false && !empty($sap)){
-    
-    
-    
-    
-    
-    
-    
+if(is_null($donnees4['nom'])==true && !empty($sap)){
     ?>
+  <div class="card">
+  <div class="card-body pt-3">
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Erreur</h4>
+                <p> Le Matricule SAP <b><?php echo $sap?> </b> n'existe pas.</p>
+                <hr>
+              </div>
+  </div>
+</div>
+    
+    
+    
+    
 
 <?php }?>
     <?php $k=0;?>

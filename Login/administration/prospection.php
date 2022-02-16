@@ -9,7 +9,9 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
-
+// DECLARATION VARIABLE
+$regiment = $_POST['regiment'];
+$formation = $_POST['formation'];
 include 'config/menu.php';
 ?>
 
@@ -60,6 +62,8 @@ include 'config/menu.php';
             </div>
           </div>
                     </section>
+
+<? if(!empty($formation)){?>
                     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -81,10 +85,8 @@ include 'config/menu.php';
                 </thead>
                 <tbody>
 
-<?php 
-// DECLARATION VARIABLE
-$regiment = $_POST['regiment'];
-$formation = $_POST['formation'];
+<?php }
+
 // COUNT DU NOMBRE DE PREREQUIS DE LA FORMATION
 $req180 = $bdd->query("SELECT COUNT(*) AS total
 FROM Formationdetails WHERE (nomformation LIKE '$formation' AND `type` LIKE '1') OR (nomformation LIKE '$formation' AND `type` LIKE '3') ");
@@ -258,4 +260,28 @@ while ($donnees19 = $req19->fetch()){
                 $utilisateurnum ++;     
                 $tableaucheck[ 0 ]=NULL;   
  }
-}
+}?>                </tbody>
+</table>
+<!-- End Table with stripped rows -->
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+</main><!-- End #main -->
+<!-- Vendor JS Files -->
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.min.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
