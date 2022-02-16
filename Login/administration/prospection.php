@@ -213,7 +213,7 @@ while ($donnees19 = $req19->fetch()){
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
-                            <td> <?php echo '<b><kio style="color:green;">Oui<kio></b>'?></td>
+                            <td> <?php echo '</h5><span class="badge bg-success">Oui</span></h5>'?></td>
                            </tr>    
         
                         <?php }
@@ -238,7 +238,7 @@ while ($donnees19 = $req19->fetch()){
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
-                            <td> <?php echo '<b><kio style="color:green;">Oui<kio></b>'?></td>
+                            <td> <?php echo '<h5><span class="badge bg-success">Oui</span></h5>'?></td>
                            </tr>    
         
                         <?php

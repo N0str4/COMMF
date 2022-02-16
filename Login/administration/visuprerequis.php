@@ -71,8 +71,8 @@ FROM `Formation`");
  <tr>
   <th scope="row"><?php echo $donnees34['NumPrérequis']?></th>
   <td> <?php echo $donnees34['Nom_Prerequis']?></td>
-  <td> <?php if($donnees34['recyclage']==1){ echo '<k style="color:red"> <b>Oui</b></k>'; }else{ echo 'Non'; }?></td>
-  <td> <?php if($donnees34['validité']==4){ echo '<k style="color:red"> <b>4 ans</b></k>'; }elseif($donnees34['validité']==5){echo '<k style="color:red"> <b>5 ans</b></k>'; }else{echo 'A vie'; }?></td>
+  <td> <?php if($donnees34['recyclage']==1){ echo '<h5><span class="badge bg-danger">Oui</span></h5>'; }else{ echo '<h5><span class="badge bg-dark">Non</span></h5>'; }?></td>
+  <td> <?php if($donnees34['validité']==4){ echo '<h5><span class="badge bg-danger">4 ans</span></h5>'; }elseif($donnees34['validité']==5){echo '<h5><span class="badge bg-danger">5 ans</span></h5>'; }else{echo '<h5><span class="badge bg-dark">A vie</span></h5>'; }?></td>
   <?php if($donnees['admin']==1){?>
 
   <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees34['NumPrérequis'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
