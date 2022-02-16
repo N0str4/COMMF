@@ -70,6 +70,7 @@ catch(PDOException $e){
     </ol>
   </nav>
 </div><!-- End Page Title -->
+<? if(empty($sap)){?>
 <section class="section">
 <div class="card">
             <div class="card-body">
@@ -103,31 +104,97 @@ catch(PDOException $e){
 
             </div>
           </div>
-          <section class="section">
+ <?php }?>
+          <section class="section profile">
 
-<? if(!empty($sap)){?>
-      <div class="row">
-        <div class="col-lg-12">
+<? if(!empty($sap) && !empty($prenom)){?>
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">OCMF - Diplomes</h5>
+  <div class="row">
+    <div class="col-xl-4">
 
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Fonction</th>
-                    <th scope="col">Diplome</th>
-                    <th scope="col">Obtenu en</th>
-                  </tr>
-                </thead>
+      <div class="card">
+        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+        <img src="ArmeeDeTerre.png" alt="Profile" >
+
+          <h2><? echo $donnees2['nom'].' '.$donnees2['prenom']?></h2>
+          <h3><? echo $donnees2['Grade']?></h3>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-xl-8">
+
+      <div class="card">
+        <div class="card-body pt-3">
+          <!-- Bordered Tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered">
+
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Informations</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#diplome">Diplomes</button>
+            </li>
+
+          </ul>
+          <div class="tab-content pt-2">
+
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <h5 class="card-title">Informations</h5>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label ">Nom Complet</div>
+                <div class="col-lg-9 col-md-8"><? echo $donnees2['nom'].' '.$donnees2['prenom'];?></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Matricule SAP:</div>
+                <div class="col-lg-9 col-md-8"><?php echo $sap ?></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Fonction:</div>
+                <div class="col-lg-9 col-md-8"><?php echo $typeverif ?></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Catégorie</div>
+                <div class="col-lg-9 col-md-8"><? echo $donnees2['Catégorie'];?></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Grade</div>
+                <div class="col-lg-9 col-md-8"><? echo $donnees2['Grade'];?></div>
+              </div>
+
+
+
+
+
+            </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="diplome">
+
+            <div class="row">
+              <div class="col-lg-12">
+
+                <div class="card">
+                   <div class="card-body">
+                     <h5 class="card-title">OCMF - Diplomes</h5>
+
+                      <!-- Table with stripped rows -->
+                       <table class="table datatable">
+                        <thead>
+                         <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Diplome</th>
+                            <th scope="col">Obtenu en</th>
+                        </tr>
+                      </thead>
                 <tbody>
-
-<?php
+                <?php
 $req2 = $bdd->query("SELECT *
 FROM `formationliaison`
 INNER JOIN Formation
@@ -135,31 +202,52 @@ ON formationliaison.Num_Prerequis = Formation.NumPrérequis WHERE id_user LIKE '
 
 
 
-while ($donnees = $req2->fetch()){?>
+while ($donnees = $req2->fetch()){
+  
+  $k=$k+1;
+  ?>
+
 <tr>
   <th scope="row"><?php echo $k?></th>
-  <td> <?php echo $nom?></td>
-  <td> <?php echo $prenom?></td>
-  <td> <?php echo $typeverif?></td>
   <td> <?php echo $donnees['Nom_Prerequis']?></td>
   <td> <?php echo $donnees['dateobtention']?></td>
 
 </tr>
 <?php }?>
-<?php }?>
+<?php }elseif(!empty($sap) && empty($prenom)){?>
+<div class="card">
+  <div class="card-body pt-3">
 
-
-
-
-                </tbody>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Erreur</h4>
+                <p> Le Matricule SAP <b><?php echo $sap?> </b> n'existe pas.</p>
+                <hr>
+              </div>
+  </div>
+</div>
+  <?php }?>
+</tbody>
               </table>
               <!-- End Table with stripped rows -->
-
-            </div>
+              </div>
           </div>
 
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+            </div><!--FIN -->
+              </div><!-- End Bordered Tabs -->
+              </div>
+              </div>
     </section>
 
   </main><!-- End #main -->
