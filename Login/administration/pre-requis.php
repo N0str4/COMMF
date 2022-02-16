@@ -376,11 +376,11 @@ $now = date('Y-m-d H:i:s');
                     <td> <?php echo $donnees['nomformation']?></td>
                     <td> <?php echo $donnees['Nom_Prerequis']?></td>
                     <?php if ($KALAMOUR=='VALIDE'){?> 
-                        <td class="val"><?php echo '<b><k style="color:green">'.$KALAMOUR.'</k></b>'; 
+                        <td class="val"><?php echo '<h5><span class="badge bg-success">Valide</span></h5>'; 
                     }else {?> 
-                        <td class="nv"><?php echo '<k style="color:red"> <b>NON VALIDE</b></k>';}?>
+                        <td class="nv"><?php echo '<h5><span class="badge bg-danger">NonValide</span></h5>';}?>
                     </td>
-                    <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<k style="color:red"> <b>OUI</b></k>'; }else {?> <td class="nonrecy"><?php echo '<b>NON</b>';}?></td></tr>    
+                    <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<h5><span class="badge bg-warning text-dark">OUI</span></h5>'; }else {?> <td class="nonrecy"><?php echo '<h5><span class="badge bg-dark">Non</span></h5>';}?></td></tr>    
         <?php }
         if ($VerifCivOrMil==1 && $type_user==0){
                 ?> 
@@ -392,9 +392,9 @@ $now = date('Y-m-d H:i:s');
                 <td> <?php echo $donnees['nomformation']?></td>
                 <td> <?php echo $donnees['Nom_Prerequis']?></td>
                 <?php if ($KALAMOUR=='VALIDE'){?> <td class="val">
-                    <?php echo '<b><k style="color:green">'.$KALAMOUR.'</k></b>';  }else {?> <td class="nv"><?php echo '<k style="color:red"> <b>NON VALIDE</b></k>';}?>
+                    <?php echo '<h5><span class="badge bg-success">Valide</span></h5>';  }else {?> <td class="nv"><?php echo '<h5><span class="badge bg-danger">NonValide</span></h5>';}?>
                 </td>
-                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<k style="color:red"> <b>OUI</b></k>'; }else {?> <td class="nonrecy"><?php echo '<b>NON</b>';}?></td></tr>    
+                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<h5><span class="badge bg-warning text-dark">OUI</span></h5>'; }else {?> <td class="nonrecy"><?php echo '<h5><span class="badge bg-dark">Non</span></h5>';}?></td></tr>    
         <?php }if ($VerifCivOrMil==0 && $type_user==1){
                 ?> 
 
@@ -406,9 +406,9 @@ $now = date('Y-m-d H:i:s');
                 <td> <?php echo $donnees['nomformation']?></td>
                 <td> <?php echo $donnees['Nom_Prerequis']?></td>
                 <?php if ($KALAMOUR=='VALIDE'){?> <td class="val">
-                    <?php echo '<b><k style="color:green">'.$KALAMOUR.'</k></b>';  }else {?> <td class="nv"><?php echo '<k style="color:red"> <b>NON VALIDE</b></k>';}?>
+                    <?php echo '<h5><span class="badge bg-success">Valide</span></h5>';  }else {?> <td class="nv"><?php echo '<h5><span class="badge bg-danger">NonValide</span></h5>';}?>
                 </td>
-                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<k style="color:red"> <b>OUI</b></k>'; }else {?> <td class="nonrecy"><?php echo '<b>NON</b>';}?></td></tr>    
+                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<h5><span class="badge bg-warning text-dark">OUI</span></h5>'; }else {?> <td class="nonrecy"><?php echo '<h5><span class="badge bg-dark">Non</span></h5>';}?></td></tr>    
             <?php }
         }else{?> 
             <script type="text/javascript">
@@ -499,9 +499,9 @@ $KALAMOUR = 'NONVALIDE';
     <td> <?php echo $donnees80['nomformation']?></td>
     <td> <?php echo $donnees80['Nom_Prerequis']?></td>
     <?php if ($KALAMOUR=='VALIDE'){?> <td class="val">
-                    <?php echo '<b><k style="color:green">'.$KALAMOUR.'</k></b>';  }else {?> <td class="nv"><?php echo '<k style="color:red"> <b>NON VALIDE</b></k>';}?>
+                    <?php echo '<h5><span class="badge bg-success">Valide</span></h5>';  }else {?> <td class="nv"><?php echo '<h5><span class="badge bg-danger">NonValide</span></h5>';}?>
                 </td>
-                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<k style="color:red"><b> OUI</b></k>'; }else {?> <th class="nonrecy"><?php echo '<b>NON</b>';}?></td></tr>    
+                <?php if ($RECYCLAGE=='OUI'){?> <td class="okrecy"><?php echo '<h5><span class="badge bg-warning text-dark">OUI</span></h5>'; }else {?> <th class="nonrecy"><?php echo '<h5><span class="badge bg-dark">Non</span></h5>';}?></td></tr>    
 
                 <?php }
             }else{?> 
