@@ -73,7 +73,7 @@ $donnees4 = $req4->fetch();
 <td> <?php echo $donnees3['Nom_Prerequis']?></td>
 <td> <?php echo $donnees4['Nom_Prerequis']?></td>
 <?php if($donnees['admin']==1){?>
-<td><a class="btn btn-danger" href="fonctions/supprimerequivalence.php?id=<?php echo $donnees34['ID_FK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
+<td><a class="btn btn-danger" href="fonctions/supprimerequivalence.php?id=<?php echo $donnees34['ID_FK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-trash"></i></a></td><?php }?>
 
 </tr>
 

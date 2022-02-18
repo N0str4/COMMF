@@ -75,7 +75,7 @@ FROM `Formation`");
   <td> <?php if($donnees34['validité']==4){ echo '<h5><span class="badge bg-danger">4 ans</span></h5>'; }elseif($donnees34['validité']==5){echo '<h5><span class="badge bg-danger">5 ans</span></h5>'; }else{echo '<h5><span class="badge bg-dark">A vie</span></h5>'; }?></td>
   <?php if($donnees['admin']==1){?>
 
-  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees34['NumPrérequis'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
+  <td><a class="btn btn-danger" href="fonctions/supprimerprerequis.php?id=<?php echo $donnees34['NumPrérequis'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-trash"></i></a></td><?php }?>
 
 </tr>
 

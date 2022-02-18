@@ -69,7 +69,7 @@ $donnees2 = $req3->fetch()
   <td> <?php echo $donnees2['Nom_Prerequis']?></td>
   <td> <?php if($donnees34['type']==0){ echo '<h5><span class="badge bg-dark">Civil</span></h5>'; } elseif($donnees34['type']==1){ echo '<h5><span class="badge bg-dark">Millitaire</span></h5>';} elseif($donnees34['type']==3){ echo '<h5><span class="badge bg-dark">Commun</span></h5>';} elseif($donnees34['type']>3){ echo '<h5><span class="badge bg-danger">Autres</span></h5>';}?></td>
   <?php if($donnees['admin']==1){?>
-<td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees34['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-exclamation-octagon"></i>Supprimer</a></td><?php }?>
+<td><a class="btn btn-danger" href="fonctions/supprimerformation.php?id=<?php echo $donnees34['ID_PK'];?>&nom=<?php echo $donnees['lname']?>"><i class="bi bi-trash"></i></a></td><?php }?>
 </tr>
 
 
