@@ -32,7 +32,12 @@ if($donnees['admin']!=$admintype){
 
 }
 include 'config/menu.php';
-
+$nom = $donnees['lname'];
+$prenom = $donnees['fname'];
+$recyclage = $_POST['Recyclage'];
+$validite = $_POST['Validite'];
+$nomprerequis = $_POST['nomPrere'];
+$now = date('Y-m-d H:i:s');
 // CONTENUE PAGE : 
 ?>
 <main id="main" class="main">
@@ -54,6 +59,7 @@ include 'config/menu.php';
               </div>
 
 </div><!-- End Page Title -->
+<? if(empty($nomprerequis)){?>
 <section class="section">
 <div class="card">
             <div class="card-body">
@@ -107,13 +113,7 @@ include 'config/menu.php';
 
             </div>
           </div>
-<?php
-$nom = $donnees['lname'];
-$prenom = $donnees['fname'];
-$recyclage = $_POST['Recyclage'];
-$validite = $_POST['Validite'];
-$nomprerequis = $_POST['nomPrere'];
-$now = date('Y-m-d H:i:s');
+<?php }
 $ajout = "AJOUT";
 include 'config.php';
 
@@ -146,8 +146,7 @@ if(!empty($donnees)){
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 <?php 
-echo $recyclage;
-echo $validite;
+
 if ($validite!=1){
 try{
 

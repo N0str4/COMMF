@@ -34,7 +34,16 @@ if($donnees['admin']!=$admintype){
 
 }
 include 'config/menu.php';
-
+$nom = $donnees['lname'];
+$prenom = $donnees['fname'];
+$nomformation = $_POST['nomforma'];
+$selection = $_POST['selection'];
+$nomprerequis1 = $_POST['prerequis1'];
+$nomprerequis2 = $_POST['prerequis2'];
+$nomprerequis3 = $_POST['prerequis3'];
+$selectionCivMil1 = $_POST['selectionprerequis1'];
+$selectionCivMil2 = $_POST['selectionprerequis2'];
+$selectionCivMil3 = $_POST['selectionprerequis3'];
 ?>
 
 
@@ -50,6 +59,7 @@ include 'config/menu.php';
     </ol>
   </nav>
 </div><!-- End Page Title -->
+<? if(empty($nomformation)){?>
 <section class="section">
 <div class="card">
             <div class="card-body">
@@ -189,16 +199,7 @@ include 'config/menu.php';
 
 
 
-$nom = $donnees['lname'];
-$prenom = $donnees['fname'];
-$nomformation = $_POST['nomforma'];
-$selection = $_POST['selection'];
-$nomprerequis1 = $_POST['prerequis1'];
-$nomprerequis2 = $_POST['prerequis2'];
-$nomprerequis3 = $_POST['prerequis3'];
-$selectionCivMil1 = $_POST['selectionprerequis1'];
-$selectionCivMil2 = $_POST['selectionprerequis2'];
-$selectionCivMil3 = $_POST['selectionprerequis3'];
+}
 $k=1;
 $now = date('Y-m-d H:i:s');
 $ajout="AJOUT";

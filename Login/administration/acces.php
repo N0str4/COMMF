@@ -90,10 +90,10 @@ FROM `users`");
   <td> <?php echo $donnees2['password']?></td>
   <td> <?php if($donnees2['blocage']<6){ echo '<span class="badge bg-dark">Non</span>'; }else{ echo '<span class="badge bg-danger">Oui</span>';}?></td>
   <td> <?php if($donnees2['admin']==1){ echo '<span class="badge bg-success">Oui</span>'; }else{ echo '<span class="badge bg-dark">Non</span>';}?></td>
-  <td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-check-circle"></i>Promouvoir</a></td>
-  <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Rétrogradé</a></td><?php }?>
-  <?php if($donnees2['blocage']>5){?> <td><a class="btn btn-warning" href="fonctionuser/deblocageutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-triangle"></i>Débloqué</a></td><?php }?>
-  <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-exclamation-octagon"></i>Supprimé</a></td>
+  <?if($donnees2['admin']==0){?><td><a class="btn btn-success" href="fonctionuser/ajouteruseradmin.php?id=<?php echo $donnees2['user_id'];?>" title="Promouvoir"><i class="bi bi-arrow-up-circle"></i></a></td><?php }?>
+  <?php if($donnees2['admin']==1){?> <td><a class="btn btn-warning" href="fonctionuser/supprimeruseradmin.php?id=<?php echo $donnees2['user_id'];?>" title="Rétrogradé"><i class="bi bi-arrow-down-circle"></i></a></td><?php }?>
+  <?php if($donnees2['blocage']>5){?> <td><a class="btn btn-primary" href="fonctionuser/deblocageutilisateur.php?id=<?php echo $donnees2['user_id'];?>" title="Débloqué"><i class="bi bi-person-check-fill"></i></a></td><?php }?>
+  <td><a class="btn btn-danger" href="fonctionuser/supprimerutilisateur.php?id=<?php echo $donnees2['user_id'];?>" title="Supprimé"><i class="bi bi-trash"></i></a></td>
 </tr>
 
 <?php }
