@@ -9,6 +9,9 @@ include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
 include 'config/menu.php';
+
+$numprerequis1 = $_POST['Equi-Prerequis1'];
+$numprerequis2 = $_POST['Equi-Prerequis2'];
 ?>
 <main id="main" class="main">
 
@@ -22,6 +25,7 @@ include 'config/menu.php';
     </ol>
   </nav>
 </div><!-- End Page Title -->
+<? if(empty($numprerequis1)){?>
 <section class="section">
 <div class="card">
             <div class="card-body">
@@ -87,6 +91,7 @@ include 'config/menu.php';
           </div>
 
 <?php
+}
 $numprerequis1 = $_POST['Equi-Prerequis1'];
 $numprerequis2 = $_POST['Equi-Prerequis2'];
 $now = date('Y-m-d H:i:s');

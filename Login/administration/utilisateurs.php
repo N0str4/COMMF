@@ -46,6 +46,7 @@ include 'config/menu.php';
                     <th scope="col">Email</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Options</th>
+                    
        
 
 
@@ -64,7 +65,7 @@ FROM `users`");
   <td> <?php echo $donnees2['fname']?></td>
   <td> <?php echo $donnees2['email']?></td>
   <td> <?php echo $donnees2['grade']?></td>
-  <td><a class="btn btn-primary" href="changeprofiluser.php?id=<?php echo $donnees2['user_id'];?>"><i class="bi bi-info-circle-fill"></i> Information</a></td>
+  <td><a class="btn btn-primary" href="changeprofiluser.php?id=<?php echo $donnees2['user_id'];?>" title="Informations"><i class="bi bi-info-circle"></i></a></td>
 
 </tr>
 
