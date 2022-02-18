@@ -67,6 +67,7 @@ include 'config/menu.php';
 
                     <th scope="col">Date</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Etat</th>
 
                     
@@ -88,7 +89,8 @@ $k=0;
   <tr>
   <td> <?php echo $donnees['Date']?></td>
   <td> <?php echo $donnees['Email']?></td>
-  <td> <?php if($type==1){ echo '<k style=color:red> <b>'.$message.'</b> </k>';}elseif($type==0){ echo '<k style=color:green> <b>'.$message.'</b> </k>';}elseif($type==3){ echo '<k style=color:orange> <b>'.$message.'</b> </k>';}?></td>
+  <td> <?php if($type==1){ echo '<span class="badge bg-danger">Erreur</span>' ;}elseif($type==0){ echo '<span class="badge bg-success">Succès</span>';}elseif($type==3){ echo '<span class="badge bg-warning text-dark">Attention</span>';}?></td>
+  <td> <?php echo $message?></td>
 
 
 </tr>
