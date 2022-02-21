@@ -136,6 +136,11 @@
           <i class="bi bi-plus-circle-dotted"></i><span>Recensement des candidats</span>
         </a>
       </li>
+      <li>
+        <a href="millitaireactif.php">
+          <i class="bi bi-plus-circle-dotted"></i><span>Vivier des candidats</span>
+        </a>
+      </li>
     </ul>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
