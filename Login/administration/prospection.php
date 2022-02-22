@@ -78,6 +78,7 @@ include 'config/menu.php';
                   <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
+                    <th scope="col">SAP</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Régiment</th>
                     <th scope="col">Prospection Possible</th>
@@ -172,13 +173,37 @@ while ($donnees19 = $req19->fetch()){
                                  ///**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
                                 $boucle=$boucle+1;
                             }
-                            for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
+                            /*for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
                                 if ($tabequivalence[$bouclefor]==$tabnum[$k]){
                                     $tableaucheck[$checked]=1;
                                     $checked++;
                                    // echo '<br>YES<br>';
                                 }
-                            }
+                            }*/
+                            for ($bouclefor=0;$bouclefor<3;$bouclefor++){
+                              if ($tabequivalence[$bouclefor]==$tabnum[$k]){
+                                $tableaucheck[$checked]=1;
+                                $checked++;;
+                              }else {/*CCCCCC*/
+                                  $test2=$tabequivalence[$bouclefor];
+                                  $req78 = $bdd->query("SELECT liaison_id_prerequis
+                                  FROM Equivalence WHERE id_prerequis LIKE '$test2'");
+                                  $rows = $req78->fetchAll();
+                                  $boucle2=0;
+                               //   echo $bouclefor.' = '.$test2.'<br>';
+                                  foreach($rows as $row) {
+                    
+                                    $equivalence[$boucle2]= $row['liaison_id_prerequis'];
+                                   //  /**/ echo '<br/>Tab['.$boucle2.']='.$equivalence[$boucle2].'<br/>';
+                                    $boucle2=$boucle2+1;
+                                  }
+                                  for ($bouclefor2=0;$bouclefor2<3;$bouclefor2++){
+                                    if ($equivalence[$bouclefor2]==$tabnum[$k]){
+                                      $tableaucheck[$checked]=1;
+                                      $checked++;                                    }
+                                  }
+                              }
+                          }
 
                         }
 
@@ -213,6 +238,7 @@ while ($donnees19 = $req19->fetch()){
 
                             <td> <b><?php echo $donnees19['nom']?></b></td>
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
+                            <td> <b> <?php echo $donnees19['sap']?></b></td>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
                             <td> <?php echo '</h5><span class="badge bg-success">Oui</span></h5>'?></td>
@@ -238,6 +264,7 @@ while ($donnees19 = $req19->fetch()){
 
                             <td> <b><?php echo $donnees19['nom']?></b></td>
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
+                            <td> <b> <?php echo $donnees19['sap']?></b></td>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
                             <td> <?php echo '<h5><span class="badge bg-success">Oui</span></h5>'?></td>

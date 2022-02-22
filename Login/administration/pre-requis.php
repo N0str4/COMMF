@@ -304,28 +304,53 @@ $now = date('Y-m-d H:i:s');
     for ($k=0; $k<20; $k++){
         $boucle = 0;
         /* DEBUG MODE */
-        /////**/ echo '<br/>K= '.$k.'<br/>';
-        ///**/ echo 'TAB K egal : '.$tab[$k].'///';
+        /**/ echo '<br/>K= '.$k.'<br/>';
+        /**/ echo 'TAB K egal : '.$tab[$k].'///';
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        ///**/echo $numverif.'<br.>';
+        /**/echo $numverif.'<br.>';
         $req7 = $bdd->query("SELECT liaison_id_prerequis
         FROM Equivalence WHERE id_prerequis LIKE '$test'");
         $colonnes = $req7->fetchAll();
+        $boucle=0;
         foreach($colonnes as $colonne) {
 
             $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-             ///**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+           // /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
             $boucle=$boucle+1;
         }
-         ///**/ echo '<br/>---<br/>';
-        for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
-            if ($tabequivalence[$bouclefor]==$numverif){
-              $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
-              $RECYCLAGE = 'NON';
-            }
-        }
+      // /**/ echo '<br/>---<br/>';
+         for ($bouclefor=0;$bouclefor<3;$bouclefor++){
+          echo '<br>'.$bouclefor.'<br>';
+          if ($tabequivalence[$bouclefor]==$numverif){
+            $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
+            $RECYCLAGE = 'NON';
+          }else {/*CCCCCC*/
+            //echo '<br>'.$bouclefor.'<br>';
+              $test2=$tabequivalence[$bouclefor];
+              $req78 = $bdd->query("SELECT liaison_id_prerequis
+              FROM Equivalence WHERE id_prerequis LIKE '$test2'");
+              $rows = $req78->fetchAll();
+              $boucle2=0;
+             // echo $bouclefor.' =c '.$test2.'<br>';
+              foreach($rows as $row) {
+
+                $equivalence[$boucle2]= $row['liaison_id_prerequis'];
+               // /**/ echo '<br/>Tab['.$boucle2.']='.$equivalence[$boucle2].'<br/>';
+                $boucle2=$boucle2+1;
+              }
+              for ($cc=0;$cc<3;$cc++){
+                if ($equivalence[$cc]==$numverif){
+                  $KALAMOUR= 'VALIDE';
+                  $RECYCLAGE = 'NON';
+                }
+              }
+            //  echo '<br>'.$bouclefor.'<br>';
+          }
+        //  echo '<br>'.$bouclefor.'<br>';
+  
+      }
 
 
 
@@ -432,28 +457,48 @@ $KALAMOUR = 'NONVALIDE';
         for ($k=0; $k<20; $k++){
             $boucle = 0;
             /* DEBUG MODE */
-            ///**/ echo 'K= '.$k.'';
+          // /**/ echo 'K= '.$k.'';
             // echo 'TAB K egal : '.$tab[$k].'///';
             /* END DEBUG MODE */
             $numverif = $donnees80['num_prerequis'];
             $test=$tab[$k];
-            ///**/echo $numverif.'<br.>';
+           // /**/echo $numverif.'<br.>';
             $req7 = $bdd->query("SELECT liaison_id_prerequis
             FROM Equivalence WHERE id_prerequis LIKE '$test'");
             $colonnes = $req7->fetchAll();
+            $boucle=0;
             foreach($colonnes as $colonne) {
     
                 $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-                ///**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+               // /**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
                 $boucle=$boucle+1;
             }
-           ///**/ echo '<br/>---<br/>';
-            for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
-                if ($tabequivalence[$bouclefor]==$numverif){
-                  $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
-                  $RECYCLAGE = 'NON';
+           /**///echo '<br/>---<br/>';
+           for ($bouclefor=0;$bouclefor<3;$bouclefor++){
+            if ($tabequivalence[$bouclefor]==$numverif){
+              $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
+              $RECYCLAGE = 'NON';
+            }else {/*CCCCCC*/
+                $test2=$tabequivalence[$bouclefor];
+                $req78 = $bdd->query("SELECT liaison_id_prerequis
+                FROM Equivalence WHERE id_prerequis LIKE '$test2'");
+                $rows = $req78->fetchAll();
+                $boucle2=0;
+              //  echo $bouclefor.' = '.$test2.'<br>';
+                foreach($rows as $row) {
+  
+                  $equivalence[$boucle2]= $row['liaison_id_prerequis'];
+                 //  /**/ echo '<br/>Tab['.$boucle2.']='.$equivalence[$boucle2].'<br/>';
+                  $boucle2=$boucle2+1;
+                }
+                for ($bouclefor2=0;$bouclefor2<3;$bouclefor2++){
+                  if ($equivalence[$bouclefor2]==$numverif){
+                    $KALAMOUR= 'VALIDE';
+                    $RECYCLAGE = 'NON';
+                  }
                 }
             }
+        }
     
     
     
@@ -520,7 +565,7 @@ $KALAMOUR = 'NONVALIDE';
     <?php 
     $RECYCLAGE = 'NON';
     $KALAMOUR = 'NONVALIDE';
-    }?>  
+    }/*?>  
 
                 </tbody>
               </table>
@@ -547,7 +592,7 @@ $KALAMOUR = 'NONVALIDE';
   <script src="assets/js/main.js"></script>
 
 
-<?php 
+<?php*/ 
 try{
     //On insère les données reçues
     $requeteLOG = $bdd->prepare("
