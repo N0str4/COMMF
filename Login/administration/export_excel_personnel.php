@@ -18,7 +18,7 @@ if ($id ==1){
 
 }
 	header("Content-Type: application/xls");    
-	header("Content-Disposition: attachment; filename=Extraction_OCMF_Diplomes.xls");  
+	header("Content-Disposition: attachment; filename=$filename.xls");  
 	header("Pragma: no-cache"); 
 	header("Expires: 0");
 	
