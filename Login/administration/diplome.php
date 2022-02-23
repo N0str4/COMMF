@@ -182,6 +182,7 @@ catch(PDOException $e){
 
                 <div class="card">
                    <div class="card-body">
+                   <td><a class="btn btn-success" href="export_excel.php?id=<?echo $id_userSAP?>"><i class="bi bi-check-circle"></i>Extraire les diplomes</a></td>
                      <h5 class="card-title">OCMF - Diplomes</h5>
 
                       <!-- Table with stripped rows -->

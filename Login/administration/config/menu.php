@@ -196,6 +196,25 @@
       </li>
     </ul>
     <hr class="dropdown-divider">
+
+    <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#cc-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-download"></i><span>Extraction</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="cc-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="extraction.php">
+          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | Catégorie </span>
+        </a>
+      </li>
+      <li>
+        <a href="diplome.php">
+          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | SAP </span>
+        </a>
+      </li>
+    </ul>
+
+    <hr class="dropdown-divider">
     <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#charts-ful" data-bs-toggle="collapse" href="#">
       <i class="bi bi-person-lines-fill"></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
