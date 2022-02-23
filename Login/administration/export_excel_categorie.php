@@ -3,10 +3,23 @@ session_start();
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
   }
-$id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
+$now = date('Y-m-d H:i:s');
 
+$id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
+if ($id ==1){
+
+	$filename='Extraction OCMF MDR '.$now;
+
+}elseif($id==2){
+
+	$filename='Extraction OCMF SOFF '.$now;
+
+
+}elseif($id==3){
+	$filename='Extraction OCMF OFF '.$now;
+}
 	header("Content-Type: application/xls");    
-	header("Content-Disposition: attachment; filename=Extraction_OCMF_Diplomes.xls");  
+	header("Content-Disposition: attachment; filename=$filename.xls");  
 	header("Pragma: no-cache"); 
 	header("Expires: 0");
 	

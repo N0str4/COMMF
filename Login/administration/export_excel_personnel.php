@@ -7,7 +7,16 @@ if(!isset($_SESSION['unique_id'])){
 
 
 $id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
+if ($id ==1){
 
+	$filename='Extraction OCMF MIL '.$now;
+
+}elseif($id==2){
+
+	$filename='Extraction OCMF CIV '.$now;
+
+
+}
 	header("Content-Type: application/xls");    
 	header("Content-Disposition: attachment; filename=Extraction_OCMF_Diplomes.xls");  
 	header("Pragma: no-cache"); 
