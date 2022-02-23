@@ -142,6 +142,8 @@
         </a>
       </li>
     </ul>
+    <hr class="dropdown-divider">
+
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-calendar-check-fill"></i><span>Formation</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -203,13 +205,13 @@
     </a>
     <ul id="cc-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="extraction.php">
-          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | Catégorie </span>
+        <a href="extractioncategorie.php">
+          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | Groupé </span>
         </a>
       </li>
       <li>
         <a href="diplome.php">
-          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | SAP </span>
+          <i class="bi bi-plus-circle-dotted"></i><span> Extraction | Simple </span>
         </a>
       </li>
     </ul>

@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['unique_id'])){
+    header("location: login.php");
+  }
 $id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
 
 	header("Content-Type: application/xls");    
