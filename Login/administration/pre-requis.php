@@ -38,7 +38,7 @@ include 'config/menu.php';
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" name="sap" id="floatingName" placeholder="SAP" required>
-                    <label for="floatingName">SAP</label>
+                    <label for="floatingName">SAP / Numéro Alliance</label>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -92,6 +92,22 @@ if (!empty($sap)) {
 $req4 = $bdd->query("SELECT *
 FROM utils WHERE sap LIKE '$sap'");
 $donnees4 = $req4->fetch();
+$req69 = $bdd->query("SELECT COUNT(*) as total
+FROM utils WHERE sap LIKE '$sap'"); // VERIF SI SAP EXISTE SI MILLITAIRE
+$donnees69 = $req69->fetch();
+if($donnees69['total']==0){ // SI EXISTE PAS, ALORS ON REMPLACE LA RECHERCHE PAR LE NUMALLIANCE
+  $req4 = $bdd->query("SELECT *
+  FROM utils WHERE numalliance LIKE '$sap'");
+  $donnees4 = $req4->fetch(); // SI LA RECHERCHE SUR LE NUMALLIANCE FONCTIONNE, ALORS ON CHANGE LES VARIABLE PAR LES DONNES CIVIL
+$id_userSAP = $donnees4['id'];
+$nom = $donnees4['nom'];
+$prenom = $donnees4['prenom'];
+$type = $donnees4['type'];
+
+}
+
+
+
 $id_userSAP = $donnees4['id'];
 $type_user = $donnees4['type'];
 $now = date('Y-m-d H:i:s');?>
