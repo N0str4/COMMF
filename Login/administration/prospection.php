@@ -78,7 +78,7 @@ include 'config/menu.php';
                   <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
-                    <th scope="col">SAP</th>
+                    <th scope="col">SAP / Numéro Alliance</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Régiment</th>
                     <th scope="col">Prospection Possible</th>
@@ -238,7 +238,7 @@ while ($donnees19 = $req19->fetch()){
 
                             <td> <b><?php echo $donnees19['nom']?></b></td>
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
-                            <td> <b> <?php echo $donnees19['sap']?></b></td>
+                            <?if($donnees19['sap']!=0){?><td> <b> <?php echo $donnees19['sap']?></b></td><?}elseif($donnees19['sap']==0){?><td> <b> <?php echo $donnees19['numalliance']?></b></td><?}?>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
                             <td> <?php echo '</h5><span class="badge bg-success">Oui</span></h5>'?></td>
@@ -264,7 +264,7 @@ while ($donnees19 = $req19->fetch()){
 
                             <td> <b><?php echo $donnees19['nom']?></b></td>
                             <td> <b> <?php echo $donnees19['prenom']?></b></td>
-                            <td> <b> <?php echo $donnees19['sap']?></b></td>
+                            <?if($donnees19['sap']!=0){?><td> <b> <?php echo $donnees19['sap']?></b></td><?}elseif($donnees19['sap']==0){?><td> <b> <?php echo $donnees19['numalliance']?></b></td><?}?>
                             <td> <?php echo $donnees19['Grade']?></td>
                             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
                             <td> <?php echo '<h5><span class="badge bg-success">Oui</span></h5>'?></td>
