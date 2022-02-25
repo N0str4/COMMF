@@ -74,7 +74,7 @@ include 'config/menu.php';
                   <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
-                    <th scope="col">SAP</th>
+                    <th scope="col">SAP / Numéro Alliance</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Régiment</th>
                   </tr>
@@ -119,7 +119,8 @@ while ($donnees3 = $req3->fetch()){
 
     <td> <b><?php echo $donnees4['nom']?></b></td>
     <td> <b> <?php echo $donnees4['prenom']?></b></td>
-    <td> <b> <?php echo $donnees4['sap']?></b></td>
+    <?if($donnees4['sap']!=0){?><td> <b> <?php echo $donnees4['sap']?></b></td><?}elseif($donnees4['sap']==0){?><td> <b> <?php echo $donnees4['numalliance']?></b></td><?}?>
+
     <td> <?php echo $donnees4['Grade']?></td>
     <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
    </tr>    
@@ -155,7 +156,7 @@ $numPrerequis=$numPrerequisFormation;
 
             <td> <b><?php echo $donnees45['nom']?></b></td>
             <td> <b> <?php echo $donnees45['prenom']?></b></td>
-            <td> <b> <?php echo $donnees45['sap']?></b></td>
+            <?if($donnees4['sap']!=0){?><td> <b> <?php echo $donnees4['sap']?></b></td><?}elseif($donnees4['sap']==0){?><td> <b> <?php echo $donnees4['numalliance']?></b></td><?}?>
             <td> <?php echo $donnees45['Grade']?></td>
             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
             </tr>    
