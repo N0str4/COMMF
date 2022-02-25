@@ -22,6 +22,21 @@ $nom = $donnees2['nom'];
 $prenom = $donnees2['prenom'];
 $type = $donnees2['type'];
 
+
+$req69 = $bdd->query("SELECT COUNT(*) as total
+FROM utils WHERE sap LIKE '$sap'"); // VERIF SI SAP EXISTE SI MILLITAIRE
+$donnees69 = $req69->fetch();
+if($donnees69['total']==0){ // SI EXISTE PAS, ALORS ON REMPLACE LA RECHERCHE PAR LE NUMALLIANCE
+  $req = $bdd->query("SELECT *
+  FROM utils WHERE numalliance LIKE '$sap'");
+  $donnees2 = $req->fetch(); // SI LA RECHERCHE SUR LE NUMALLIANCE FONCTIONNE, ALORS ON CHANGE LES VARIABLE PAR LES DONNES CIVIL
+$id_userSAP = $donnees2['id'];
+$nom = $donnees2['nom'];
+$prenom = $donnees2['prenom'];
+$type = $donnees2['type'];
+
+}
+
 if ($type == 1){
 
     $typeverif='Millitaire';
@@ -81,7 +96,7 @@ catch(PDOException $e){
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" name="sap" id="floatingName" placeholder="SAP" required>
-                    <label for="floatingName">SAP</label>
+                    <label for="floatingName">SAP / Numéro Alliance</label>
                   </div>
                 </div>
                 <div class="col-md-6">
