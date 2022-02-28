@@ -73,8 +73,8 @@ include 'config/menu.php';
               </div>
                     </div>
                     <div class="modal-footer">
-                      <a class="btn btn-primary" href="export_excel_categorie.php?id=2"><i class="bi bi-person-x"></i><b>| Civil</b></a>
-                      <a class="btn btn-success" href="export_excel_categorie.php?id=1"><i class="bi bi-person-plus"></i><b>| Millitaire</b></a>
+                      <a class="btn btn-primary" href="export_excel_personnel.php?id=2"><i class="bi bi-person-x"></i><b>| Civil</b></a>
+                      <a class="btn btn-success" href="export_excel_personnel.php?id=1"><i class="bi bi-person-plus"></i><b>| Millitaire</b></a>
                       <hr>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
 

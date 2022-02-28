@@ -9,6 +9,7 @@ $bdd = new PDO('mysql:host=vikatch505.mysql.db;dbname=vikatch505;charset=utf8', 
 include 'config/config.php';
 $req = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
 $donnees = $req->fetch();
+$email = $donnees['email'];
 // DECLARATION VARIABLE
 $regiment = $_POST['regiment'];
 $formation = $_POST['formation'];
@@ -88,6 +89,7 @@ include 'config/menu.php';
 
 <?php }
 
+
 // COUNT DU NOMBRE DE PREREQUIS DE LA FORMATION
 $req180 = $bdd->query("SELECT COUNT(*) AS total
 FROM Formationdetails WHERE (nomformation LIKE '$formation' AND `type` LIKE '1') OR (nomformation LIKE '$formation' AND `type` LIKE '3') ");
@@ -117,6 +119,25 @@ $req19 = $bdd->query("SELECT *
 FROM utils");
 $utilisateurnum = 0;
 if (!empty($formation)){
+  try{
+    $etat = "Succès : Prospection réaliser pour  ".$formation;
+    $now = date('Y-m-d H:i:s');
+    $Erreur =0;
+
+    $req = $bdd->prepare("
+    INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+    VALUES(:email, :date, :etat, :ip)");
+    $req->bindParam(':email', $email);
+    $req->bindParam(':date', $now);
+    $req->bindParam(':etat', $etat);
+    $req->bindParam(':ip', $Erreur);
+    $req->execute();
+    }
+      
+    catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+    }
+
 while ($donnees19 = $req19->fetch()){
     $id_userSAP = $donnees19['id'];
     //echo '<br>'.$id_userSAP.'<br>';

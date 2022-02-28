@@ -7,6 +7,8 @@ if(!isset($_SESSION['unique_id'])){
 
 
 $id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
+$now = date('Y-m-d H:i:s');
+
 if ($id ==1){
 
 	$filename='Extraction OCMF MIL '.$now;
@@ -266,4 +268,26 @@ $output .="
 		
 	}	
 	}	
+	$req6 = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
+	$donnees6 = $req6->fetch();
+	$email = $donnees6['email'];
+	try{
+		$etat = "Succès : ".$filename;
+		$now = date('Y-m-d H:i:s');
+		$Erreur =0;
+	
+		$req = $bdd->prepare("
+		INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+		VALUES(:email, :date, :etat, :ip)");
+		$req->bindParam(':email', $email);
+		$req->bindParam(':date', $now);
+		$req->bindParam(':etat', $etat);
+		$req->bindParam(':ip', $Erreur);
+		$req->execute();
+		}
+		  
+		catch(PDOException $e){
+		echo "Erreur : " . $e->getMessage();
+		}	
+
 ?>

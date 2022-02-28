@@ -5,8 +5,11 @@ if(!isset($_SESSION['unique_id'])){
   }
 $id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
 
+$filename = "Extraction OCMF Simple Diplome";
+
+
 	header("Content-Type: application/xls");    
-	header("Content-Disposition: attachment; filename=Extraction_OCMF_Diplomes.xls");  
+	header("Content-Disposition: attachment; filename=$filename.xls");  
 	header("Pragma: no-cache"); 
 	header("Expires: 0");
  $conn = mysqli_connect("vikatch505.mysql.db", "vikatch505", "Billitlebg59", "vikatch505");
@@ -34,8 +37,7 @@ $id = (!empty($_GET['id']))? intval($_GET['id']) : 0;
 			<tbody>
 	";
 	$query = $conn->query("SELECT * FROM `utils` WHERE id LIKE '$id'") or die(mysqli_errno());
-	while($fetch = $query->fetch_array()){
-		
+	while($fetch2 = $query->fetch_array()){
 	$output .= "
 				<tr>
 					<td>".$fetch['Grade']."</td>
@@ -119,5 +121,26 @@ $output .="
 			";
 	echo $output;
 	
+	$req6 = $bdd->query("SELECT * FROM `users` WHERE `user_id` LIKE '{$_SESSION['id']}'");
+	$donnees6 = $req6->fetch();
+	$email = $donnees6['email'];
+	try{
+		$etat = "Succès : Extraction OCMF Diplomes ";
+		$now = date('Y-m-d H:i:s');
+		$Erreur =0;
 	
+		$req = $bdd->prepare("
+		INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+		VALUES(:email, :date, :etat, :ip)");
+		$req->bindParam(':email', $email);
+		$req->bindParam(':date', $now);
+		$req->bindParam(':etat', $etat);
+		$req->bindParam(':ip', $Erreur);
+		$req->execute();
+		}
+		  
+		catch(PDOException $e){
+		echo "Erreur : " . $e->getMessage();
+		}	
+
 ?>

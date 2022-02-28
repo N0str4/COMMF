@@ -100,6 +100,25 @@ if (!empty($formation)){?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
 <?php 
+  try{
+    $etat = "Succès : Recensement réaliser pour ".$formation;
+    $now = date('Y-m-d H:i:s');
+    $Erreur =0;
+    $email = $donnees['email'];
+    $req = $bdd->prepare("
+    INSERT INTO logsconnexionocmf(Email, Date, Etat, IP)
+    VALUES(:email, :date, :etat, :ip)");
+    $req->bindParam(':email', $email);
+    $req->bindParam(':date', $now);
+    $req->bindParam(':etat', $etat);
+    $req->bindParam(':ip', $Erreur);
+    $req->execute();
+    }
+      
+    catch(PDOException $e){
+    echo "Erreur : " . $e->getMessage();
+    }
+
 $k =1;
 while ($donnees3 = $req3->fetch()){
     $iduser = $donnees3['id_user'];
@@ -156,7 +175,7 @@ $numPrerequis=$numPrerequisFormation;
 
             <td> <b><?php echo $donnees45['nom']?></b></td>
             <td> <b> <?php echo $donnees45['prenom']?></b></td>
-            <?if($donnees4['sap']!=0){?><td> <b> <?php echo $donnees4['sap']?></b></td><?}elseif($donnees4['sap']==0){?><td> <b> <?php echo $donnees4['numalliance']?></b></td><?}?>
+            <?if($donnees45['sap']!=0){?><td> <b> <?php echo $donnees45['sap']?></b></td><?}elseif($donnees45['sap']==0){?><td> <b> <?php echo $donnees45['numalliance']?></b></td><?}?>
             <td> <?php echo $donnees45['Grade']?></td>
             <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
             </tr>    
