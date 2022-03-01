@@ -59,7 +59,19 @@ include 'config/menu.php';
 
             </div>
           </div>
+
+
+    
                     </section>
+
+
+<? 
+
+$formation = $_POST['formation'];
+
+
+if (!empty($formation)){
+?>
                     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -83,7 +95,6 @@ include 'config/menu.php';
 
 <?php 
 
-$formation = $_POST['formation'];
 
 // RECUPERATION DU NUMERO DE PREREQUIS
 $req2 = $bdd->query("SELECT *
@@ -189,6 +200,7 @@ $numPrerequis=$numPrerequisFormation;
         }
     }
 
+}
 }
    /* $boucle=0;
     foreach($colonnes as $colonne) {
