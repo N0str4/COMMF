@@ -18,8 +18,13 @@ $filename = "Extraction OCMF Simple Diplome";
 	 die("Error: Failed to connect to database!");
  }
 
+
+
+
+
 	require_once 'config/config.php';
-	
+
+
 	$output = "";
 	
 	$output .="
@@ -33,20 +38,29 @@ $filename = "Extraction OCMF Simple Diplome";
 					<th style ='background-color: #0066cc;color: #fff;'>Matricule SAP</th>
 					<th style ='background-color: #0066cc;color: #fff;'>Identifiant Defense</th>
 					<th style ='background-color: #0066cc;color: #fff;'>Matricule Legion</th>
+					<th style ='background-color: #0066cc;color: #fff;'>Numero Alliance</th>
 				</tr>
 			<tbody>
 	";
 	$query = $conn->query("SELECT * FROM `utils` WHERE id LIKE '$id'") or die(mysqli_errno());
 	while($fetch2 = $query->fetch_array()){
+
+		if($fetch2['sap']!=0){
+			$coucou = $fetch2['sap'];
+		}elseif($fetch2['sap']==0){
+			$coucou ='';
+
+		}
 	$output .= "
 				<tr>
-					<td>".$fetch['Grade']."</td>
-					<td>".$fetch['nom']."</td>
-					<td>".$fetch['prenom']."</td>
+					<td>".$fetch2['Grade']."</td>
+					<td>".$fetch2['nom']."</td>
+					<td>".$fetch2['prenom']."</td>
 					<td></td>
-					<td>".$fetch['sap']."</td>
-					<td>".$fetch['matriculedefense']."</td>
-					<td>".$fetch['saplegion']."</td>
+					<td>".$coucou."</td>
+					<td>".$fetch2['matriculedefense']."</td>
+					<td>".$fetch2['saplegion']."</td>
+					<td>".$fetch2['numalliance']."</td>
 				</tr>
 	";
 	}
@@ -125,7 +139,7 @@ $output .="
 	$donnees6 = $req6->fetch();
 	$email = $donnees6['email'];
 	try{
-		$etat = "Succès : Extraction OCMF Diplomes ";
+		$etat = "Succès : Extraction OCMF Diplome ";
 		$now = date('Y-m-d H:i:s');
 		$Erreur =0;
 	

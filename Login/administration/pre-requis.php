@@ -320,12 +320,12 @@ $now = date('Y-m-d H:i:s');
     for ($k=0; $k<20; $k++){
         $boucle = 0;
         /* DEBUG MODE */
-        /**/ echo '<br/>K= '.$k.'<br/>';
-        /**/ echo 'TAB K egal : '.$tab[$k].'///';
+        ///**/ echo '<br/>K= '.$k.'<br/>';
+        ///**/ echo 'TAB K egal : '.$tab[$k].'///';
         /* END DEBUG MODE */
         $numverif = $donnees['num_prerequis'];
         $test=$tab[$k];
-        /**/echo $numverif.'<br.>';
+        ///**/echo $numverif.'<br.>';
         $req7 = $bdd->query("SELECT liaison_id_prerequis
         FROM Equivalence WHERE id_prerequis LIKE '$test'");
         $colonnes = $req7->fetchAll();
@@ -338,7 +338,7 @@ $now = date('Y-m-d H:i:s');
         }
       // /**/ echo '<br/>---<br/>';
          for ($bouclefor=0;$bouclefor<3;$bouclefor++){
-          echo '<br>'.$bouclefor.'<br>';
+          //echo '<br>'.$bouclefor.'<br>';
           if ($tabequivalence[$bouclefor]==$numverif){
             $KALAMOUR= verificationEquivalenceOui($test, $tabequivalence,$bouclefor);
             $RECYCLAGE = 'NON';

@@ -27,6 +27,17 @@ try{
     echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
   }
 
+  try{
+    //On insère les données reçues
+    $delete = $bdd->prepare("
+    DELETE FROM formationliaison WHERE `Num_Prerequis` = :id1");
+    $delete->bindParam(':id1',$id);
+    $delete->execute();
+
+  }
+  catch(PDOException $e){
+    echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+  }
 
 try{
     //On insère les données reçues

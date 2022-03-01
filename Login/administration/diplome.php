@@ -164,11 +164,19 @@ catch(PDOException $e){
                 <div class="col-lg-9 col-md-8"><? echo $donnees2['nom'].' '.$donnees2['prenom'];?></div>
               </div>
 
+              <? if($donnees2['type']==1){?>
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Matricule SAP:</div>
                 <div class="col-lg-9 col-md-8"><?php echo $sap ?></div>
+              </div><?
+            }elseif($donnees2['type']==0){?>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Numéro Alliance:</div>
+                <div class="col-lg-9 col-md-8"><?php echo $sap ?></div>
               </div>
 
+
+<? }?>
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Fonction:</div>
                 <div class="col-lg-9 col-md-8"><?php echo $typeverif ?></div>
