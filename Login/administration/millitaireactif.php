@@ -65,7 +65,7 @@ while($donnees2 = $req2->fetch()){
     <td> <b><?php echo $donnees2['nom']?></b></td>
     <td> <b> <?php echo $donnees2['prenom']?></b></td>
     <? if($donnees2['type']==1){?><td> <?php echo $donnees2['sap']?></td><?}elseif($donnees2['type']==0){ ?><td> <?php echo $donnees2['numalliance']?></td><?}?>
-    <td><?php if($donnees2['type']==1){ echo '<h5><span class="badge bg-success">Millitaire</span></h5>';}elseif($donnees2['type']==0){ echo '<h5><span class="badge bg-dark">Civil</span></h5>';}?> </td>
+    <td><?php if($donnees2['type']==1){ echo '<h5><span class="badge bg-success">Militaire</span></h5>';}elseif($donnees2['type']==0){ echo '<h5><span class="badge bg-dark">Civil</span></h5>';}?> </td>
     <td> <?php echo $donnees2['Grade']?></td>
     <td> <b> <?php echo $donnees2['Catégorie']?></b></td>
     <td> <?php echo $donneesVerifReg['NomRegiment']?></td>

@@ -39,8 +39,8 @@ if($donnees['admin']!=1){
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
               <h4 class="alert-heading"><b> Attention</b></h4>
                 <i class="bi bi-exclamation-triangle me-1"></i>
-                <b>Supprimer un pré-requis</b>, reviens à supprimé également la <b>Formation</b> dans lequel le pre-requis est <b>affilié.</b><br>
-                Celà supprime également <b>l'affectation du diplome</b>, pour les candidats le possédant.
+                <b>Supprimer un pré-requis</b>, reviens à supprimer également la <b>Formation</b> dans lequel le pre-requis est <b>affilié.</b><br>
+                Cela supprime également <b>l'affectation du diplôme</b>, pour les candidats le possédant.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               <?php }?>

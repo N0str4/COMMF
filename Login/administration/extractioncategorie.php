@@ -41,9 +41,9 @@ include 'config/menu.php';
           <section class="section">
           <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading"><b> Information Extraction </b></h4>
-                <p>Une Extraction vous permet d'extraire un ensemble de données critique sur un personnel de l'Armée de Terre.<br>
-                Une Extraction Groupé est une ensemble d'extraction, rassemblé en un.
-                <br> Celle-ci comprend, leurs diplomes, leurs dates d'obtentions, leurs divers matricules (SAP, Alliance, Defense..), leurs grades, régiments et dates d'affectation</p>
+                <p>Une extraction vous permet d'extraire un ensemble de données critique sur un personnel de l'armée de Terre.
+<br>Une extraction Groupée est une ensembles d'extraction, rassemblé en un. 
+<br>Celle-ci comprend, leurs diplômes, leurs dates d'obtentions, leurs divers matricules (SAP, Alliance, Defense...), leurs grades, régiments et dates d'affectation.</p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
       <div class="row">
@@ -52,7 +52,7 @@ include 'config/menu.php';
           <div class="card">
             <div class="card-body">
             <h5 class="card-title">Extraction de Personnel</h5>
-              <p>Extraction réaliser en fonction de la Fonction du personnel de l'armée de terre. <b>(Civil/Millitaire)</b></p>
+              <p>Extraction réalisée en fonction de la fonction du personnel de l'armée de terre.<b>(Civil/Millitaire)</b></p>
 
               <!-- Vertically centered Modal -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
@@ -68,7 +68,7 @@ include 'config/menu.php';
                     <div class="modal-body">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading">Attention</h4>
-                <p> Le fichier Excel ne dois être sous <b>aucun prétexte</b> communiqué aux personnes externe de l'armée de terre.</p>
+                <p> Le fichier Excel ne doit être sous <b>aucun prétexte</b> communiqué aux personnes externes de l'armée de terre.</p>
                 <hr>
               </div>
                     </div>
@@ -92,7 +92,7 @@ include 'config/menu.php';
           <div class="card">
             <div class="card-body">
             <h5 class="card-title">Extraction de Catégorie</h5>
-            <p>Extraction réaliser en fonction de la Catégorie du personnel millitaire. <b>(MDR/SOFF/OFF)</b></p>
+            <p>Extraction réalisée en fonction de la catégorie du personnel militaire. </b></p>
 
               <!-- Vertically centered Modal -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cc">
@@ -108,7 +108,7 @@ include 'config/menu.php';
                     <div class="modal-body">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading">Attention</h4>
-                <p> Le fichier Excel ne dois être sous <b>aucun prétexte</b> communiqué aux personnes externe de l'armée de terre.</p>
+                <p> Le fichier Excel ne doit être sous <b>aucun prétexte</b> communiqué aux personnes externes de l'armée de terre.</p>
                 <hr>
               </div>
                     </div>

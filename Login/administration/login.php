@@ -21,15 +21,15 @@
 </div>
         <div class="field input">
           <label>Adresse email</label>
-          <input type="text" name="email" placeholder="Entrez votre email @intradef.gouf.fr" required>
+          <input type="text" name="email" placeholder="@intradef.gouv.fr" required>
         </div>
         <div class="field input">
           <label>Mot De Passe</label>
-          <input type="password" name="password" placeholder="Entrez votre Mot de Passe" required>
+          <input type="password" name="password" placeholder="Mot de Passe" required>
           <i class="fas fa-eye"></i>
         </div>
         <div class="field button">
-          <input type="submit" name="submit" value="Continuez vers l'OCMF ">
+          <input type="submit" name="submit" value="Connexion">
                 </div>
       </form>
       <div class="link">Referez vous au <a  onClick="javascript:window.open('mailto:david.ryssen@intradef.gouv.fr', 'my-window');event.preventDefault()"
