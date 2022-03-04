@@ -138,8 +138,43 @@ if (!empty($formation)){
     echo "Erreur : " . $e->getMessage();
     }
 
+  }
+//////////    RECYCLAGE  VERIFICATION SI LES STAGES ONT BESOIN D'UN RECYCLAGE ////// 
+$valeurrecyclage=1;
+$req67 = $bdd->query("SELECT *
+FROM Formation WHERE recyclage LIKE '$valeurrecyclage'");
+$entites= $req67->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($entites as $entite) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testRecyclage[$i] = $entite['NumPrérequis'];
+    /* DEBUG MODE */
+    //echo 'testRecyclage['.$i.']='.$testRecyclage[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
+
+}
+
+
+
+    
 while ($donnees19 = $req19->fetch()){
+  $checked=0;
+  $valeurPourVerifierSiDiplomeOKEtEquiOk=0;
+  $possedeDejaLaFormation=0;
     $id_userSAP = $donnees19['id'];
+    echo $donnees19['prenom'];
     //echo '<br>'.$id_userSAP.'<br>';
                 $req5 = $bdd->query("SELECT *
                 FROM formationliaison WHERE id_user LIKE '$id_userSAP'");
@@ -154,7 +189,17 @@ while ($donnees19 = $req19->fetch()){
                          // /**/ echo '<br />';
                         /* END DEBUG MODE */
                         $tabdate[$i] = $row['dateobtention'];
-                        $tab[$i] = $row['Num_Prerequis'];
+                        $tab[$i] = $row['Num_Prerequis']; // ON STOCKE DANS UN TABLEAU LA VALEUR DU PREREQUIS
+                        $numprerequisboucle=$tab[$i]; // ON LE MET DANS UNE VAR POUR LA REQ SQL
+                        $req50 = $bdd->query("SELECT *
+                        FROM Formation WHERE NumPrérequis LIKE '$numprerequisboucle'");
+                        $output2 = $req50->fetch(); // ON RECUPERE LE NOM DU PREREQUIS
+                        $stockageNomVar = $output2['Nom_Prerequis']; // ON STOCKE LE NOM DU PREREQUIS DANS UNE VAR
+
+                        if($stockageNomVar==$formation){
+
+                          $possedeDejaLaFormation=1;
+                        }
                         /* DEBUG MODE */
                           ///**/ echo 'Tab['.$i.']='.$tab[$i];
                           // /**/ echo '<br/>';
@@ -167,21 +212,50 @@ while ($donnees19 = $req19->fetch()){
                         /* END DEBUG MODE */
 
                 }
-              //  echo '<br>UTILISATION : '.$utilisateurnum;
-              //  echo '<br>'.$count180['total'];
-                $checked=0;
+              if($possedeDejaLaFormation==0){
+               echo '<br>UTILISATION : '.$utilisateurnum;
+              echo '<br>'.$count180['total'];
+                              $valide=0;
                 for ($k=0;$k<20;$k++){// FORMA
                     for($p=0;$p<20;$p++){// UTIL
                         
-                    ///    echo '<br>PREREQUIS FORMA'.$tabnum[$k];
-                    ///    echo '<br> PREREQUIS UTIL'.$tab[$p];
+                        echo '<br>PREREQUIS FORMA'.$tabnum[$k];
+                        echo '<br> PREREQUIS UTIL'.$tab[$p];
+
+
                         if($tabnum[$k]!=NULL){// SI PLUS DE PREREQUIS DE FORMA A CHECK
                             if($tabnum[$k]==$tab[$p]){
-                                $tableaucheck[$checked]=1;
-                                $checked++;
-                               // echo '<br>YES<br>';
+                                echo '<br>YES1<br>';
+                                $date1 = $tabdate[$p];
+                                $diff  = abs($now - $date1);
+                                echo '<br>DIFFERENCE : '.$diff;  
+                                $prerequis=$tab[$p];
+                                $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                 if($TESTOK=='RECYCLAGE'){
+                                     $RECYCLAGE='OUI';
+                                     echo 'RECYKLAGE';
+                                     echo '<br>CHEKED = '.$checked;
+                                     $tableaucheck[$checked]=0;
+                                     echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                          $checked++;
+                                    }elseif ($TESTOK=='N/R'){
+                                      echo '<br>CHEKED = '.$checked;
+                                      $tableaucheck[$checked]=1;
+                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                      $valide=1;
+                                      $checked++;
+                                      $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                      $i = $i++;
+                                      
+                                    }
 
                             }
+    
+
+
+
+
+
                             // RECUPERATION DES LIAISONS LIEE AU PREREQUIS UTIL
                             $numPrerequis=$tab[$p];
                             $req70 = $bdd->query("SELECT liaison_id_prerequis
@@ -191,62 +265,173 @@ while ($donnees19 = $req19->fetch()){
                             foreach($colonnes as $colonne) {
                     
                                 $tabequivalence[$boucle]= $colonne['liaison_id_prerequis'];
-                                 ///**/ echo '<br/>Tab['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
+                                 /**/ echo '<br/>Tab1['.$boucle.']='.$tabequivalence[$boucle].'<br/>';
                                 $boucle=$boucle+1;
                             }
                             /*for ($bouclefor=0;$bouclefor<$boucle;$bouclefor++){
                                 if ($tabequivalence[$bouclefor]==$tabnum[$k]){
                                     $tableaucheck[$checked]=1;
                                     $checked++;
-                                   // echo '<br>YES<br>';
+                                   echo '<br>YES<br>';
                                 }
                             }*/
                             for ($bouclefor=0;$bouclefor<3;$bouclefor++){
+                              echo '<br>$tabequivalence[$bouclefor]: '.$tabequivalence[$bouclefor];
+                              echo '<br> $tabnum[$k] : '.$tabnum[$k];
                               if ($tabequivalence[$bouclefor]==$tabnum[$k]){
-                                $tableaucheck[$checked]=1;
-                                $checked++;;
+                                  echo '<br>-------<br>';
+                                for ($zzz=0;$zzz<20;$zzz++){
+                                  echo '<br> TABLEAU '.$tableauVerif[$zzz];
+                                  if($tabequivalence[$bouclefor]==$tableauVerif[$zzz]){
+                                    echo '<br>EQUIVALENCE DEJA VERIFIER POUR LE PREREQUIS';
+                                    $oups=1;
+                                    $zzz=22;
+
+                                  }elseif($tabequivalence[$bouclefor]!=$tableauVerif[$k]){
+                                      $oups = 0;
+ 
+                                  }
+                                }
+                                if($oups==0){
+                                  echo '<br>YES2';
+                                
+                                  $date1 = $tabdate[$p];
+                                  $diff  = abs($now - $date1);
+                                  echo '<br>DIFFERENCE : '.$diff; 
+                                  echo '<br>DATE : '.$date1; 
+                                  $prerequis=$tab[$p];
+                                  echo '<br>CHEKED = '.$checked;
+                                  $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                  if($TESTOK=='RECYCLAGE'){
+                                      $RECYCLAGE='OUI';
+                                      echo 'RECYKLAGE';
+                                      echo '<br>CHEKED = '.$checked;
+                                      $tableaucheck[$checked]=0;
+                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                           $checked++;
+                                     }elseif ($TESTOK=='N/R'){
+                                      echo '<br>CHEKED = '.$checked;
+                                      $tableaucheck[$checked]=1;
+                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                           $checked++;
+                                      $valide=1;
+                                      $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                      $i = $i++;
+                                     }
+                                }
+
                               }else {/*CCCCCC*/
                                   $test2=$tabequivalence[$bouclefor];
                                   $req78 = $bdd->query("SELECT liaison_id_prerequis
                                   FROM Equivalence WHERE id_prerequis LIKE '$test2'");
                                   $rows = $req78->fetchAll();
                                   $boucle2=0;
-                               //   echo $bouclefor.' = '.$test2.'<br>';
+                                 echo '<br> Equivalence: '.$bouclefor.' = '.$test2.'<br>';
                                   foreach($rows as $row) {
                     
                                     $equivalence[$boucle2]= $row['liaison_id_prerequis'];
-                                   //  /**/ echo '<br/>Tab['.$boucle2.']='.$equivalence[$boucle2].'<br/>';
+                                     /**/ echo '<br/>Tab2['.$boucle2.']='.$equivalence[$boucle2].'<br/>';
                                     $boucle2=$boucle2+1;
                                   }
                                   for ($bouclefor2=0;$bouclefor2<3;$bouclefor2++){
+                                    echo '<br>$equivalence[$bouclefor2] = '.$equivalence[$bouclefor2];
+                                    echo '<br>$tabnum[$k] = '.$tabnum[$k];
+
+
+
                                     if ($equivalence[$bouclefor2]==$tabnum[$k]){
-                                      $tableaucheck[$checked]=1;
-                                      $checked++;                                    }
+                                     
+                                            for ($zzz=0;$zzz<20;$zzz++){
+  
+                                              if($tabequivalence[$bouclefor]==$tableaucheck[$zzz]){
+                                                echo '<br>EQUIVALENCE DEJA VERIFIER POUR LE PREREQUIS';
+                                                $oups=1;
+                                                $k=22;
+  
+                                              }elseif($tabequivalence[$bouclefor]!=$tableaucheck[$zzz]){
+                                            $RECYCLAGE='NON';
+                                            $oups = 0;
+                                              }
+                                            }
+                                            if($oups==0){
+                                              echo '<br>YES3';
+                                            
+                                              $date1 = $tabdate[$p];
+                                              $diff  = abs($now - $date1);
+                                              echo '<br>DIFFERENCE : '.$diff; 
+                                              echo '<br>DATE : '.$date1; 
+                                              $prerequis=$tab[$p];
+                                              echo '<br>CHEKED = '.$checked;
+                                              $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                              if($TESTOK=='RECYCLAGE'){
+                                                  $RECYCLAGE='OUI';
+                                                  echo 'RECYKLAGE';
+                                                  echo '<br>CHEKED = '.$checked;
+                                                  $tableaucheck[$checked]=0;
+                                                  echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                                       $checked++;
+                                                 }elseif ($TESTOK=='N/R'){
+                                                  echo '<br>CHEKED = '.$checked;
+                                                  $tableaucheck[$checked]=1;
+                                                  echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                                       $checked++;
+                                                  $valide=1;
+                                                  $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                                  $i = $i++;
+                                                 }
+                                            }
+                                                  
+  
+                                      }elseif($equivalence[$bouclefor2]!=$tabnum[$k]) {
+                                      echo '<br>NOP';
+                                    }
                                   }
+
+
                               }
+                              
                           }
 
                         }
+                        for($i=0;$i<40;$i++){
+                          unset($equivalence[$i]);
+                          unset($tabequivalence[$i]);
+                          
+                      }
 
                     }
+                    if($valide!=1) {
+                      echo '<br><b>NON VALIDE</b>';
+                      $tableaucheck[$checked]=0;
+                      $checked++;  
+    
+                    }
+
 
                 }
-                for ($test=0;$test<$count180RESULT;$test++){
-                    //echo '['.$test.']'.$tableaucheck[$test].'<br>';
+                
+                for ($test=0;$test<10;$test++){
+                    echo '['.$test.']'.$tableaucheck[$test].'<br>';
  
                 }
-               for( $i = 1; $i < $count180RESULT; $i++ )
+                $boucleexit=true;
+                $boucleverif = 3;
+                $verifI=1;
+                for( $i = 0; $i < $count180RESULT; $i++ )
                 {
-                    // Si différent.
-                    if($tableaucheck[ 0 ]!=NULL){
+                  if ($tableaucheck[$i]!=$verifI){
+                    $isEqual = 'false2';
+                    $boucleverif=0;
+                    $i = 100;
+                  }elseif ($tableaucheck[$i]==$verifI){
+                    /**/ $isEqual = 'true2';  // VERIF
+                    $boucleverif=1;
+                  }
+                }
+  
+               echo '<br> BOUCLE VERIF '.$boucleverif;
 
-                        if($tableaucheck[0] != $tableaucheck[$i] )
-                        {
-                        // On dit que c'est faux et on sort,
-                        // pas besoin de vérifier la suite.
-                        $isEqual = 'false2';
-                         }elseif($tableaucheck[0] == $tableaucheck[$i] ){
-                            $isEqual = 'true2'; 
+               if($boucleverif==1){
                             $regiment=$donnees19['regiment'];
                             $reqVerifReg = $bdd->query("SELECT *
                             FROM regiments WHERE ID_FK LIKE '$regiment'");
@@ -265,49 +450,30 @@ while ($donnees19 = $req19->fetch()){
                             <td> <?php echo '</h5><span class="badge bg-success">Oui</span></h5>'?></td>
                            </tr>    
         
-                        <?php }
-                    }elseif($tableaucheck[ 0 ]==NULL){
-                        $isEqual = 'false1';
-                    }
-                }
-                if ($count180RESULT==1){
-                    if($tableaucheck[0]==1){
-                        $isEqual = 'true4'; 
-                            $regiment=$donnees19['regiment'];
-                            $reqVerifReg = $bdd->query("SELECT *
-                            FROM regiments WHERE ID_FK LIKE '$regiment'");
-                            $donneesVerifReg = $reqVerifReg->fetch();
+                         <?php 
+            }
 
-                            
-                            
-                            ?> 
-                            <tr>
 
-                            <td> <b><?php echo $donnees19['nom']?></b></td>
-                            <td> <b> <?php echo $donnees19['prenom']?></b></td>
-                            <?if($donnees19['sap']!=0){?><td> <b> <?php echo $donnees19['sap']?></b></td><?}elseif($donnees19['sap']==0){?><td> <b> <?php echo $donnees19['numalliance']?></b></td><?}?>
-                            <td> <?php echo $donnees19['Grade']?></td>
-                            <td> <?php echo $donneesVerifReg['NomRegiment']?></td>
-                            <td> <?php echo '<h5><span class="badge bg-success">Oui</span></h5>'?></td>
-                           </tr>    
-        
-                        <?php
-                    }elseif($tableaucheck[0]==NULL){
-                        $isEqual = 'false4'; 
-                    }
-                }   
+
+
+
+   
 
                 for($i=1;$i<$count180RESULT;$i++){
                     unset($tableaucheck[$i]);
+                    
                 }
-                for($i=1;$i<40;$i++){
+                for($i=0;$i<40;$i++){
                     unset($tab[$i]);
-                    unset($tabnum[$i]);
+                    unset($equivalence[$i]);
+                    unset($tabequivalence[$i]);
+                    
                 }
-                //echo $isEqual;
+                
                 $utilisateurnum ++;     
                 $tableaucheck[ 0 ]=NULL;   
  }
+ echo $donnees19['prenom'].' : OK ';
 }?>                </tbody>
 </table>
 <!-- End Table with stripped rows -->
@@ -333,3 +499,31 @@ while ($donnees19 = $req19->fetch()){
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+
+
+<?
+function verifRecyclageV2($diff, $testRecyclage,$test){
+    for ($bouclefor2=0;$bouclefor2<10;$bouclefor2++){
+        // echo '<br>DIFF :'.$diff;
+        // echo '<br>TEST RECY : '.$testRecyclage[$bouclefor2];
+        // echo '<br>TEST  : '.$test.'<br>';
+
+        if ($diff>5 and ($testRecyclage[$bouclefor2]==$test)) {   
+            return $TEST = 'RECYCLAGE';
+            $bouclefor2=11;
+
+            /* DEBUG MODE */
+            // echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+            // echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+            /* END DEBUG MODE */
+    
+        }else {
+            
+        } 
+    } 
+    return $TEST= 'N/R';
+} 
+
+
+
+             
