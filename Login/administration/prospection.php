@@ -166,6 +166,61 @@ foreach($entites as $entite) {
 
 }
 
+//////////    VALIDITE  VERIFICATION SI LES STAGES ONT BESOIN D'UN VALIDITE >5 ////// 
+$valeurValidite5=5;
+$req68 = $bdd->query("SELECT *
+FROM Formation WHERE validité LIKE '$valeurValidite5'");
+$valeurs= $req68->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($valeurs as $valeur) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testValidite5[$i] = $valeur['NumPrérequis'];
+    /* DEBUG MODE */
+   //echo '<br> testValidite5['.$i.']='.$testValidite5[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
+
+}
+
+///////////
+
+//////////    VALIDITE  VERIFICATION SI LES STAGES ONT BESOIN D'UN VALIDITE >4 ////// 
+$valeurValidite4=4;
+$req69 = $bdd->query("SELECT *
+FROM Formation WHERE validité LIKE '$valeurValidite4'");
+$infos= $req69->fetchAll(PDO::FETCH_ASSOC);
+/*var_dump($rows);*/
+$i=0;
+foreach($infos as $info) {
+    /* DEBUG MODE */
+   // /**/ echo '<br />';
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    /* END DEBUG MODE */
+    $testValidite4[$i] = $info['NumPrérequis'];
+    /* DEBUG MODE */
+    //echo '<br> testValidite4['.$i.']='.$testValidite4[$i];
+   // /**/ echo '<br/>';
+    /* END DEBUG MODE */
+    $i=$i+1;
+    /* DEBUG MODE */
+   // /**/ echo 'i='.$i;
+   // /**/ echo '<br />';
+    
+    /* END DEBUG MODE */
+
+}
 
 
     
@@ -231,6 +286,9 @@ while ($donnees19 = $req19->fetch()){
                                 echo '<br>DIFFERENCE : '.$diff;  
                                 $prerequis=$tab[$p];
                                 $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                $VALIDITECHECK = verifValidite5($diff, $testValidite5,$prerequis);
+                                $VALIDITECHECK4 = verifValidite4($diff, $testValidite4,$prerequis);
+
                                  if($TESTOK=='RECYCLAGE'){
                                      $RECYCLAGE='OUI';
                                      echo 'RECYKLAGE';
@@ -239,13 +297,26 @@ while ($donnees19 = $req19->fetch()){
                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
                                           $checked++;
                                     }elseif ($TESTOK=='N/R'){
-                                      echo '<br>CHEKED = '.$checked;
-                                      $tableaucheck[$checked]=1;
-                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
-                                      $valide=1;
-                                      $checked++;
-                                      $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
-                                      $i = $i++;
+
+                                      if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4=='NONVALIDE'){
+                                        $KALAMOUR="NONVALIDE";
+                                        echo '<b><br>'.$KALAMOUR.'</b>';
+                                        echo '<br>CHEKED = '.$checked;
+                                        $tableaucheck[$checked]=0;
+                                        echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                             $checked++;
+                                        }else{
+                                        echo $KALAMOUR="VALIDE";
+                                        echo '<br>CHEKED = '.$checked;
+                                        $tableaucheck[$checked]=1;
+                                        echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                        $valide=1;
+                                        $checked++;
+                                        $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                        $i = $i++;
+                                    }
+
+
                                       
                                     }
 
@@ -302,6 +373,8 @@ while ($donnees19 = $req19->fetch()){
                                   $prerequis=$tab[$p];
                                   echo '<br>CHEKED = '.$checked;
                                   $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                  $VALIDITECHECK = verifValidite5($diff, $testValidite5,$prerequis);
+                                  $VALIDITECHECK4 = verifValidite4($diff, $testValidite4,$prerequis);  
                                   if($TESTOK=='RECYCLAGE'){
                                       $RECYCLAGE='OUI';
                                       echo 'RECYKLAGE';
@@ -310,15 +383,30 @@ while ($donnees19 = $req19->fetch()){
                                       echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
                                            $checked++;
                                      }elseif ($TESTOK=='N/R'){
-                                      echo '<br>CHEKED = '.$checked;
-                                      $tableaucheck[$checked]=1;
-                                      echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
-                                           $checked++;
-                                      $valide=1;
-                                      $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
-                                      $i = $i++;
-                                     }
+
+                                      if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4=='NONVALIDE'){
+                                        $KALAMOUR="NONVALIDE";
+                                        echo '<b><br>'.$KALAMOUR.'</b>';
+                                        echo '<br>CHEKED = '.$checked;
+                                        $tableaucheck[$checked]=0;
+                                        echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                             $checked++;
+                                        }else{
+                                        echo $KALAMOUR="VALIDE";
+                                        echo '<br>CHEKED = '.$checked;
+                                        $tableaucheck[$checked]=1;
+                                        echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                        $valide=1;
+                                        $checked++;
+                                        $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                        $i = $i++;
+                                    }
+
+
+                                      
+                                    }
                                 }
+                                
 
                               }else {/*CCCCCC*/
                                   $test2=$tabequivalence[$bouclefor];
@@ -363,6 +451,8 @@ while ($donnees19 = $req19->fetch()){
                                               $prerequis=$tab[$p];
                                               echo '<br>CHEKED = '.$checked;
                                               $TESTOK = verifRecyclageV2($diff,$testRecyclage,$prerequis);
+                                              $VALIDITECHECK = verifValidite5($diff, $testValidite5,$prerequis);
+                                              $VALIDITECHECK4 = verifValidite4($diff, $testValidite4,$prerequis);              
                                               if($TESTOK=='RECYCLAGE'){
                                                   $RECYCLAGE='OUI';
                                                   echo 'RECYKLAGE';
@@ -371,14 +461,28 @@ while ($donnees19 = $req19->fetch()){
                                                   echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
                                                        $checked++;
                                                  }elseif ($TESTOK=='N/R'){
-                                                  echo '<br>CHEKED = '.$checked;
-                                                  $tableaucheck[$checked]=1;
-                                                  echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
-                                                       $checked++;
-                                                  $valide=1;
-                                                  $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
-                                                  $i = $i++;
-                                                 }
+
+                                                  if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4=='NONVALIDE'){
+                                                    $KALAMOUR="NONVALIDE";
+                                                    echo '<b><br>'.$KALAMOUR.'</b>';
+                                                    echo '<br>CHEKED = '.$checked;
+                                                    $tableaucheck[$checked]=0;
+                                                    echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                                         $checked++;
+                                                    }else{
+                                                    echo $KALAMOUR="VALIDE";
+                                                    echo '<br>CHEKED = '.$checked;
+                                                    $tableaucheck[$checked]=1;
+                                                    echo '<br>TAB : '.$checked.' : '.$tableaucheck[$checked].'<br>';
+                                                    $valide=1;
+                                                    $checked++;
+                                                    $tableauVerif[$valeurPourVerifierSiDiplomeOKEtEquiOk] = $prerequis;
+                                                    $i = $i++;
+                                                }
+            
+            
+                                                  
+                                                }
                                             }
                                                   
   
@@ -524,6 +628,43 @@ function verifRecyclageV2($diff, $testRecyclage,$test){
     return $TEST= 'N/R';
 } 
 
+/// VERIF VALIDITER >5
+function verifValidite5($diff, $testValidite5,$test){
+  for ($bouclefor2=0;$bouclefor2<20;$bouclefor2++){
 
+      if ($diff>5 and ($testValidite5[$bouclefor2]==$test)) {    
+          return $TEST = 'NONVALIDE';
+          $bouclefor2=11;
 
-             
+          /* DEBUG MODE */
+         //  echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+         //  echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+          /* END DEBUG MODE */
+  
+      }else {
+          
+      } 
+      
+  } 
+  return $TEST= 'VALIDE';
+} 
+///   VERIF VALIDITER >4
+function verifValidite4($diff, $testValidite4,$test){
+  for ($bouclefor2=0;$bouclefor2<20;$bouclefor2++){
+      // echo $testValidite4[$bouclefor2].'='.$test;
+      if ($diff>4 and ($testValidite4[$bouclefor2]==$test)) { 
+          $TEST2 = 'NONVALIDE';
+          return $TEST2;
+          $bouclefor2=22;
+
+          /* DEBUG MODE */
+         //  echo ' | (INFORMATION : CETTE FORMATION '.$donnees['Nom_Prerequis'].' NECESSITE UN RECYCLAGE TOUT LES 5 ANS)<br/>';
+         //  echo ' | (RECYCLAGE NECCESSAIRE :'.$RECYCLAGE.')<br/>';
+          /* END DEBUG MODE */
+  
+      }
+
+  } 
+  $TEST2= 'VALIDE';
+  return $TEST2;
+} 
