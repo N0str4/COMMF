@@ -250,11 +250,26 @@ while ($donnees19 = $req19->fetch()){
                         FROM Formation WHERE NumPrérequis LIKE '$numprerequisboucle'");
                         $output2 = $req50->fetch(); // ON RECUPERE LE NOM DU PREREQUIS
                         $stockageNomVar = $output2['Nom_Prerequis']; // ON STOCKE LE NOM DU PREREQUIS DANS UNE VAR
+                        $date1 = $tabdate[$i];
+                        $diff  = abs($now - $date1);
+                        $isValid =  $output2['validité'];
+                        $VALIDITECHECK = verifValidite5($diff, $testValidite5,$numprerequisboucle);
+                        $VALIDITECHECK4 = verifValidite4($diff, $testValidite4,$numprerequisboucle);  
 
+  
                         if($stockageNomVar==$formation){
+                          if($isValid!=NULL){
+                              if($VALIDITECHECK=='NONVALIDE' || $VALIDITECHECK4=='NONVALIDE'){
+                                $possedeDejaLaFormation=0;
+                              }else{
+                                $possedeDejaLaFormation=1;
 
+                              }
+
+                          }else{
                           $possedeDejaLaFormation=1;
                         }
+                      }
                         /* DEBUG MODE */
                           ///**/ echo 'Tab['.$i.']='.$tab[$i];
                           // /**/ echo '<br/>';
@@ -276,7 +291,7 @@ while ($donnees19 = $req19->fetch()){
                         
                         echo '<br>PREREQUIS FORMA'.$tabnum[$k];
                         echo '<br> PREREQUIS UTIL'.$tab[$p];
-
+                      
 
                         if($tabnum[$k]!=NULL){// SI PLUS DE PREREQUIS DE FORMA A CHECK
                             if($tabnum[$k]==$tab[$p]){
